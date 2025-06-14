@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yojader\\source\\repos\\WindowsApp2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6AB9226C-57C4-46C9-ABC9-DD1EB9C77537}|WindowsApp2\\WindowsApp2.vbproj|c:\\users\\yojader\\source\\repos\\windowsapp2\\windowsapp2\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{6AB9226C-57C4-46C9-ABC9-DD1EB9C77537}|WindowsApp2\\WindowsApp2.vbproj|solutionrelative:windowsapp2\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AB9226C-57C4-46C9-ABC9-DD1EB9C77537}|WindowsApp2\\WindowsApp2.vbproj|C:\\Users\\yojader\\source\\repos\\WindowsApp2\\windowsapp2\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{6AB9226C-57C4-46C9-ABC9-DD1EB9C77537}|WindowsApp2\\WindowsApp2.vbproj|solutionrelative:windowsapp2\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.vb",
+              "DocumentMoniker": "C:\\Users\\yojader\\source\\repos\\WindowsApp2\\WindowsApp2\\Form1.vb",
+              "RelativeDocumentMoniker": "WindowsApp2\\Form1.vb",
+              "ToolTip": "C:\\Users\\yojader\\source\\repos\\WindowsApp2\\WindowsApp2\\Form1.vb",
+              "RelativeToolTip": "WindowsApp2\\Form1.vb",
+              "ViewState": "AgIAAEYAAAAAAAAAAIAwwFUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-04-29T22:12:17.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.vb [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\yojader\\source\\repos\\WindowsApp2\\WindowsApp2\\Form1.vb",
+              "RelativeDocumentMoniker": "WindowsApp2\\Form1.vb",
+              "ToolTip": "C:\\Users\\yojader\\source\\repos\\WindowsApp2\\WindowsApp2\\Form1.vb [Dise\u00F1o]",
+              "RelativeToolTip": "WindowsApp2\\Form1.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-04-29T19:21:01.481Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

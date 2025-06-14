@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yojader\\source\\repos\\Cal_resistencia\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{844DF358-F9D7-46F7-90C4-B92C2989C8A5}|Cal_resistencia\\Cal_resistencia.vbproj|c:\\users\\yojader\\source\\repos\\cal_resistencia\\cal_resistencia\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{844DF358-F9D7-46F7-90C4-B92C2989C8A5}|Cal_resistencia\\Cal_resistencia.vbproj|solutionrelative:cal_resistencia\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{844DF358-F9D7-46F7-90C4-B92C2989C8A5}|Cal_resistencia\\Cal_resistencia.vbproj|C:\\Users\\yojader\\source\\repos\\Cal_resistencia\\cal_resistencia\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{844DF358-F9D7-46F7-90C4-B92C2989C8A5}|Cal_resistencia\\Cal_resistencia.vbproj|solutionrelative:cal_resistencia\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.vb",
+              "DocumentMoniker": "C:\\Users\\yojader\\source\\repos\\Cal_resistencia\\Cal_resistencia\\Form1.vb",
+              "RelativeDocumentMoniker": "Cal_resistencia\\Form1.vb",
+              "ToolTip": "C:\\Users\\yojader\\source\\repos\\Cal_resistencia\\Cal_resistencia\\Form1.vb",
+              "RelativeToolTip": "Cal_resistencia\\Form1.vb",
+              "ViewState": "AgIAAGMAAAAAAAAAAAArwGsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-06-03T18:50:09.777Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.vb [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\yojader\\source\\repos\\Cal_resistencia\\Cal_resistencia\\Form1.vb",
+              "RelativeDocumentMoniker": "Cal_resistencia\\Form1.vb",
+              "ToolTip": "C:\\Users\\yojader\\source\\repos\\Cal_resistencia\\Cal_resistencia\\Form1.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Cal_resistencia\\Form1.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-06-03T18:47:35.561Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

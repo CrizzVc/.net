@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "resgis_database", "resgis_database\resgis_database.vbproj", "{D992BD16-89AC-4418-A7EA-4A802182BC75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D992BD16-89AC-4418-A7EA-4A802182BC75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D992BD16-89AC-4418-A7EA-4A802182BC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D992BD16-89AC-4418-A7EA-4A802182BC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D992BD16-89AC-4418-A7EA-4A802182BC75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C40EC2A1-A327-4903-9681-C5948B5E5C53}
+	EndGlobalSection
+EndGlobal

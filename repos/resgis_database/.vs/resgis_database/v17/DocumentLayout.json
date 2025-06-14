@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yojader\\source\\repos\\resgis_database\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|C:\\Users\\yojader\\source\\repos\\resgis_database\\resgis_database\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|c:\\users\\yojader\\source\\repos\\resgis_database\\resgis_database\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.vb",
+              "DocumentMoniker": "C:\\Users\\yojader\\source\\repos\\resgis_database\\resgis_database\\Form1.vb",
+              "RelativeDocumentMoniker": "resgis_database\\Form1.vb",
+              "ToolTip": "C:\\Users\\yojader\\source\\repos\\resgis_database\\resgis_database\\Form1.vb",
+              "RelativeToolTip": "resgis_database\\Form1.vb",
+              "ViewState": "AgIAADkAAAAAzczMzMwYwEMAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-06-10T20:29:59.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.vb [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\yojader\\source\\repos\\resgis_database\\resgis_database\\Form1.vb",
+              "RelativeDocumentMoniker": "resgis_database\\Form1.vb",
+              "ToolTip": "C:\\Users\\yojader\\source\\repos\\resgis_database\\resgis_database\\Form1.vb [Dise\u00F1o]",
+              "RelativeToolTip": "resgis_database\\Form1.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-06-10T20:21:54.779Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
