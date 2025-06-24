@@ -25,3 +25,17 @@ C:\Users\Cris\source\repos\resgis_database\resgis_database\obj\Debug\resgis_data
 C:\Users\Cris\source\repos\resgis_database\resgis_database\obj\Debug\resgis_database.pdb
 C:\Users\Cris\source\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Form2.resources
 C:\Users\Cris\source\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Form3.resources
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\bin\Debug\resgis_database.exe.config
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\bin\Debug\resgis_database.exe
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\bin\Debug\resgis_database.pdb
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\bin\Debug\resgis_database.xml
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.vbproj.AssemblyReference.cache
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Form1.resources
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Form2.resources
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Form3.resources
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Resources.resources
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.vbproj.GenerateResource.cache
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.vbproj.CoreCompileInputs.cache
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.exe
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.xml
+C:\Users\sena77\Documents\.net repository\repos\resgis_database\resgis_database\obj\Debug\resgis_database.pdb

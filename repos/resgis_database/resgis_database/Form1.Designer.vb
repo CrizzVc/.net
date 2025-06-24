@@ -23,9 +23,13 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.aside = New System.Windows.Forms.Panel()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.ButtonIniciar = New System.Windows.Forms.Button()
+        Me.LbContra = New System.Windows.Forms.Label()
+        Me.BoxContra = New System.Windows.Forms.TextBox()
+        Me.LbCedula = New System.Windows.Forms.Label()
+        Me.BoxCedula = New System.Windows.Forms.TextBox()
+        Me.ButtonRegistrar = New System.Windows.Forms.Button()
         Me.aside.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -34,30 +38,12 @@ Partial Class Form1
         Me.aside.AutoScroll = True
         Me.aside.AutoScrollMinSize = New System.Drawing.Size(200, 0)
         Me.aside.BackColor = System.Drawing.SystemColors.ButtonShadow
-        Me.aside.Controls.Add(Me.Button6)
         Me.aside.Controls.Add(Me.Button5)
-        Me.aside.Controls.Add(Me.Button4)
         Me.aside.Dock = System.Windows.Forms.DockStyle.Left
         Me.aside.Location = New System.Drawing.Point(0, 0)
         Me.aside.Name = "aside"
         Me.aside.Size = New System.Drawing.Size(201, 521)
         Me.aside.TabIndex = 13
-        '
-        'Button6
-        '
-        Me.Button6.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button6.FlatAppearance.BorderSize = 0
-        Me.Button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button6.Font = New System.Drawing.Font("Microsoft YaHei UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button6.Location = New System.Drawing.Point(0, 71)
-        Me.Button6.Margin = New System.Windows.Forms.Padding(3, 3, 3, 1)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(201, 32)
-        Me.Button6.TabIndex = 2
-        Me.Button6.Text = "agregar producto"
-        Me.Button6.UseVisualStyleBackColor = False
         '
         'Button5
         '
@@ -68,7 +54,7 @@ Partial Class Form1
         Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button5.Font = New System.Drawing.Font("Microsoft YaHei UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button5.Location = New System.Drawing.Point(0, 39)
+        Me.Button5.Location = New System.Drawing.Point(0, 0)
         Me.Button5.Margin = New System.Windows.Forms.Padding(3, 3, 3, 1)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(201, 32)
@@ -76,36 +62,87 @@ Partial Class Form1
         Me.Button5.Text = "productos"
         Me.Button5.UseVisualStyleBackColor = False
         '
-        'Button4
+        'ButtonIniciar
         '
-        Me.Button4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button4.FlatAppearance.BorderSize = 0
-        Me.Button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button4.Font = New System.Drawing.Font("Microsoft YaHei UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button4.Location = New System.Drawing.Point(0, 0)
-        Me.Button4.Margin = New System.Windows.Forms.Padding(3, 3, 3, 1)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(201, 39)
-        Me.Button4.TabIndex = 0
-        Me.Button4.Text = "Inicio"
-        Me.Button4.UseVisualStyleBackColor = False
+        Me.ButtonIniciar.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonIniciar.Location = New System.Drawing.Point(332, 277)
+        Me.ButtonIniciar.Name = "ButtonIniciar"
+        Me.ButtonIniciar.Size = New System.Drawing.Size(138, 35)
+        Me.ButtonIniciar.TabIndex = 21
+        Me.ButtonIniciar.Text = "Iniciar Sesion"
+        Me.ButtonIniciar.UseVisualStyleBackColor = True
+        '
+        'LbContra
+        '
+        Me.LbContra.AutoSize = True
+        Me.LbContra.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LbContra.Location = New System.Drawing.Point(315, 196)
+        Me.LbContra.Name = "LbContra"
+        Me.LbContra.Size = New System.Drawing.Size(91, 20)
+        Me.LbContra.TabIndex = 20
+        Me.LbContra.Text = "Contraseña"
+        '
+        'BoxContra
+        '
+        Me.BoxContra.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BoxContra.Location = New System.Drawing.Point(319, 219)
+        Me.BoxContra.Name = "BoxContra"
+        Me.BoxContra.Size = New System.Drawing.Size(168, 27)
+        Me.BoxContra.TabIndex = 19
+        '
+        'LbCedula
+        '
+        Me.LbCedula.AutoSize = True
+        Me.LbCedula.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LbCedula.Location = New System.Drawing.Point(315, 126)
+        Me.LbCedula.Name = "LbCedula"
+        Me.LbCedula.Size = New System.Drawing.Size(59, 20)
+        Me.LbCedula.TabIndex = 18
+        Me.LbCedula.Text = "Cedula"
+        '
+        'BoxCedula
+        '
+        Me.BoxCedula.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BoxCedula.Location = New System.Drawing.Point(319, 149)
+        Me.BoxCedula.Name = "BoxCedula"
+        Me.BoxCedula.Size = New System.Drawing.Size(168, 27)
+        Me.BoxCedula.TabIndex = 16
+        '
+        'ButtonRegistrar
+        '
+        Me.ButtonRegistrar.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonRegistrar.Location = New System.Drawing.Point(332, 333)
+        Me.ButtonRegistrar.Name = "ButtonRegistrar"
+        Me.ButtonRegistrar.Size = New System.Drawing.Size(138, 35)
+        Me.ButtonRegistrar.TabIndex = 22
+        Me.ButtonRegistrar.Text = "Registrar"
+        Me.ButtonRegistrar.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 521)
+        Me.Controls.Add(Me.ButtonRegistrar)
+        Me.Controls.Add(Me.ButtonIniciar)
+        Me.Controls.Add(Me.LbContra)
+        Me.Controls.Add(Me.BoxContra)
+        Me.Controls.Add(Me.LbCedula)
+        Me.Controls.Add(Me.BoxCedula)
         Me.Controls.Add(Me.aside)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.aside.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents aside As Panel
     Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button6 As Button
+    Friend WithEvents ButtonIniciar As Button
+    Friend WithEvents LbContra As Label
+    Friend WithEvents BoxContra As TextBox
+    Friend WithEvents LbCedula As Label
+    Friend WithEvents BoxCedula As TextBox
+    Friend WithEvents ButtonRegistrar As Button
 End Class
