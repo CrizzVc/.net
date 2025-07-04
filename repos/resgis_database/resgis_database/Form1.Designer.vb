@@ -22,61 +22,40 @@ Partial Class Form1
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.aside = New System.Windows.Forms.Panel()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.ButtonIniciar = New System.Windows.Forms.Button()
         Me.LbContra = New System.Windows.Forms.Label()
         Me.BoxContra = New System.Windows.Forms.TextBox()
         Me.LbCedula = New System.Windows.Forms.Label()
         Me.BoxCedula = New System.Windows.Forms.TextBox()
         Me.ButtonRegistrar = New System.Windows.Forms.Button()
-        Me.aside.SuspendLayout()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'aside
-        '
-        Me.aside.AutoScroll = True
-        Me.aside.AutoScrollMinSize = New System.Drawing.Size(200, 0)
-        Me.aside.BackColor = System.Drawing.SystemColors.ButtonShadow
-        Me.aside.Controls.Add(Me.Button5)
-        Me.aside.Dock = System.Windows.Forms.DockStyle.Left
-        Me.aside.Location = New System.Drawing.Point(0, 0)
-        Me.aside.Name = "aside"
-        Me.aside.Size = New System.Drawing.Size(201, 521)
-        Me.aside.TabIndex = 13
-        '
-        'Button5
-        '
-        Me.Button5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button5.FlatAppearance.BorderSize = 0
-        Me.Button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button5.Font = New System.Drawing.Font("Microsoft YaHei UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button5.Location = New System.Drawing.Point(0, 0)
-        Me.Button5.Margin = New System.Windows.Forms.Padding(3, 3, 3, 1)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(201, 32)
-        Me.Button5.TabIndex = 1
-        Me.Button5.Text = "productos"
-        Me.Button5.UseVisualStyleBackColor = False
         '
         'ButtonIniciar
         '
-        Me.ButtonIniciar.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonIniciar.Location = New System.Drawing.Point(332, 277)
+        Me.ButtonIniciar.BackColor = System.Drawing.Color.LimeGreen
+        Me.ButtonIniciar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonIniciar.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonIniciar.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonIniciar.Location = New System.Drawing.Point(44, 253)
         Me.ButtonIniciar.Name = "ButtonIniciar"
-        Me.ButtonIniciar.Size = New System.Drawing.Size(138, 35)
+        Me.ButtonIniciar.Size = New System.Drawing.Size(202, 35)
         Me.ButtonIniciar.TabIndex = 21
         Me.ButtonIniciar.Text = "Iniciar Sesion"
-        Me.ButtonIniciar.UseVisualStyleBackColor = True
+        Me.ButtonIniciar.UseVisualStyleBackColor = False
         '
         'LbContra
         '
         Me.LbContra.AutoSize = True
         Me.LbContra.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LbContra.Location = New System.Drawing.Point(315, 196)
+        Me.LbContra.ForeColor = System.Drawing.Color.ForestGreen
+        Me.LbContra.Location = New System.Drawing.Point(40, 174)
         Me.LbContra.Name = "LbContra"
         Me.LbContra.Size = New System.Drawing.Size(91, 20)
         Me.LbContra.TabIndex = 20
@@ -85,16 +64,17 @@ Partial Class Form1
         'BoxContra
         '
         Me.BoxContra.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BoxContra.Location = New System.Drawing.Point(319, 219)
+        Me.BoxContra.Location = New System.Drawing.Point(44, 197)
         Me.BoxContra.Name = "BoxContra"
-        Me.BoxContra.Size = New System.Drawing.Size(168, 27)
+        Me.BoxContra.Size = New System.Drawing.Size(202, 27)
         Me.BoxContra.TabIndex = 19
         '
         'LbCedula
         '
         Me.LbCedula.AutoSize = True
         Me.LbCedula.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LbCedula.Location = New System.Drawing.Point(315, 126)
+        Me.LbCedula.ForeColor = System.Drawing.Color.ForestGreen
+        Me.LbCedula.Location = New System.Drawing.Point(40, 104)
         Me.LbCedula.Name = "LbCedula"
         Me.LbCedula.Size = New System.Drawing.Size(59, 20)
         Me.LbCedula.TabIndex = 18
@@ -103,46 +83,96 @@ Partial Class Form1
         'BoxCedula
         '
         Me.BoxCedula.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BoxCedula.Location = New System.Drawing.Point(319, 149)
+        Me.BoxCedula.Location = New System.Drawing.Point(44, 127)
         Me.BoxCedula.Name = "BoxCedula"
-        Me.BoxCedula.Size = New System.Drawing.Size(168, 27)
+        Me.BoxCedula.Size = New System.Drawing.Size(202, 27)
         Me.BoxCedula.TabIndex = 16
         '
         'ButtonRegistrar
         '
-        Me.ButtonRegistrar.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonRegistrar.Location = New System.Drawing.Point(332, 333)
+        Me.ButtonRegistrar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonRegistrar.FlatAppearance.BorderColor = System.Drawing.Color.Green
+        Me.ButtonRegistrar.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonRegistrar.ForeColor = System.Drawing.Color.ForestGreen
+        Me.ButtonRegistrar.Location = New System.Drawing.Point(44, 337)
         Me.ButtonRegistrar.Name = "ButtonRegistrar"
-        Me.ButtonRegistrar.Size = New System.Drawing.Size(138, 35)
+        Me.ButtonRegistrar.Size = New System.Drawing.Size(202, 35)
         Me.ButtonRegistrar.TabIndex = 22
         Me.ButtonRegistrar.Text = "Registrar"
         Me.ButtonRegistrar.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PictureBox1.Image = Global.resgis_database.My.Resources.Resources.Vazo
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(10)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(405, 529)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 23
+        Me.PictureBox1.TabStop = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft YaHei UI", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(37, 34)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(128, 42)
+        Me.Label1.TabIndex = 24
+        Me.Label1.Text = "Sign in"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label2.Location = New System.Drawing.Point(133, 302)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(19, 20)
+        Me.Label2.TabIndex = 25
+        Me.Label2.Text = "ó"
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.ButtonRegistrar)
+        Me.Panel1.Controls.Add(Me.ButtonIniciar)
+        Me.Panel1.Controls.Add(Me.LbContra)
+        Me.Panel1.Controls.Add(Me.BoxContra)
+        Me.Panel1.Controls.Add(Me.LbCedula)
+        Me.Panel1.Controls.Add(Me.BoxCedula)
+        Me.Panel1.Location = New System.Drawing.Point(455, 57)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(295, 410)
+        Me.Panel1.TabIndex = 26
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 521)
-        Me.Controls.Add(Me.ButtonRegistrar)
-        Me.Controls.Add(Me.ButtonIniciar)
-        Me.Controls.Add(Me.LbContra)
-        Me.Controls.Add(Me.BoxContra)
-        Me.Controls.Add(Me.LbCedula)
-        Me.Controls.Add(Me.BoxCedula)
-        Me.Controls.Add(Me.aside)
+        Me.BackColor = System.Drawing.Color.MintCream
+        Me.ClientSize = New System.Drawing.Size(792, 529)
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Name = "Form1"
         Me.Text = "Form1"
-        Me.aside.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents aside As Panel
-    Friend WithEvents Button5 As Button
     Friend WithEvents ButtonIniciar As Button
     Friend WithEvents LbContra As Label
     Friend WithEvents BoxContra As TextBox
     Friend WithEvents LbCedula As Label
     Friend WithEvents BoxCedula As TextBox
     Friend WithEvents ButtonRegistrar As Button
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel1 As Panel
 End Class

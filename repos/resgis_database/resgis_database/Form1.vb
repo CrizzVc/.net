@@ -6,7 +6,7 @@ Imports System.Drawing.Drawing2D
 
 Public Class Form1
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
         Form2.Show()
         Me.Hide()
     End Sub
@@ -18,7 +18,7 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonIniciar_Click(sender As Object, e As EventArgs) Handles ButtonIniciar.Click
-        Dim conexion As New SqlConnection("server=DESKTOP-UCU7LVT\SQLEXPRESS; database=prueba; integrated security=true")
+        Dim conexion As New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
 
         Try
             conexion.Open()
@@ -31,7 +31,7 @@ Public Class Form1
 
             Dim contraseña As String = BoxContra.Text
 
-            Dim consulta As String = "SELECT COUNT(*) FROM admins WHERE cedula = @cedula AND password = @password"
+            Dim consulta As String = "SELECT COUNT(*) FROM admin WHERE cedula = @cedula AND password = @password"
             Dim comando As New SqlCommand(consulta, conexion)
 
             comando.Parameters.AddWithValue("@cedula", cedula)
@@ -55,6 +55,10 @@ Public Class Form1
 
         BoxCedula.Text = ""
         BoxContra.Text = ""
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
 

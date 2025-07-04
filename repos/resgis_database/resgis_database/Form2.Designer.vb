@@ -37,19 +37,19 @@ Partial Class Form2
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.lista = New System.Windows.Forms.Panel()
         Me.PlMas = New System.Windows.Forms.Panel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.BoxApellido = New System.Windows.Forms.TextBox()
+        Me.BoxSerial = New System.Windows.Forms.TextBox()
+        Me.LabelDesc = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.boxdesc = New System.Windows.Forms.TextBox()
+        Me.BoxMarca = New System.Windows.Forms.TextBox()
         Me.LbNombreProp = New System.Windows.Forms.Label()
         Me.LbProName = New System.Windows.Forms.Label()
         Me.BoxNombre = New System.Windows.Forms.TextBox()
         Me.BoxColor = New System.Windows.Forms.TextBox()
         Me.savePro = New System.Windows.Forms.Button()
-        Me.LabelDesc = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.BoxMarca = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.BoxApellido = New System.Windows.Forms.TextBox()
-        Me.BoxSerial = New System.Windows.Forms.TextBox()
         Me.aside.SuspendLayout()
         Me.PlPro.SuspendLayout()
         Me.PlMas.SuspendLayout()
@@ -59,7 +59,7 @@ Partial Class Form2
         '
         Me.aside.AutoScroll = True
         Me.aside.AutoScrollMinSize = New System.Drawing.Size(200, 0)
-        Me.aside.BackColor = System.Drawing.SystemColors.ButtonShadow
+        Me.aside.BackColor = System.Drawing.Color.LimeGreen
         Me.aside.Controls.Add(Me.ButtonCerrar)
         Me.aside.Controls.Add(Me.buttonAgg)
         Me.aside.Controls.Add(Me.buttonArticulos)
@@ -71,13 +71,16 @@ Partial Class Form2
         '
         'ButtonCerrar
         '
-        Me.ButtonCerrar.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonCerrar.BackColor = System.Drawing.Color.MintCream
+        Me.ButtonCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonCerrar.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonCerrar.ForeColor = System.Drawing.Color.ForestGreen
         Me.ButtonCerrar.Location = New System.Drawing.Point(28, 403)
         Me.ButtonCerrar.Name = "ButtonCerrar"
         Me.ButtonCerrar.Size = New System.Drawing.Size(138, 35)
         Me.ButtonCerrar.TabIndex = 23
         Me.ButtonCerrar.Text = "Cerrar Sesion"
-        Me.ButtonCerrar.UseVisualStyleBackColor = True
+        Me.ButtonCerrar.UseVisualStyleBackColor = False
         '
         'buttonAgg
         '
@@ -111,6 +114,7 @@ Partial Class Form2
         '
         'PlPro
         '
+        Me.PlPro.BackColor = System.Drawing.Color.MintCream
         Me.PlPro.Controls.Add(Me.LabelSerial)
         Me.PlPro.Controls.Add(Me.borrar)
         Me.PlPro.Controls.Add(Me.Button2)
@@ -139,7 +143,7 @@ Partial Class Form2
         '
         Me.borrar.BackColor = System.Drawing.Color.IndianRed
         Me.borrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.borrar.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.borrar.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.borrar.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.borrar.Location = New System.Drawing.Point(511, 400)
         Me.borrar.Name = "borrar"
@@ -151,12 +155,16 @@ Partial Class Form2
         '
         'Button2
         '
+        Me.Button2.BackColor = System.Drawing.Color.DarkSeaGreen
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button2.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.SystemColors.HighlightText
         Me.Button2.Location = New System.Drawing.Point(501, 42)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 23
         Me.Button2.Text = "Recargar"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Labelid
         '
@@ -180,12 +188,16 @@ Partial Class Form2
         '
         'Button3
         '
+        Me.Button3.BackColor = System.Drawing.Color.LimeGreen
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button3.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.SystemColors.HighlightText
         Me.Button3.Location = New System.Drawing.Point(528, 10)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(48, 23)
         Me.Button3.TabIndex = 25
         Me.Button3.Text = "🔍︎"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'LabelMarca
         '
@@ -199,9 +211,10 @@ Partial Class Form2
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(393, 12)
+        Me.TextBox4.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.Location = New System.Drawing.Point(393, 10)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(138, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(138, 23)
         Me.TextBox4.TabIndex = 24
         '
         'lista
@@ -213,13 +226,14 @@ Partial Class Form2
         '
         'PlMas
         '
+        Me.PlMas.BackColor = System.Drawing.Color.MintCream
         Me.PlMas.Controls.Add(Me.Label3)
         Me.PlMas.Controls.Add(Me.Label4)
         Me.PlMas.Controls.Add(Me.BoxApellido)
         Me.PlMas.Controls.Add(Me.BoxSerial)
         Me.PlMas.Controls.Add(Me.LabelDesc)
         Me.PlMas.Controls.Add(Me.Label2)
-        Me.PlMas.Controls.Add(Me.TextBox1)
+        Me.PlMas.Controls.Add(Me.boxdesc)
         Me.PlMas.Controls.Add(Me.BoxMarca)
         Me.PlMas.Controls.Add(Me.LbNombreProp)
         Me.PlMas.Controls.Add(Me.LbProName)
@@ -231,6 +245,71 @@ Partial Class Form2
         Me.PlMas.Size = New System.Drawing.Size(599, 450)
         Me.PlMas.TabIndex = 30
         Me.PlMas.Visible = False
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(327, 102)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(67, 13)
+        Me.Label3.TabIndex = 22
+        Me.Label3.Text = "A Propietario"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(390, 34)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(33, 13)
+        Me.Label4.TabIndex = 21
+        Me.Label4.Text = "Serial"
+        '
+        'BoxApellido
+        '
+        Me.BoxApellido.Location = New System.Drawing.Point(296, 118)
+        Me.BoxApellido.Name = "BoxApellido"
+        Me.BoxApellido.Size = New System.Drawing.Size(138, 20)
+        Me.BoxApellido.TabIndex = 20
+        '
+        'BoxSerial
+        '
+        Me.BoxSerial.Location = New System.Drawing.Point(359, 52)
+        Me.BoxSerial.Name = "BoxSerial"
+        Me.BoxSerial.Size = New System.Drawing.Size(138, 20)
+        Me.BoxSerial.TabIndex = 19
+        '
+        'LabelDesc
+        '
+        Me.LabelDesc.AutoSize = True
+        Me.LabelDesc.Location = New System.Drawing.Point(250, 184)
+        Me.LabelDesc.Name = "LabelDesc"
+        Me.LabelDesc.Size = New System.Drawing.Size(63, 13)
+        Me.LabelDesc.TabIndex = 18
+        Me.LabelDesc.Text = "Descripcion"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(215, 36)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(37, 13)
+        Me.Label2.TabIndex = 17
+        Me.Label2.Text = "Marca"
+        '
+        'boxdesc
+        '
+        Me.boxdesc.Location = New System.Drawing.Point(90, 200)
+        Me.boxdesc.Multiline = True
+        Me.boxdesc.Name = "boxdesc"
+        Me.boxdesc.Size = New System.Drawing.Size(390, 127)
+        Me.boxdesc.TabIndex = 16
+        '
+        'BoxMarca
+        '
+        Me.BoxMarca.Location = New System.Drawing.Point(201, 52)
+        Me.BoxMarca.Name = "BoxMarca"
+        Me.BoxMarca.Size = New System.Drawing.Size(138, 20)
+        Me.BoxMarca.TabIndex = 15
         '
         'LbNombreProp
         '
@@ -266,77 +345,17 @@ Partial Class Form2
         '
         'savePro
         '
+        Me.savePro.BackColor = System.Drawing.Color.LimeGreen
+        Me.savePro.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.savePro.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.savePro.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.savePro.ForeColor = System.Drawing.SystemColors.HighlightText
         Me.savePro.Location = New System.Drawing.Point(434, 381)
         Me.savePro.Name = "savePro"
         Me.savePro.Size = New System.Drawing.Size(138, 35)
         Me.savePro.TabIndex = 10
         Me.savePro.Text = "Guardar"
-        Me.savePro.UseVisualStyleBackColor = True
-        '
-        'LabelDesc
-        '
-        Me.LabelDesc.AutoSize = True
-        Me.LabelDesc.Location = New System.Drawing.Point(250, 184)
-        Me.LabelDesc.Name = "LabelDesc"
-        Me.LabelDesc.Size = New System.Drawing.Size(63, 13)
-        Me.LabelDesc.TabIndex = 18
-        Me.LabelDesc.Text = "Descripcion"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(215, 36)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(37, 13)
-        Me.Label2.TabIndex = 17
-        Me.Label2.Text = "Marca"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(90, 200)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(390, 127)
-        Me.TextBox1.TabIndex = 16
-        '
-        'BoxMarca
-        '
-        Me.BoxMarca.Location = New System.Drawing.Point(201, 52)
-        Me.BoxMarca.Name = "BoxMarca"
-        Me.BoxMarca.Size = New System.Drawing.Size(138, 20)
-        Me.BoxMarca.TabIndex = 15
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(327, 102)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 13)
-        Me.Label3.TabIndex = 22
-        Me.Label3.Text = "A Propietario"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(390, 34)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(33, 13)
-        Me.Label4.TabIndex = 21
-        Me.Label4.Text = "Serial"
-        '
-        'BoxApellido
-        '
-        Me.BoxApellido.Location = New System.Drawing.Point(296, 118)
-        Me.BoxApellido.Name = "BoxApellido"
-        Me.BoxApellido.Size = New System.Drawing.Size(138, 20)
-        Me.BoxApellido.TabIndex = 20
-        '
-        'BoxSerial
-        '
-        Me.BoxSerial.Location = New System.Drawing.Point(359, 52)
-        Me.BoxSerial.Name = "BoxSerial"
-        Me.BoxSerial.Size = New System.Drawing.Size(138, 20)
-        Me.BoxSerial.TabIndex = 19
+        Me.savePro.UseVisualStyleBackColor = False
         '
         'Form2
         '
@@ -344,8 +363,8 @@ Partial Class Form2
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.aside)
-        Me.Controls.Add(Me.PlMas)
         Me.Controls.Add(Me.PlPro)
+        Me.Controls.Add(Me.PlMas)
         Me.Name = "Form2"
         Me.Text = "Form2"
         Me.aside.ResumeLayout(False)
@@ -382,6 +401,6 @@ Partial Class Form2
     Friend WithEvents BoxSerial As TextBox
     Friend WithEvents LabelDesc As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents boxdesc As TextBox
     Friend WithEvents BoxMarca As TextBox
 End Class

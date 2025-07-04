@@ -3,7 +3,7 @@
 Public Class Form3
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles savePro.Click
-        Dim conexion As New SqlConnection("server=DESKTOP-UCU7LVT\SQLEXPRESS; database=prueba; integrated security=true")
+        Dim conexion As New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
         conexion.Open()
 
         Dim user As String = BoxUser.Text
@@ -14,7 +14,7 @@ Public Class Form3
         End If
         Dim password As String = BoxContra.Text
 
-        Dim cadena As String = "INSERT INTO admins(nombreU, cedula, password) VALUES (@nombreU, @cedula, @password)"
+        Dim cadena As String = "INSERT INTO admin(nombreU, cedula, password) VALUES (@nombreU, @cedula, @password)"
         Dim comando As New SqlCommand(cadena, conexion)
 
         comando.Parameters.AddWithValue("@nombreU", user)
@@ -40,4 +40,5 @@ Public Class Form3
         Form1.Show()
         Me.Hide()
     End Sub
+
 End Class

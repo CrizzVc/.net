@@ -3,14 +3,12 @@
 Public Class Form2
     Dim conexion As SqlConnection
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.BackColor = Color.FromArgb(235, 247, 227)
-        aside.BackColor = Color.FromArgb(102, 176, 50)
 
         Try
-            conexion = New SqlConnection("server=DESKTOP-UCU7LVT\SQLEXPRESS; database=prueba; integrated security=true")
+            conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
             conexion.Open()
 
-            Dim cadena As String = "SELECT id, nombre, precio FROM articulo"
+            Dim cadena As String = "SELECT id, marca, color, serial FROM articulo"
             Dim comando As New SqlCommand(cadena, conexion)
             Dim reader As SqlDataReader = comando.ExecuteReader()
 
@@ -20,24 +18,37 @@ Public Class Form2
             Dim yPos As Integer = 10
             While reader.Read()
                 Dim labelID As New Label()
-                Dim labelNAME As New Label()
-                Dim labelPR As New Label()
+                Dim labelMarca As New Label()
+                Dim labelCl As New Label()
+                Dim labelSr As New Label()
+
+                'estilos
+                labelID.Font = New Font(labelID.Font.FontFamily, 9)
+                labelMarca.Font = New Font(labelMarca.Font.FontFamily, 9)
+                labelCl.Font = New Font(labelCl.Font.FontFamily, 9)
+                labelSr.Font = New Font(labelSr.Font.FontFamily, 9, FontStyle.Bold)
 
                 labelID.Text = $"{reader("id")}"
-                labelID.Location = New Point(20, yPos)
+                labelID.Location = New Point(25, yPos)
                 labelID.AutoSize = True
 
-                labelNAME.Text = $"{reader("nombre")}"
-                labelNAME.Location = New Point(80, yPos)
-                labelNAME.AutoSize = True
+                labelMarca.Text = $"{reader("marca")}"
+                labelMarca.Location = New Point(90, yPos)
+                labelMarca.AutoSize = True
 
-                labelPR.Text = $"{reader("precio")}"
-                labelPR.Location = New Point(180, yPos)
-                labelPR.AutoSize = True
+                labelCl.Text = $"{reader("color")}"
+                labelCl.Location = New Point(160, yPos)
+                labelCl.AutoSize = True
+
+                labelSr.Text = $"{reader("serial")}"
+                labelSr.Location = New Point(240, yPos)
+                labelSr.AutoSize = True
 
                 lista.Controls.Add(labelID)
-                lista.Controls.Add(labelNAME)
-                lista.Controls.Add(labelPR)
+                lista.Controls.Add(labelMarca)
+                lista.Controls.Add(labelCl)
+                lista.Controls.Add(labelSr)
+
                 yPos += 25
             End While
 
@@ -66,10 +77,10 @@ Public Class Form2
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         borrar.Visible = False
         Try
-            conexion = New SqlConnection("server=DESKTOP-UCU7LVT\SQLEXPRESS; database=prueba; integrated security=true")
+            conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
             conexion.Open()
 
-            Dim cadena As String = "SELECT id, nombre, precio FROM articulo"
+            Dim cadena As String = "SELECT id, marca, color, serial FROM articulo"
             Dim comando As New SqlCommand(cadena, conexion)
             Dim reader As SqlDataReader = comando.ExecuteReader()
 
@@ -79,24 +90,40 @@ Public Class Form2
             Dim yPos As Integer = 10
             While reader.Read()
                 Dim labelID As New Label()
-                Dim labelNAME As New Label()
-                Dim labelPR As New Label()
+                Dim labelMarca As New Label()
+                Dim labelCl As New Label()
+                Dim labelSr As New Label()
 
-                labelID.Text = $"{reader("id")}"
-                labelID.Location = New Point(20, yPos)
+                'estilos
+                labelID.Font = New Font(labelID.Font.FontFamily, 9, FontStyle.Bold)
+                labelMarca.Font = New Font(labelMarca.Font.FontFamily, 9, FontStyle.Bold)
+                labelCl.Font = New Font(labelCl.Font.FontFamily, 9, FontStyle.Bold)
+                labelSr.Font = New Font(labelSr.Font.FontFamily, 9, FontStyle.Bold)
+
+                labelID.Location = New Point(25, yPos)
                 labelID.AutoSize = True
 
-                labelNAME.Text = $"{reader("nombre")}"
-                labelNAME.Location = New Point(80, yPos)
-                labelNAME.AutoSize = True
+                labelID.Text = $"{reader("id")}"
+                labelID.Location = New Point(25, yPos)
+                labelID.AutoSize = True
 
-                labelPR.Text = $"{reader("precio")}"
-                labelPR.Location = New Point(180, yPos)
-                labelPR.AutoSize = True
+                labelMarca.Text = $"{reader("marca")}"
+                labelMarca.Location = New Point(90, yPos)
+                labelMarca.AutoSize = True
+
+                labelCl.Text = $"{reader("color")}"
+                labelCl.Location = New Point(160, yPos)
+                labelCl.AutoSize = True
+
+                labelSr.Text = $"{reader("serial")}"
+                labelSr.Location = New Point(240, yPos)
+                labelSr.AutoSize = True
 
                 lista.Controls.Add(labelID)
-                lista.Controls.Add(labelNAME)
-                lista.Controls.Add(labelPR)
+                lista.Controls.Add(labelMarca)
+                lista.Controls.Add(labelCl)
+                lista.Controls.Add(labelSr)
+
                 yPos += 25
             End While
 
@@ -115,10 +142,10 @@ Public Class Form2
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         borrar.Visible = True
         Try
-            conexion = New SqlConnection("server=DESKTOP-UCU7LVT\SQLEXPRESS; database=prueba; integrated security=true")
+            conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
             conexion.Open()
             Dim cod As String = TextBox4.Text
-            Dim cadena As String = "select id, nombre, precio from articulo where id=" & cod
+            Dim cadena As String = "SELECT id, marca, color, serial FROM articulo where id=" & cod
             Dim comando As SqlCommand
             comando = New SqlCommand(cadena, conexion)
             Dim reader As SqlDataReader = comando.ExecuteReader()
@@ -130,24 +157,37 @@ Public Class Form2
             Dim yPos As Integer = 10
             While reader.Read()
                 Dim labelID As New Label()
-                Dim labelNAME As New Label()
-                Dim labelPR As New Label()
+                Dim labelMarca As New Label()
+                Dim labelCl As New Label()
+                Dim labelSr As New Label()
+
+                'estilos
+                labelID.Font = New Font(labelID.Font.FontFamily, 9, FontStyle.Bold)
+                labelMarca.Font = New Font(labelMarca.Font.FontFamily, 9, FontStyle.Bold)
+                labelCl.Font = New Font(labelCl.Font.FontFamily, 9, FontStyle.Bold)
+                labelSr.Font = New Font(labelSr.Font.FontFamily, 9, FontStyle.Bold)
 
                 labelID.Text = $"{reader("id")}"
-                labelID.Location = New Point(20, yPos)
+                labelID.Location = New Point(25, yPos)
                 labelID.AutoSize = True
 
-                labelNAME.Text = $"{reader("nombre")}"
-                labelNAME.Location = New Point(80, yPos)
-                labelNAME.AutoSize = True
+                labelMarca.Text = $"{reader("marca")}"
+                labelMarca.Location = New Point(90, yPos)
+                labelMarca.AutoSize = True
 
-                labelPR.Text = $"{reader("precio")}"
-                labelPR.Location = New Point(180, yPos)
-                labelPR.AutoSize = True
+                labelCl.Text = $"{reader("color")}"
+                labelCl.Location = New Point(160, yPos)
+                labelCl.AutoSize = True
+
+                labelSr.Text = $"{reader("serial")}"
+                labelSr.Location = New Point(240, yPos)
+                labelSr.AutoSize = True
 
                 lista.Controls.Add(labelID)
-                lista.Controls.Add(labelNAME)
-                lista.Controls.Add(labelPR)
+                lista.Controls.Add(labelMarca)
+                lista.Controls.Add(labelCl)
+                lista.Controls.Add(labelSr)
+
                 yPos += 25
             End While
 
@@ -168,7 +208,7 @@ Public Class Form2
     End Sub
 
     Private Sub borrar_Click(sender As Object, e As EventArgs) Handles borrar.Click
-        conexion = New SqlConnection("server=DESKTOP-UCU7LVT\SQLEXPRESS; database=prueba; integrated security=true")
+        conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
         conexion.Open()
         Dim cod As String = TextBox4.Text
         Dim cadena As String = "delete from articulo where id=" & cod
@@ -187,22 +227,48 @@ Public Class Form2
     End Sub
 
 
-    Private Sub savePro_Click(sender As Object, e As EventArgs) Handles savePro.Click, borrar.Click
-        Dim conexion As SqlConnection
-        conexion = New SqlConnection("server=DESKTOP-UCU7LVT\SQLEXPRESS ; database=prueba ; integrated security = true")
-        conexion.Open()
-        Dim descri As String = BoxColor.Text
-        Dim precio As String = BoxNombre.Text
-        Dim cadena As String = "insert into articulo(nombre,precio) values ('" & descri & "'," & precio & ")"
-        Dim comando As SqlCommand
-        comando = New SqlCommand(cadena, conexion)
-        comando.ExecuteNonQuery()
-        MessageBox.Show("Los datos se guardaron correctamente")
-        BoxColor.Text = ""
-        BoxNombre.Text = ""
+    Private Sub savePro_Click(sender As Object, e As EventArgs) Handles savePro.Click
+        Try
+            Using conexion As New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
+                conexion.Open()
 
-        conexion.Close()
+                ' Recolectar datos
+                Dim color As String = BoxColor.Text
+                Dim nameP As String = BoxNombre.Text
+                Dim lastnameP As String = BoxApellido.Text
+                Dim marca As String = BoxMarca.Text
+                Dim serial As String = BoxSerial.Text
+                Dim descri As String = boxdesc.Text
+                Dim descripcionFinal As String = If(String.IsNullOrWhiteSpace(descri), "Sin descripción", descri)
+
+                ' Consulta con parámetros
+                Dim cadena As String = "INSERT INTO articulo (marca, color, serial, descP, nameP, lastnameP) VALUES (@marca, @color, @serial, @descP, @nameP, @lastnameP)"
+                Using comando As New SqlCommand(cadena, conexion)
+                    comando.Parameters.AddWithValue("@marca", marca)
+                    comando.Parameters.AddWithValue("@color", color)
+                    comando.Parameters.AddWithValue("@serial", serial)
+                    comando.Parameters.AddWithValue("@descP", descripcionFinal)
+                    comando.Parameters.AddWithValue("@nameP", nameP)
+                    comando.Parameters.AddWithValue("@lastnameP", lastnameP)
+
+                    comando.ExecuteNonQuery()
+                End Using
+
+                MessageBox.Show("Los datos se guardaron correctamente")
+
+                ' Limpiar campos
+                BoxColor.Text = ""
+                BoxNombre.Text = ""
+                BoxApellido.Text = ""
+                boxdesc.Text = ""
+                BoxMarca.Text = ""
+                BoxSerial.Text = ""
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error al guardar los datos: " & ex.Message)
+        End Try
     End Sub
+
 
     Private Sub ButtonCerrar_Click(sender As Object, e As EventArgs) Handles ButtonCerrar.Click
         Form1.Show()
