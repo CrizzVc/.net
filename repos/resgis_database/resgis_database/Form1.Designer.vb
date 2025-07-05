@@ -106,7 +106,7 @@ Partial Class Form1
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Left
         Me.PictureBox1.Image = Global.resgis_database.My.Resources.Resources.Vazo
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(10)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(10, 10, 10, 10)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(405, 529)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -157,8 +157,9 @@ Partial Class Form1
         Me.ClientSize = New System.Drawing.Size(792, 529)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "Sign in"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

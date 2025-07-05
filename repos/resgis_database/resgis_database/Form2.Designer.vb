@@ -29,7 +29,6 @@ Partial Class Form2
         Me.PlPro = New System.Windows.Forms.Panel()
         Me.LabelSerial = New System.Windows.Forms.Label()
         Me.borrar = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Labelid = New System.Windows.Forms.Label()
         Me.LabelColor = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -85,7 +84,9 @@ Partial Class Form2
         'buttonAgg
         '
         Me.buttonAgg.Dock = System.Windows.Forms.DockStyle.Top
+        Me.buttonAgg.FlatAppearance.BorderSize = 0
         Me.buttonAgg.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.buttonAgg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LimeGreen
         Me.buttonAgg.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonAgg.Font = New System.Drawing.Font("Microsoft YaHei UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.buttonAgg.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -100,7 +101,9 @@ Partial Class Form2
         'buttonArticulos
         '
         Me.buttonArticulos.Dock = System.Windows.Forms.DockStyle.Top
+        Me.buttonArticulos.FlatAppearance.BorderSize = 0
         Me.buttonArticulos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.buttonArticulos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LimeGreen
         Me.buttonArticulos.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.buttonArticulos.Font = New System.Drawing.Font("Microsoft YaHei UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.buttonArticulos.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -117,7 +120,6 @@ Partial Class Form2
         Me.PlPro.BackColor = System.Drawing.Color.MintCream
         Me.PlPro.Controls.Add(Me.LabelSerial)
         Me.PlPro.Controls.Add(Me.borrar)
-        Me.PlPro.Controls.Add(Me.Button2)
         Me.PlPro.Controls.Add(Me.Labelid)
         Me.PlPro.Controls.Add(Me.LabelColor)
         Me.PlPro.Controls.Add(Me.Button3)
@@ -152,19 +154,6 @@ Partial Class Form2
         Me.borrar.Text = "Borrar"
         Me.borrar.UseVisualStyleBackColor = False
         Me.borrar.Visible = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.DarkSeaGreen
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.Button2.Location = New System.Drawing.Point(501, 42)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 23
-        Me.Button2.Text = "Recargar"
-        Me.Button2.UseVisualStyleBackColor = False
         '
         'Labelid
         '
@@ -365,8 +354,8 @@ Partial Class Form2
         Me.Controls.Add(Me.aside)
         Me.Controls.Add(Me.PlPro)
         Me.Controls.Add(Me.PlMas)
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "Form2"
-        Me.Text = "Form2"
         Me.aside.ResumeLayout(False)
         Me.PlPro.ResumeLayout(False)
         Me.PlPro.PerformLayout()
@@ -379,7 +368,6 @@ Partial Class Form2
     Friend WithEvents buttonAgg As Button
     Friend WithEvents buttonArticulos As Button
     Friend WithEvents PlPro As Panel
-    Friend WithEvents Button2 As Button
     Friend WithEvents Labelid As Label
     Friend WithEvents LabelColor As Label
     Friend WithEvents Button3 As Button
