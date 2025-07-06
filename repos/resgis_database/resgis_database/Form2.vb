@@ -120,65 +120,133 @@ Public Class Form2
 
                         yPos += 110 ' Ajusta según el alto de tu panel/card
                     Next
+
                 ElseIf count = 1 Then
                     borrar.Visible = True
-
-                    ' Mostrar el único artículo encontrado
+                    Dim datos As Object() = resultados(0)
                     Dim yPos As Integer = 10
-                    Dim datos = resultados(0)
 
-                    Dim labelID As New Label()
-                    Dim labelMarca As New Label()
-                    Dim labelCl As New Label()
-                    Dim labelSr As New Label()
-                    Dim labelNP As New Label()
-                    Dim labelLP As New Label()
-                    Dim labelDs As New Label()
+                    ' Paleta de colores
+                    Dim colorBlue As Color = Color.FromArgb(17, 83, 237)
+                    Dim colorLight As Color = Color.FromArgb(242, 244, 247)
+                    Dim colorWhite As Color = Color.White
+                    Dim colorGray As Color = Color.FromArgb(118, 122, 140)
+                    Dim colorGrayLight As Color = Color.FromArgb(219, 225, 232)
 
-                    ' Estilos
-                    labelID.Font = New Font(labelID.Font.FontFamily, 9)
-                    labelMarca.Font = New Font(labelMarca.Font.FontFamily, 9)
-                    labelCl.Font = New Font(labelCl.Font.FontFamily, 9)
-                    labelSr.Font = New Font(labelSr.Font.FontFamily, 9)
-                    labelDs.Font = New Font(labelDs.Font.FontFamily, 9)
-                    labelNP.Font = New Font(labelNP.Font.FontFamily, 9)
-                    labelLP.Font = New Font(labelLP.Font.FontFamily, 9)
+                    ' Panel principal (card)
+                    Dim card As New Panel()
+                    card.Size = New Size(550, 180)
+                    card.Location = New Point(10, yPos)
+                    card.BackColor = colorWhite
+                    card.BorderStyle = BorderStyle.None
 
-                    labelID.Text = $"{datos(0)}"
-                    labelID.Location = New Point(25, yPos)
-                    labelID.AutoSize = True
+                    ' Panel izquierdo (perfil)
+                    Dim panelLeft As New Panel()
+                    panelLeft.Size = New Size(180, 178)
+                    panelLeft.Location = New Point(0, 0)
+                    panelLeft.BackColor = colorLight
 
-                    labelMarca.Text = $"{datos(1)}"
-                    labelMarca.Location = New Point(90, yPos)
-                    labelMarca.AutoSize = True
+                    ' Foto (puedes usar un recurso o imagen por defecto)
+                    Dim pic As New PictureBox()
+                    pic.Size = New Size(64, 64)
+                    pic.Location = New Point(58, 15)
+                    pic.SizeMode = PictureBoxSizeMode.StretchImage
+                    pic.Image = My.Resources.imgD ' Cambia por tu recurso
 
-                    labelCl.Text = $"{datos(2)}"
-                    labelCl.Location = New Point(160, yPos)
-                    labelCl.AutoSize = True
+                    ' Nombre (marca)
+                    Dim lblNombre As New Label()
+                    lblNombre.Text = $"{datos(1)}"
+                    lblNombre.Font = New Font("Segoe UI", 11, FontStyle.Bold)
+                    lblNombre.ForeColor = colorBlue
+                    lblNombre.Location = New Point(20, 85)
+                    lblNombre.AutoSize = True
 
-                    labelSr.Text = $"{datos(3)}"
-                    labelSr.Location = New Point(240, yPos)
-                    labelSr.AutoSize = True
+                    ' Serial (como email)
+                    Dim lblSerial As New Label()
+                    lblSerial.Text = $"{datos(3)}"
+                    lblSerial.Font = New Font("Segoe UI", 9)
+                    lblSerial.ForeColor = colorGray
+                    lblSerial.Location = New Point(20, 110)
+                    lblSerial.AutoSize = True
 
-                    labelNP.Text = $"Dueño:{datos(4)}"
-                    labelNP.Location = New Point(25, yPos + 25)
-                    labelNP.AutoSize = True
+                    ' ID y Color (como stats)
+                    Dim lblID As New Label()
+                    lblID.Text = $"ID: {datos(0)}"
+                    lblID.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+                    lblID.ForeColor = colorGray
+                    lblID.Location = New Point(20, 135)
+                    lblID.AutoSize = True
 
-                    labelLP.Text = $"{datos(5)}"
-                    labelLP.Location = New Point(90, yPos + 25)
-                    labelLP.AutoSize = True
+                    ' Panel derecho (datos)
+                    Dim panelRight As New Panel()
+                    panelRight.Size = New Size(418, 178)
+                    panelRight.Location = New Point(180, 0)
+                    panelRight.BackColor = colorWhite
 
-                    labelDs.Text = $"Descripcion: {datos(6)}"
-                    labelDs.Location = New Point(160, yPos + 25)
-                    labelDs.AutoSize = True
+                    ' Dueño
+                    Dim lblDueño As New Label()
+                    lblDueño.Text = "Dueño:"
+                    lblDueño.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+                    lblDueño.ForeColor = colorGray
+                    lblDueño.Location = New Point(20, 30)
+                    lblDueño.AutoSize = True
 
-                    lista.Controls.Add(labelID)
-                    lista.Controls.Add(labelMarca)
-                    lista.Controls.Add(labelCl)
-                    lista.Controls.Add(labelSr)
-                    lista.Controls.Add(labelNP)
-                    lista.Controls.Add(labelLP)
-                    lista.Controls.Add(labelDs)
+                    Dim lblDueñoValor As New Label()
+                    lblDueñoValor.Text = $"{datos(4)} {datos(5)}"
+                    lblDueñoValor.Font = New Font("Segoe UI", 9)
+                    lblDueñoValor.ForeColor = colorBlue
+                    lblDueñoValor.Location = New Point(100, 30)
+                    lblDueñoValor.AutoSize = True
+
+                    ' Color debajo del dueño
+                    Dim lblColorR As New Label()
+                    lblColorR.Text = "Color:"
+                    lblColorR.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+                    lblColorR.ForeColor = colorGray
+                    lblColorR.Location = New Point(20, 50)
+                    lblColorR.AutoSize = True
+
+                    Dim lblColorValor As New Label()
+                    lblColorValor.Text = $"{datos(2)}"
+                    lblColorValor.Font = New Font("Segoe UI", 9)
+                    lblColorValor.ForeColor = colorGray
+                    lblColorValor.Location = New Point(100, 50)
+                    lblColorValor.AutoSize = True
+
+                    ' Descripción
+                    Dim lblDesc As New Label()
+                    lblDesc.Text = "Descripción:"
+                    lblDesc.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+                    lblDesc.ForeColor = colorGray
+                    lblDesc.Location = New Point(20, 70)
+                    lblDesc.AutoSize = True
+
+                    Dim lblDescValor As New Label()
+                    lblDescValor.Text = $"{datos(6)}"
+                    lblDescValor.Font = New Font("Segoe UI", 9)
+                    lblDescValor.ForeColor = colorGray
+                    lblDescValor.Location = New Point(100, 70)
+                    lblDescValor.AutoSize = True
+
+                    ' Agregar controles a paneles
+                    panelLeft.Controls.Add(pic)
+                    panelLeft.Controls.Add(lblNombre)
+                    panelLeft.Controls.Add(lblSerial)
+                    panelLeft.Controls.Add(lblID)
+
+                    panelRight.Controls.Add(lblDueño)
+                    panelRight.Controls.Add(lblDueñoValor)
+                    panelRight.Controls.Add(lblColorR)
+                    panelRight.Controls.Add(lblColorValor)
+                    panelRight.Controls.Add(lblDesc)
+                    panelRight.Controls.Add(lblDescValor)
+
+                    card.Controls.Add(panelLeft)
+                    card.Controls.Add(panelRight)
+
+                    lista.Controls.Add(card)
+
+                    yPos += 190
                 End If
 
 

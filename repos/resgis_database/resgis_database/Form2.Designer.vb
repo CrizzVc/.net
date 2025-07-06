@@ -96,7 +96,7 @@ Partial Class Form2
         Me.buttonAgg.Name = "buttonAgg"
         Me.buttonAgg.Size = New System.Drawing.Size(201, 40)
         Me.buttonAgg.TabIndex = 2
-        Me.buttonAgg.Text = "Agregar Ariculos"
+        Me.buttonAgg.Text = "Agregar Articulos"
         Me.buttonAgg.UseVisualStyleBackColor = False
         '
         'buttonArticulos
@@ -150,7 +150,7 @@ Partial Class Form2
         Me.borrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.borrar.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.borrar.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.borrar.Location = New System.Drawing.Point(701, 474)
+        Me.borrar.Location = New System.Drawing.Point(713, 474)
         Me.borrar.Name = "borrar"
         Me.borrar.Size = New System.Drawing.Size(84, 33)
         Me.borrar.TabIndex = 22
@@ -194,7 +194,7 @@ Partial Class Form2
         Me.lista.AutoSize = True
         Me.lista.Location = New System.Drawing.Point(222, 74)
         Me.lista.Name = "lista"
-        Me.lista.Size = New System.Drawing.Size(518, 365)
+        Me.lista.Size = New System.Drawing.Size(479, 433)
         Me.lista.TabIndex = 28
         '
         'PlMas
@@ -228,7 +228,7 @@ Partial Class Form2
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft YaHei UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(233, 114)
+        Me.Label5.Location = New System.Drawing.Point(237, 137)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(68, 19)
         Me.Label5.TabIndex = 24
@@ -240,7 +240,7 @@ Partial Class Form2
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Microsoft YaHei UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(233, 21)
+        Me.Label1.Location = New System.Drawing.Point(237, 24)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(93, 19)
         Me.Label1.TabIndex = 23
@@ -251,7 +251,7 @@ Partial Class Form2
         Me.boxdesc.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.boxdesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.boxdesc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.boxdesc.Location = New System.Drawing.Point(237, 237)
+        Me.boxdesc.Location = New System.Drawing.Point(241, 298)
         Me.boxdesc.Multiline = True
         Me.boxdesc.Name = "boxdesc"
         Me.boxdesc.Size = New System.Drawing.Size(536, 127)
@@ -261,7 +261,7 @@ Partial Class Form2
         '
         Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(439, 58)
+        Me.Label3.Location = New System.Drawing.Point(435, 71)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
         Me.Label3.TabIndex = 22
@@ -271,7 +271,7 @@ Partial Class Form2
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(439, 145)
+        Me.Label4.Location = New System.Drawing.Point(435, 180)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(33, 13)
         Me.Label4.TabIndex = 21
@@ -282,7 +282,7 @@ Partial Class Form2
         Me.BoxApellido.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.BoxApellido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.BoxApellido.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.BoxApellido.Location = New System.Drawing.Point(241, 74)
+        Me.BoxApellido.Location = New System.Drawing.Point(438, 87)
         Me.BoxApellido.Name = "BoxApellido"
         Me.BoxApellido.Size = New System.Drawing.Size(138, 20)
         Me.BoxApellido.TabIndex = 20
@@ -292,7 +292,7 @@ Partial Class Form2
         Me.BoxSerial.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.BoxSerial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.BoxSerial.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.BoxSerial.Location = New System.Drawing.Point(241, 163)
+        Me.BoxSerial.Location = New System.Drawing.Point(438, 196)
         Me.BoxSerial.Name = "BoxSerial"
         Me.BoxSerial.Size = New System.Drawing.Size(138, 20)
         Me.BoxSerial.TabIndex = 19
@@ -301,7 +301,7 @@ Partial Class Form2
         '
         Me.LabelDesc.AutoSize = True
         Me.LabelDesc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.LabelDesc.Location = New System.Drawing.Point(237, 206)
+        Me.LabelDesc.Location = New System.Drawing.Point(237, 269)
         Me.LabelDesc.Name = "LabelDesc"
         Me.LabelDesc.Size = New System.Drawing.Size(63, 13)
         Me.LabelDesc.TabIndex = 18
@@ -311,7 +311,7 @@ Partial Class Form2
         '
         Me.Label2.AutoSize = True
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(236, 147)
+        Me.Label2.Location = New System.Drawing.Point(241, 180)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(70, 13)
         Me.Label2.TabIndex = 17
@@ -322,7 +322,7 @@ Partial Class Form2
         Me.BoxMarca.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.BoxMarca.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.BoxMarca.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.BoxMarca.Location = New System.Drawing.Point(635, 163)
+        Me.BoxMarca.Location = New System.Drawing.Point(245, 196)
         Me.BoxMarca.Name = "BoxMarca"
         Me.BoxMarca.Size = New System.Drawing.Size(138, 20)
         Me.BoxMarca.TabIndex = 15
@@ -331,7 +331,7 @@ Partial Class Form2
         '
         Me.LbNombreProp.AutoSize = True
         Me.LbNombreProp.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.LbNombreProp.Location = New System.Drawing.Point(237, 58)
+        Me.LbNombreProp.Location = New System.Drawing.Point(241, 71)
         Me.LbNombreProp.Name = "LbNombreProp"
         Me.LbNombreProp.Size = New System.Drawing.Size(44, 13)
         Me.LbNombreProp.TabIndex = 14
@@ -341,7 +341,7 @@ Partial Class Form2
         '
         Me.LbProName.AutoSize = True
         Me.LbProName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.LbProName.Location = New System.Drawing.Point(632, 145)
+        Me.LbProName.Location = New System.Drawing.Point(636, 178)
         Me.LbProName.Name = "LbProName"
         Me.LbProName.Size = New System.Drawing.Size(31, 13)
         Me.LbProName.TabIndex = 13
@@ -352,7 +352,7 @@ Partial Class Form2
         Me.BoxNombre.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.BoxNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.BoxNombre.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.BoxNombre.Location = New System.Drawing.Point(434, 74)
+        Me.BoxNombre.Location = New System.Drawing.Point(245, 87)
         Me.BoxNombre.Name = "BoxNombre"
         Me.BoxNombre.Size = New System.Drawing.Size(138, 20)
         Me.BoxNombre.TabIndex = 12
@@ -362,7 +362,7 @@ Partial Class Form2
         Me.BoxColor.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.BoxColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.BoxColor.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.BoxColor.Location = New System.Drawing.Point(434, 163)
+        Me.BoxColor.Location = New System.Drawing.Point(639, 196)
         Me.BoxColor.Name = "BoxColor"
         Me.BoxColor.Size = New System.Drawing.Size(138, 20)
         Me.BoxColor.TabIndex = 11
@@ -374,7 +374,7 @@ Partial Class Form2
         Me.savePro.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.savePro.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.savePro.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.savePro.Location = New System.Drawing.Point(635, 396)
+        Me.savePro.Location = New System.Drawing.Point(639, 457)
         Me.savePro.Name = "savePro"
         Me.savePro.Size = New System.Drawing.Size(138, 35)
         Me.savePro.TabIndex = 10
