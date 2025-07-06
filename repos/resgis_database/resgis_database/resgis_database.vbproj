@@ -138,13 +138,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\coca.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Vazo.jfif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Belle.jfif" />
+    <Content Include="Resources\coca.png" />
+    <None Include="Resources\imgD.jfif" />
+    <Content Include="Resources\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
