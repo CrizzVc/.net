@@ -22,6 +22,7 @@ Partial Class Form3
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form3))
         Me.BoxCedula = New System.Windows.Forms.TextBox()
         Me.BoxUser = New System.Windows.Forms.TextBox()
         Me.savePro = New System.Windows.Forms.Button()
@@ -32,7 +33,9 @@ Partial Class Form3
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -40,7 +43,7 @@ Partial Class Form3
         '
         Me.BoxCedula.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BoxCedula.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.BoxCedula.Location = New System.Drawing.Point(70, 196)
+        Me.BoxCedula.Location = New System.Drawing.Point(48, 166)
         Me.BoxCedula.Name = "BoxCedula"
         Me.BoxCedula.Size = New System.Drawing.Size(213, 27)
         Me.BoxCedula.TabIndex = 7
@@ -49,7 +52,7 @@ Partial Class Form3
         '
         Me.BoxUser.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BoxUser.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.BoxUser.Location = New System.Drawing.Point(69, 142)
+        Me.BoxUser.Location = New System.Drawing.Point(47, 112)
         Me.BoxUser.Name = "BoxUser"
         Me.BoxUser.Size = New System.Drawing.Size(213, 27)
         Me.BoxUser.TabIndex = 6
@@ -61,7 +64,7 @@ Partial Class Form3
         Me.savePro.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.savePro.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.savePro.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.savePro.Location = New System.Drawing.Point(69, 300)
+        Me.savePro.Location = New System.Drawing.Point(47, 270)
         Me.savePro.Name = "savePro"
         Me.savePro.Size = New System.Drawing.Size(212, 35)
         Me.savePro.TabIndex = 5
@@ -72,7 +75,7 @@ Partial Class Form3
         '
         Me.BoxContra.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BoxContra.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.BoxContra.Location = New System.Drawing.Point(70, 248)
+        Me.BoxContra.Location = New System.Drawing.Point(48, 218)
         Me.BoxContra.Name = "BoxContra"
         Me.BoxContra.Size = New System.Drawing.Size(213, 27)
         Me.BoxContra.TabIndex = 10
@@ -84,7 +87,7 @@ Partial Class Form3
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(83, Byte), Integer), CType(CType(237, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(69, 378)
+        Me.Button1.Location = New System.Drawing.Point(47, 348)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(212, 35)
         Me.Button1.TabIndex = 12
@@ -96,7 +99,7 @@ Partial Class Form3
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft YaHei UI", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(3, Byte), Integer), CType(CType(54, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(39, 36)
+        Me.Label1.Location = New System.Drawing.Point(40, 27)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(144, 42)
         Me.Label1.TabIndex = 25
@@ -107,7 +110,7 @@ Partial Class Form3
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(66, 120)
+        Me.Label2.Location = New System.Drawing.Point(44, 90)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(56, 19)
         Me.Label2.TabIndex = 26
@@ -118,7 +121,7 @@ Partial Class Form3
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(66, 174)
+        Me.Label3.Location = New System.Drawing.Point(44, 144)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(51, 19)
         Me.Label3.TabIndex = 27
@@ -129,7 +132,7 @@ Partial Class Form3
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(118, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(140, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(66, 226)
+        Me.Label4.Location = New System.Drawing.Point(44, 196)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(79, 19)
         Me.Label4.TabIndex = 28
@@ -140,20 +143,37 @@ Partial Class Form3
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft YaHei", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label5.Location = New System.Drawing.Point(164, 346)
+        Me.Label5.Location = New System.Drawing.Point(142, 316)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(19, 20)
         Me.Label5.TabIndex = 29
         Me.Label5.Text = "ó"
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.BoxContra)
+        Me.Panel1.Controls.Add(Me.BoxCedula)
+        Me.Panel1.Controls.Add(Me.BoxUser)
+        Me.Panel1.Controls.Add(Me.savePro)
+        Me.Panel1.Location = New System.Drawing.Point(34, 48)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(309, 411)
+        Me.Panel1.TabIndex = 30
+        '
         'PictureBox1
         '
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PictureBox1.Image = Global.resgis_database.My.Resources.Resources.Vazo
+        Me.PictureBox1.Image = Global.resgis_database.My.Resources.Resources.plane
         Me.PictureBox1.Location = New System.Drawing.Point(395, 0)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(10)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(405, 450)
+        Me.PictureBox1.Size = New System.Drawing.Size(405, 527)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 24
         Me.PictureBox1.TabStop = False
@@ -163,24 +183,17 @@ Partial Class Form3
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
+        Me.ClientSize = New System.Drawing.Size(800, 527)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.BoxContra)
-        Me.Controls.Add(Me.BoxCedula)
-        Me.Controls.Add(Me.BoxUser)
-        Me.Controls.Add(Me.savePro)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "Form3"
         Me.Text = "Registro"
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents BoxCedula As TextBox
@@ -194,4 +207,5 @@ Partial Class Form3
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Panel1 As Panel
 End Class

@@ -22,6 +22,7 @@ Partial Class Form2
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form2))
         Me.aside = New System.Windows.Forms.Panel()
         Me.ButtonCerrar = New System.Windows.Forms.Button()
         Me.buttonAgg = New System.Windows.Forms.Button()
@@ -390,6 +391,7 @@ Partial Class Form2
         Me.Controls.Add(Me.PlPro)
         Me.Controls.Add(Me.PlMas)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form2"
         Me.aside.ResumeLayout(False)
         Me.PlPro.ResumeLayout(False)

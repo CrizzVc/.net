@@ -47,6 +47,11 @@ resgis_database
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:resgis_database.My.Resources.Resources.plane">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:resgis_database.My.Resources.Resources.Vazo">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
