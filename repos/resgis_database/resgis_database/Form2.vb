@@ -11,7 +11,7 @@ Public Class Form2
             conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
             conexion.Open()
             Dim cod As String = TextBox4.Text
-            Dim cadena As String = "SELECT id, marca, color, serial, descP, nameP, lastnameP FROM articulo WHERE id = @codInt OR marca = @codStr"
+            Dim cadena As String = "SELECT id, marca, color, serial, descP, nameP, lastnameP FROM articulo WHERE id = @codInt OR marca LIKE @codStr"
             Dim comando As New SqlCommand(cadena, conexion)
             Dim codInt As Integer
             If Integer.TryParse(cod, codInt) Then
@@ -19,7 +19,7 @@ Public Class Form2
             Else
                 comando.Parameters.AddWithValue("@codInt", -1)
             End If
-            comando.Parameters.AddWithValue("@codStr", cod)
+            comando.Parameters.AddWithValue("@codStr", cod & "%")
             Dim reader As SqlDataReader = comando.ExecuteReader()
 
             ' Limpiar panel
@@ -507,6 +507,5 @@ Public Class Form2
         Form1.Show()
         Me.Hide()
     End Sub
-
 
 End Class
