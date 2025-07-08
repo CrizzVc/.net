@@ -28,6 +28,7 @@ Partial Class Form2
         Me.buttonAgg = New System.Windows.Forms.Button()
         Me.buttonArticulos = New System.Windows.Forms.Button()
         Me.PlPro = New System.Windows.Forms.Panel()
+        Me.ButtonEditar = New System.Windows.Forms.Button()
         Me.LabelDtaN = New System.Windows.Forms.Label()
         Me.borrar = New System.Windows.Forms.Button()
         Me.Labelid = New System.Windows.Forms.Label()
@@ -35,6 +36,7 @@ Partial Class Form2
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.lista = New System.Windows.Forms.Panel()
         Me.PlMas = New System.Windows.Forms.Panel()
+        Me.ButtonActua = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.boxdesc = New System.Windows.Forms.TextBox()
@@ -121,6 +123,7 @@ Partial Class Form2
         '
         Me.PlPro.AutoScroll = True
         Me.PlPro.BackColor = System.Drawing.Color.White
+        Me.PlPro.Controls.Add(Me.ButtonEditar)
         Me.PlPro.Controls.Add(Me.LabelDtaN)
         Me.PlPro.Controls.Add(Me.borrar)
         Me.PlPro.Controls.Add(Me.Labelid)
@@ -133,6 +136,20 @@ Partial Class Form2
         Me.PlPro.Padding = New System.Windows.Forms.Padding(201, 0, 0, 0)
         Me.PlPro.Size = New System.Drawing.Size(809, 519)
         Me.PlPro.TabIndex = 20
+        '
+        'ButtonEditar
+        '
+        Me.ButtonEditar.BackColor = System.Drawing.Color.ForestGreen
+        Me.ButtonEditar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonEditar.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonEditar.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.ButtonEditar.Location = New System.Drawing.Point(713, 418)
+        Me.ButtonEditar.Name = "ButtonEditar"
+        Me.ButtonEditar.Size = New System.Drawing.Size(84, 33)
+        Me.ButtonEditar.TabIndex = 31
+        Me.ButtonEditar.Text = "Editar"
+        Me.ButtonEditar.UseVisualStyleBackColor = False
+        Me.ButtonEditar.Visible = False
         '
         'LabelDtaN
         '
@@ -201,6 +218,7 @@ Partial Class Form2
         'PlMas
         '
         Me.PlMas.BackColor = System.Drawing.Color.White
+        Me.PlMas.Controls.Add(Me.ButtonActua)
         Me.PlMas.Controls.Add(Me.Label5)
         Me.PlMas.Controls.Add(Me.Label1)
         Me.PlMas.Controls.Add(Me.boxdesc)
@@ -223,6 +241,20 @@ Partial Class Form2
         Me.PlMas.Size = New System.Drawing.Size(809, 519)
         Me.PlMas.TabIndex = 30
         Me.PlMas.Visible = False
+        '
+        'ButtonActua
+        '
+        Me.ButtonActua.BackColor = System.Drawing.Color.DodgerBlue
+        Me.ButtonActua.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonActua.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonActua.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonActua.ForeColor = System.Drawing.SystemColors.HighlightText
+        Me.ButtonActua.Location = New System.Drawing.Point(639, 457)
+        Me.ButtonActua.Name = "ButtonActua"
+        Me.ButtonActua.Size = New System.Drawing.Size(138, 35)
+        Me.ButtonActua.TabIndex = 25
+        Me.ButtonActua.Text = "Actualizar"
+        Me.ButtonActua.UseVisualStyleBackColor = False
         '
         'Label5
         '
@@ -370,7 +402,7 @@ Partial Class Form2
         '
         'savePro
         '
-        Me.savePro.BackColor = System.Drawing.Color.LimeGreen
+        Me.savePro.BackColor = System.Drawing.Color.ForestGreen
         Me.savePro.Cursor = System.Windows.Forms.Cursors.Hand
         Me.savePro.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.savePro.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -388,8 +420,8 @@ Partial Class Form2
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(809, 519)
         Me.Controls.Add(Me.aside)
-        Me.Controls.Add(Me.PlPro)
         Me.Controls.Add(Me.PlMas)
+        Me.Controls.Add(Me.PlPro)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form2"
@@ -428,4 +460,6 @@ Partial Class Form2
     Friend WithEvents LabelDtaN As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents ButtonEditar As Button
+    Friend WithEvents ButtonActua As Button
 End Class

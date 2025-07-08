@@ -18,7 +18,7 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonIniciar_Click(sender As Object, e As EventArgs) Handles ButtonIniciar.Click
-        Dim conexion As New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
+        Dim conexion As New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
 
         Try
             conexion.Open()

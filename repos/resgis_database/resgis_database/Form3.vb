@@ -3,7 +3,7 @@
 Public Class Form3
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles savePro.Click
-        Dim conexion As New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
+        Dim conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
         conexion.Open()
 
         Dim user As String = BoxUser.Text

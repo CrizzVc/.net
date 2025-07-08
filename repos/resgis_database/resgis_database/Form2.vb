@@ -8,7 +8,7 @@ Public Class Form2
     Public Sub BuscarArticulo(lista As Control)
 
         Try
-            conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
+            conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
             conexion.Open()
             Dim cod As String = TextBox4.Text
             Dim cadena As String = "SELECT id, marca, color, serial, descP, nameP, lastnameP FROM articulo WHERE id = @codInt OR marca LIKE @codStr"
@@ -124,6 +124,23 @@ Public Class Form2
                 ElseIf count = 1 Then
                     borrar.Visible = True
                     Dim datos As Object() = resultados(0)
+
+                    ' Mostrar botón borrar y actualizar
+                    borrar.Visible = True
+                    ButtonEditar.Visible = True
+
+                    ' Cargar datos en el panel de agregar (PlMas)
+                    BoxNombre.Text = datos(4).ToString()
+                    BoxApellido.Text = datos(5).ToString()
+                    BoxMarca.Text = datos(1).ToString()
+                    BoxSerial.Text = datos(3).ToString()
+                    BoxColor.Text = datos(2).ToString()
+                    boxdesc.Text = datos(6).ToString()
+
+                    ' Guardar ID en el Tag para saber qué artículo actualizar después
+                    BoxNombre.Tag = datos(0)
+
+                    borrar.Visible = True
                     Dim yPos As Integer = 10
 
                     ' Paleta de colores
@@ -272,24 +289,27 @@ Public Class Form2
                 conexion.Close()
             End If
         End Try
+
     End Sub
 
     'funcion del botón ver <---------------------
     Public Sub VerPro(idPrD As Integer)
         TextBox4.Text = idPrD
         borrar.Visible = True
+        ButtonEditar.Visible = True
 
         BuscarArticulo(lista)
     End Sub
 
     'función recargar <---------------
     Public Sub CargarArticulos(lista As Control)
+        ButtonEditar.Visible = False
         borrar.Visible = False
         Dim conexion As SqlConnection = Nothing
 
 
         Try
-            conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
+            conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
             conexion.Open()
 
             Dim cadena As String = "SELECT id, marca, color, serial FROM articulo"
@@ -355,7 +375,7 @@ Public Class Form2
                 btnVerPro.ForeColor = Color.White
                 btnVerPro.FlatStyle = FlatStyle.Flat
                 AddHandler btnVerPro.Click, Sub(senderBtn, eBtn)
-                                                verPro(idPr)
+                                                VerPro(idPr)
                                             End Sub
 
                 ' Agregar controles al panel
@@ -387,7 +407,7 @@ Public Class Form2
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
-            conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
+            conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
             conexion.Open()
 
             Dim cadena As String = "SELECT nombreU FROM admin WHERE id = 1"
@@ -416,8 +436,24 @@ Public Class Form2
         PlMas.Visible = True
         PlPro.Visible = False
 
-        Me.Text = "agregar"
+        ' Limpiar campos para un nuevo artículo
+        BoxNombre.Text = ""
+        BoxApellido.Text = ""
+        BoxMarca.Text = ""
+        BoxSerial.Text = ""
+        BoxColor.Text = ""
+        boxdesc.Text = ""
+
+        ' Configurar botones
+        savePro.Visible = True         ' Mostrar botón guardar
+        ButtonActua.Visible = False    ' Ocultar botón actualizar
+
+        ' Limpiar Tag por si estaba en modo Editar
+        BoxNombre.Tag = Nothing
+
+        Me.Text = "Agregar Artículo"
     End Sub
+
 
     Private Sub buttonArticulos_Click(sender As Object, e As EventArgs) Handles buttonArticulos.Click
         PlMas.Visible = False
@@ -441,7 +477,7 @@ Public Class Form2
 
 
     Private Sub borrar_Click(sender As Object, e As EventArgs) Handles borrar.Click
-        conexion = New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
+        conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
         conexion.Open()
         Dim cod As String = TextBox4.Text
         Dim cadena As String = "delete from articulo where id=" & cod
@@ -461,17 +497,28 @@ Public Class Form2
 
 
     Private Sub savePro_Click(sender As Object, e As EventArgs) Handles savePro.Click
+        ' Validar campos requeridos antes de abrir la conexión
+        If String.IsNullOrWhiteSpace(BoxNombre.Text) OrElse
+       String.IsNullOrWhiteSpace(BoxApellido.Text) OrElse
+       String.IsNullOrWhiteSpace(BoxMarca.Text) OrElse
+       String.IsNullOrWhiteSpace(BoxSerial.Text) OrElse
+       String.IsNullOrWhiteSpace(BoxColor.Text) Then
+
+            MessageBox.Show("Por favor, completa todos los campos obligatorios antes de guardar.", "Campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
         Try
-            Using conexion As New SqlConnection("server=DESKTOP-J71LFTK\SQLEXPRESS; database=base1; integrated security=true")
+            Using conexion As New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
                 conexion.Open()
 
                 ' Recolectar datos
-                Dim color As String = BoxColor.Text
-                Dim nameP As String = BoxNombre.Text
-                Dim lastnameP As String = BoxApellido.Text
-                Dim marca As String = BoxMarca.Text
-                Dim serial As String = BoxSerial.Text
-                Dim descri As String = boxdesc.Text
+                Dim color As String = BoxColor.Text.Trim()
+                Dim nameP As String = BoxNombre.Text.Trim()
+                Dim lastnameP As String = BoxApellido.Text.Trim()
+                Dim marca As String = BoxMarca.Text.Trim()
+                Dim serial As String = BoxSerial.Text.Trim()
+                Dim descri As String = boxdesc.Text.Trim()
                 Dim descripcionFinal As String = If(String.IsNullOrWhiteSpace(descri), "Sin descripción", descri)
 
                 ' Consulta con parámetros
@@ -487,7 +534,7 @@ Public Class Form2
                     comando.ExecuteNonQuery()
                 End Using
 
-                MessageBox.Show("Los datos se guardaron correctamente")
+                MessageBox.Show("Los datos se guardaron correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Limpiar campos
                 BoxColor.Text = ""
@@ -498,14 +545,91 @@ Public Class Form2
                 BoxSerial.Text = ""
             End Using
         Catch ex As Exception
-            MessageBox.Show("Error al guardar los datos: " & ex.Message)
+            MessageBox.Show("Error al guardar los datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
 
     Private Sub ButtonCerrar_Click(sender As Object, e As EventArgs) Handles ButtonCerrar.Click
         Form1.Show()
         Me.Hide()
     End Sub
+
+    Private Sub ButtonEditar_Click(sender As Object, e As EventArgs) Handles ButtonEditar.Click
+        PlMas.Visible = True    ' Muestra panel agregar
+        PlPro.Visible = False   ' Oculta panel de artículos
+
+        savePro.Visible = False          ' Oculta botón guardar normal
+        ButtonActua.Visible = True ' Muestra botón para actualizar
+        Me.Text = "Editar Artículo"
+    End Sub
+
+    Private Sub ButtonActua_Click(sender As Object, e As EventArgs) Handles ButtonActua.Click
+        ' Validar campos requeridos antes de abrir la conexión
+        If String.IsNullOrWhiteSpace(BoxNombre.Text) OrElse
+           String.IsNullOrWhiteSpace(BoxApellido.Text) OrElse
+           String.IsNullOrWhiteSpace(BoxMarca.Text) OrElse
+           String.IsNullOrWhiteSpace(BoxSerial.Text) OrElse
+           String.IsNullOrWhiteSpace(BoxColor.Text) Then
+
+            MessageBox.Show("Por favor, completa todos los campos obligatorios antes de actualizar.", "Campos vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Try
+            Using conexion As New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+                conexion.Open()
+
+                ' Recolectar datos
+                Dim idArticulo As Integer = CInt(BoxNombre.Tag) ' ID guardado en el Tag
+                Dim color As String = BoxColor.Text.Trim()
+                Dim nameP As String = BoxNombre.Text.Trim()
+                Dim lastnameP As String = BoxApellido.Text.Trim()
+                Dim marca As String = BoxMarca.Text.Trim()
+                Dim serial As String = BoxSerial.Text.Trim()
+                Dim descri As String = boxdesc.Text.Trim()
+                Dim descripcionFinal As String = If(String.IsNullOrWhiteSpace(descri), "Sin descripción", descri)
+
+                ' Consulta UPDATE
+                Dim cadena As String = "UPDATE articulo SET marca=@marca, color=@color, serial=@serial, descP=@descP, nameP=@nameP, lastnameP=@lastnameP WHERE id=@id"
+                Using comando As New SqlCommand(cadena, conexion)
+                    comando.Parameters.AddWithValue("@marca", marca)
+                    comando.Parameters.AddWithValue("@color", color)
+                    comando.Parameters.AddWithValue("@serial", serial)
+                    comando.Parameters.AddWithValue("@descP", descripcionFinal)
+                    comando.Parameters.AddWithValue("@nameP", nameP)
+                    comando.Parameters.AddWithValue("@lastnameP", lastnameP)
+                    comando.Parameters.AddWithValue("@id", idArticulo)
+
+                    Dim filas As Integer = comando.ExecuteNonQuery()
+                    If filas > 0 Then
+                        MessageBox.Show("Artículo actualizado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Else
+                        MessageBox.Show("No se encontró el artículo para actualizar", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+                End Using
+            End Using
+
+            ' Limpiar campos
+            BoxNombre.Text = ""
+            BoxApellido.Text = ""
+            BoxMarca.Text = ""
+            BoxSerial.Text = ""
+            BoxColor.Text = ""
+            boxdesc.Text = ""
+
+            ' Volver a la vista de artículos
+            PlMas.Visible = False
+            PlPro.Visible = True
+            savePro.Visible = True
+            ButtonActua.Visible = False
+            CargarArticulos(lista)
+
+        Catch ex As Exception
+            MessageBox.Show("Error al actualizar: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
 
 End Class
