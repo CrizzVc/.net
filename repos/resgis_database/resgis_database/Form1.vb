@@ -5,27 +5,32 @@ Imports System.Drawing
 Imports System.Drawing.Drawing2D
 
 Public Class Form1
-
+    ' Variables para la conexión a la base de datos
     Dim dataBase As String = "base1"
     Dim serverName As String = "DESKTOP-J71LFTK\SQLEXPRESS"
 
+    ' oculta el form actual y muestra el Form2
     Private Sub Button5_Click(sender As Object, e As EventArgs)
         Form2.Show()
         Me.Hide()
     End Sub
 
-
+    ' Muestra el Form3 para registrar un nuevo usuario
     Private Sub ButtonRegistar_Click(sender As Object, e As EventArgs) Handles ButtonRegistrar.Click
         Form3.Show()
         Me.Hide()
     End Sub
 
     Private Sub ButtonIniciar_Click(sender As Object, e As EventArgs) Handles ButtonIniciar.Click
+        ' crea una conexión a la base de datos
         Dim conexion As New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
 
+
         Try
+            ' Abre la conexión a la base de datos
             conexion.Open()
 
+            ' Verifica si los campos de cédula y contraseña están vacíos
             Dim cedula As Integer
             If Not Integer.TryParse(BoxCedula.Text, cedula) Then
                 MessageBox.Show("Por favor ingresa una cédula válida (solo números)")
