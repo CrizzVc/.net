@@ -2,8 +2,11 @@
 
 Public Class Form3
 
+    Dim dataBase As String = "base1"
+    Dim serverName As String = "DESKTOP-J71LFTK\SQLEXPRESS"
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles savePro.Click
-        Dim conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+        Dim conexion = New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
         conexion.Open()
 
         Dim user As String = BoxUser.Text

@@ -2,13 +2,16 @@
 Imports System.Drawing.Printing
 
 Public Class Form2
+    Dim dataBase As String = "base1"
+    Dim serverName As String = "DESKTOP-J71LFTK\SQLEXPRESS"
+
     Dim conexion As SqlConnection
 
     'Funcion buscar <---------------------
     Public Sub BuscarArticulo(lista As Control)
 
         Try
-            conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+            conexion = New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
             conexion.Open()
             Dim cod As String = TextBox4.Text
             Dim cadena As String = "SELECT id, marca, color, serial, descP, nameP, lastnameP FROM articulo WHERE id = @codInt OR marca LIKE @codStr"
@@ -309,7 +312,7 @@ Public Class Form2
 
 
         Try
-            conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+            conexion = New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
             conexion.Open()
 
             Dim cadena As String = "SELECT id, marca, color, serial FROM articulo"
@@ -407,7 +410,7 @@ Public Class Form2
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
-            conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+            conexion = New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
             conexion.Open()
 
             Dim cadena As String = "SELECT nombreU FROM admin WHERE id = 1"
@@ -477,7 +480,7 @@ Public Class Form2
 
 
     Private Sub borrar_Click(sender As Object, e As EventArgs) Handles borrar.Click
-        conexion = New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+        conexion = New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
         conexion.Open()
         Dim cod As String = TextBox4.Text
         Dim cadena As String = "delete from articulo where id=" & cod
@@ -509,7 +512,7 @@ Public Class Form2
         End If
 
         Try
-            Using conexion As New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+            Using conexion As New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
                 conexion.Open()
 
                 ' Recolectar datos
@@ -578,7 +581,7 @@ Public Class Form2
         End If
 
         Try
-            Using conexion As New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+            Using conexion As New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
                 conexion.Open()
 
                 ' Recolectar datos

@@ -6,6 +6,9 @@ Imports System.Drawing.Drawing2D
 
 Public Class Form1
 
+    Dim dataBase As String = "base1"
+    Dim serverName As String = "DESKTOP-J71LFTK\SQLEXPRESS"
+
     Private Sub Button5_Click(sender As Object, e As EventArgs)
         Form2.Show()
         Me.Hide()
@@ -18,7 +21,7 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonIniciar_Click(sender As Object, e As EventArgs) Handles ButtonIniciar.Click
-        Dim conexion As New SqlConnection("server=DESKTOP-43NQ5GU\SQLEXPRESS; database=DBPrueba; integrated security=true")
+        Dim conexion As New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
 
         Try
             conexion.Open()
