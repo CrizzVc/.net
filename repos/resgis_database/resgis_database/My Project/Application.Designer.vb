@@ -32,7 +32,7 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()> _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.resgis_database.Form1
+            Me.MainForm = Global.resgis_database.sign_in
         End Sub
     End Class
 End Namespace

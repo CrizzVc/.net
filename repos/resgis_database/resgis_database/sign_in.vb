@@ -4,20 +4,20 @@ Imports System.Reflection.Emit
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 
-Public Class Form1
+Public Class sign_in
     ' Variables para la conexión a la base de datos
     Dim dataBase As String = "base1"
     Dim serverName As String = "DESKTOP-J71LFTK\SQLEXPRESS"
 
-    ' oculta el form actual y muestra el Form2
+    ' oculta el form actual y muestra el home
     Private Sub Button5_Click(sender As Object, e As EventArgs)
-        Form2.Show()
+        home.Show()
         Me.Hide()
     End Sub
 
-    ' Muestra el Form3 para registrar un nuevo usuario
+    ' Muestra el sign up para registrar un nuevo usuario
     Private Sub ButtonRegistar_Click(sender As Object, e As EventArgs) Handles ButtonRegistrar.Click
-        Form3.Show()
+        sign_up.Show()
         Me.Hide()
     End Sub
 
@@ -37,6 +37,7 @@ Public Class Form1
                 Exit Sub
             End If
 
+            ' verifica si la cedula y la contraseña son válidas
             Dim contraseña As String = BoxContra.Text
 
             Dim consulta As String = "SELECT COUNT(*) FROM admin WHERE cedula = @cedula AND password = @password"
@@ -47,9 +48,10 @@ Public Class Form1
 
             Dim resultado As Integer = Convert.ToInt32(comando.ExecuteScalar())
 
+            ' compara el resultado de la consulta y muestra un mensaje según el resultado
             If resultado > 0 Then
                 MessageBox.Show("Inicio de sesión exitoso")
-                Form2.Show()
+                home.Show()
                 Me.Hide()
             Else
                 MessageBox.Show("Cédula o contraseña incorrectos")
@@ -60,14 +62,11 @@ Public Class Form1
         Finally
             conexion.Close()
         End Try
-
+        ' Limpia los campos de entrada después de iniciar sesión
         BoxCedula.Text = ""
         BoxContra.Text = ""
     End Sub
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class
 
 

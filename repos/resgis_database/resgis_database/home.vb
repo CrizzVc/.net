@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Drawing.Printing
 
-Public Class Form2
+Public Class home
     Dim dataBase As String = "base1"
     Dim serverName As String = "DESKTOP-J71LFTK\SQLEXPRESS"
 
@@ -29,6 +29,9 @@ Public Class Form2
             lista.Controls.Clear()
 
             ' Verificar si hay resultados
+            ' si el numero de resultados es 1 muestra los datos completos
+            ' si hay más de 1 muestra una lista de artículos
+            ' si no hay resultados muestra un mensaje de artículo no encontrado
             If reader.HasRows Then
                 ' Contar cuántos artículos hay
                 Dim count As Integer = 0
@@ -72,7 +75,7 @@ Public Class Form2
                         icon.Size = New Size(48, 48)
                         icon.Location = New Point(10, 16)
                         icon.SizeMode = PictureBoxSizeMode.StretchImage
-                        icon.Image = My.Resources.imgD ' Asegúrate de tener un recurso de imagen
+                        icon.Image = My.Resources.imgD ' imagen
 
                         ' Título (marca)
                         Dim labelTitle As New Label()
@@ -121,7 +124,7 @@ Public Class Form2
                         ' Agregar el panel al contenedor principal
                         lista.Controls.Add(card)
 
-                        yPos += 110 ' Ajusta según el alto de tu panel/card
+                        yPos += 110
                     Next
 
                 ElseIf count = 1 Then
@@ -171,7 +174,7 @@ Public Class Form2
                     pic.Size = New Size(64, 64)
                     pic.Location = New Point(58, 15)
                     pic.SizeMode = PictureBoxSizeMode.StretchImage
-                    pic.Image = My.Resources.imgD ' Cambia por tu recurso
+                    pic.Image = My.Resources.imgD ' imagen
 
                     ' Nombre (marca)
                     Dim lblNombre As New Label()
@@ -296,6 +299,8 @@ Public Class Form2
     End Sub
 
     'funcion del botón ver <---------------------
+    ' Esta función se llama cuando se hace clic en el botón "Ver" de un artículo.
+    ' coloca en el buscador el id y ejecuta la funcion "BuscarArticulos" para ver los datos completos del artículo.
     Public Sub VerPro(idPrD As Integer)
         TextBox4.Text = idPrD
         borrar.Visible = True
@@ -305,6 +310,10 @@ Public Class Form2
     End Sub
 
     'función recargar <---------------
+    ' Esta función se usa para recargar la lista de artículos en el panel.
+    ' primcipalmente se usa para recorrer la base de datos
+    ' y cada producto se renderiza a partir de este codigo.
+    ' se oculta los botones de editar y borrar
     Public Sub CargarArticulos(lista As Control)
         ButtonEditar.Visible = False
         borrar.Visible = False
@@ -407,12 +416,13 @@ Public Class Form2
     End Sub
 
     'LOAD <-------------------------------------
-    Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub home_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
             conexion = New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
             conexion.Open()
 
+            ' Obtener el nombre de usuario del administrador y lo mostrar en el título del formulario
             Dim cadena As String = "SELECT nombreU FROM admin WHERE id = 1"
             Dim comando As New SqlCommand(cadena, conexion)
             Dim reader As SqlDataReader = comando.ExecuteReader()
@@ -432,6 +442,7 @@ Public Class Form2
             End If
         End Try
 
+        ' Inicializar la cargar los artículos
         CargarArticulos(lista)
     End Sub
 
@@ -457,7 +468,7 @@ Public Class Form2
         Me.Text = "Agregar Artículo"
     End Sub
 
-
+    ' funcion para navegar entre paneles <---------------------
     Private Sub buttonArticulos_Click(sender As Object, e As EventArgs) Handles buttonArticulos.Click
         PlMas.Visible = False
         PlPro.Visible = True
@@ -466,7 +477,8 @@ Public Class Form2
         Me.Text = "articulos"
     End Sub
 
-    'buscar <--------------------------
+    'barra de busqueda <--------------------------
+    ' utiliza la función BuscarArticulo para buscar un artículo por su código o marca.
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
         If String.IsNullOrWhiteSpace(TextBox4.Text) Then
@@ -478,7 +490,7 @@ Public Class Form2
 
     End Sub
 
-
+    ' elimina un artículo de la base de datos
     Private Sub borrar_Click(sender As Object, e As EventArgs) Handles borrar.Click
         conexion = New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
         conexion.Open()
@@ -511,6 +523,7 @@ Public Class Form2
             Exit Sub
         End If
 
+        ' Intentar abrir la conexión y guardar los datos
         Try
             Using conexion As New SqlConnection("server=" & serverName & "; database=" & dataBase & "; integrated security=true")
                 conexion.Open()
@@ -553,12 +566,13 @@ Public Class Form2
     End Sub
 
 
-
+    ' cerrar sesión <---------------------
     Private Sub ButtonCerrar_Click(sender As Object, e As EventArgs) Handles ButtonCerrar.Click
-        Form1.Show()
+        sign_in.Show()
         Me.Hide()
     End Sub
 
+    ' Muestra el panel de agregar y oculta el panel de artículos y pasa los datos del artículo a editar
     Private Sub ButtonEditar_Click(sender As Object, e As EventArgs) Handles ButtonEditar.Click
         PlMas.Visible = True    ' Muestra panel agregar
         PlPro.Visible = False   ' Oculta panel de artículos
@@ -568,6 +582,7 @@ Public Class Form2
         Me.Text = "Editar Artículo"
     End Sub
 
+    ' Actualiza un artículo existente en la base de datos
     Private Sub ButtonActua_Click(sender As Object, e As EventArgs) Handles ButtonActua.Click
         ' Validar campos requeridos antes de abrir la conexión
         If String.IsNullOrWhiteSpace(BoxNombre.Text) OrElse

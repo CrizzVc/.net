@@ -45,9 +45,6 @@ C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\bin\De
 C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\bin\Debug\resgis_database.xml
 C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.vbproj.AssemblyReference.cache
 C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.exe.config
-C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Form1.resources
-C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Form2.resources
-C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Form3.resources
 C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.Resources.resources
 C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.vbproj.GenerateResource.cache
 C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.vbproj.CoreCompileInputs.cache
@@ -68,3 +65,6 @@ C:\Users\Soto\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\De
 C:\Users\Soto\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.exe
 C:\Users\Soto\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.xml
 C:\Users\Soto\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.pdb
+C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.sign_in.resources
+C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.home.resources
+C:\Users\Cris\Documents\GitHub\.net\repos\resgis_database\resgis_database\obj\Debug\resgis_database.sign_up.resources
