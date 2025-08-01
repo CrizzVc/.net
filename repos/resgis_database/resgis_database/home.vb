@@ -129,8 +129,10 @@ Public Class home
 
                 ElseIf count = 1 Then
                     borrar.Visible = True
+
                     Dim datos As Object() = resultados(0)
 
+                    TextBox4.Text = datos(0)
                     ' Mostrar botón borrar y actualizar
                     borrar.Visible = True
                     ButtonEditar.Visible = True

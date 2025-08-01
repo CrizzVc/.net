@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\home.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\home.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\home.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\home.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|c:\\users\\cris\\documents\\github\\.net\\repos\\resgis_database\\resgis_database\\my project\\application.designer.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\my project\\application.designer.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|c:\\users\\cris\\documents\\github\\.net\\repos\\resgis_database\\resgis_database\\sign_in.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\sign_in.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\sign_in.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|c:\\users\\cris\\documents\\github\\.net\\repos\\resgis_database\\resgis_database\\sign_in.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\sign_in.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
       "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\sign_in.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|c:\\users\\cris\\documents\\github\\.net\\repos\\resgis_database\\resgis_database\\sign_up.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\sign_up.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\sign_up.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|c:\\users\\cris\\documents\\github\\.net\\repos\\resgis_database\\resgis_database\\home.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\home.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|c:\\users\\cris\\documents\\github\\.net\\repos\\resgis_database\\resgis_database\\sign_up.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\sign_up.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
       "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\sign_up.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|c:\\users\\cris\\documents\\github\\.net\\repos\\resgis_database\\resgis_database\\home.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{D992BD16-89AC-4418-A7EA-4A802182BC75}|resgis_database\\resgis_database.vbproj|solutionrelative:resgis_database\\home.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,11 +38,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "home.vb [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\home.vb",
               "RelativeDocumentMoniker": "resgis_database\\home.vb",
@@ -55,29 +55,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "home.vb",
               "DocumentMoniker": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\home.vb",
               "RelativeDocumentMoniker": "resgis_database\\home.vb",
               "ToolTip": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\home.vb",
               "RelativeToolTip": "resgis_database\\home.vb",
-              "ViewState": "AgIAAHICAAAAMDMzMzMXwEgCAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAHQAAAAAbGZmZmYiwIQAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2025-06-17T20:19:39.141Z",
               "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Application.Designer.vb",
-              "DocumentMoniker": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\My Project\\Application.Designer.vb",
-              "RelativeDocumentMoniker": "resgis_database\\My Project\\Application.Designer.vb",
-              "ToolTip": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\My Project\\Application.Designer.vb",
-              "RelativeToolTip": "resgis_database\\My Project\\Application.Designer.vb",
-              "ViewState": "AgIAABAAAAAANDMzMzMLwCEAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-08-01T01:07:59.754Z",
               "EditorCaption": ""
             },
             {
@@ -91,6 +78,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Application.Designer.vb",
+              "DocumentMoniker": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\My Project\\Application.Designer.vb",
+              "RelativeDocumentMoniker": "resgis_database\\My Project\\Application.Designer.vb",
+              "ToolTip": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\My Project\\Application.Designer.vb",
+              "RelativeToolTip": "resgis_database\\My Project\\Application.Designer.vb",
+              "ViewState": "AgIAABAAAAAANDMzMzMLwBgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-08-01T01:07:59.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "sign_in.vb [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\sign_in.vb",
               "RelativeDocumentMoniker": "resgis_database\\sign_in.vb",
@@ -102,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "sign_up.vb",
               "DocumentMoniker": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\sign_up.vb",
               "RelativeDocumentMoniker": "resgis_database\\sign_up.vb",
@@ -115,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "sign_in.vb",
               "DocumentMoniker": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\sign_in.vb",
               "RelativeDocumentMoniker": "resgis_database\\sign_in.vb",
@@ -128,7 +128,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "sign_up.vb [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\Cris\\Documents\\GitHub\\.net\\repos\\resgis_database\\resgis_database\\sign_up.vb",
               "RelativeDocumentMoniker": "resgis_database\\sign_up.vb",
