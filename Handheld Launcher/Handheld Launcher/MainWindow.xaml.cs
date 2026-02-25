@@ -25,6 +25,12 @@ namespace Handheld_Launcher
             GamesGrid.ItemsSource = Games;
             // Ejemplo: Escanea una carpeta (Cámbiala por una real en tu PC)
             ScanGames(@"C:\Games");
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += (s, e) => {
+                TimeTextBlock.Text = DateTime.Now.ToString("HH:mm");
+            };
+            timer.Start();
 
         }
 

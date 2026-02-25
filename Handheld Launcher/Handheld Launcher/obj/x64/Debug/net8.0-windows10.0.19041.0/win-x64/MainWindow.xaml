@@ -14,30 +14,74 @@
     </Window.SystemBackdrop>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.Resources>
+            <Style TargetType="GridViewItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewItem">
+                            <Grid x:Name="ContentRoot" RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform x:Name="RootScale" ScaleX="1" ScaleY="1" />
+                                </Grid.RenderTransform>
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.1" />
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.1" />
+                                                
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <ContentPresenter />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+
+        <TextBlock x:ConnectionId='8' x:Name="TimeTextBlock" 
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Top" 
+                   Margin="0,30,40,0" 
+                   FontSize="26" 
+                   FontWeight="SemiBold" 
+                   Foreground="White"/>
+
         <StackPanel Padding="40">
-            
             <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,0,20">
                 <TextBlock Text="MIS JUEGOS" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <Button x:ConnectionId='7' Content="+"                       Style="{StaticResource AccentButtonStyle}" CornerRadius="15" Width="30" Height="30"/>
+                <Button x:ConnectionId='14' Content="+"                       Style="{StaticResource AccentButtonStyle}" CornerRadius="15" Width="30" Height="30"/>
             </StackPanel>
 
-            <GridView x:ConnectionId='2' x:Name="GamesGrid" IsItemClickEnabled="True">
+            <GridView x:ConnectionId='9' x:Name="GamesGrid" IsItemClickEnabled="True">
                 <GridView.ItemTemplate>
                     <DataTemplate                            >
-                        <StackPanel x:ConnectionId='4' Width="150" Margin="10">
+                        <StackPanel x:ConnectionId='11' Width="150" Margin="10">
                             <Border Background="Gray" Height="200" CornerRadius="8">
-                                <Image x:ConnectionId='6'                        Stretch="UniformToFill"/>
+                                <Image x:ConnectionId='13'                        Stretch="UniformToFill"/>
                             </Border>
-                            <TextBlock x:ConnectionId='5'                      
-                           HorizontalAlignment="Center" 
-                           Foreground="White" 
-                           FontSize="14"/>
+                            <TextBlock x:ConnectionId='12'                      
+                                       HorizontalAlignment="Center" 
+                                       Foreground="White" 
+                                       Margin="0,10,0,0"
+                                       FontSize="14"/>
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
         </StackPanel>
     </Grid>
-    
 </Window>
 
