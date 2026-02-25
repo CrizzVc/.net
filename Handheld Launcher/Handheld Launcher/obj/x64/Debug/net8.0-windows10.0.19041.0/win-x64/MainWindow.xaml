@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Handheld_Launcher.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Handheld_Launcher"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Handheld Launcher">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Padding="40">
+            
+            <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,0,20">
+                <TextBlock Text="MIS JUEGOS" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <Button x:ConnectionId='7' Content="+"                       Style="{StaticResource AccentButtonStyle}" CornerRadius="15" Width="30" Height="30"/>
+            </StackPanel>
+
+            <GridView x:ConnectionId='2' x:Name="GamesGrid" IsItemClickEnabled="True">
+                <GridView.ItemTemplate>
+                    <DataTemplate                            >
+                        <StackPanel x:ConnectionId='4' Width="150" Margin="10">
+                            <Border Background="Gray" Height="200" CornerRadius="8">
+                                <Image x:ConnectionId='6'                        Stretch="UniformToFill"/>
+                            </Border>
+                            <TextBlock x:ConnectionId='5'                      
+                           HorizontalAlignment="Center" 
+                           Foreground="White" 
+                           FontSize="14"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </StackPanel>
+    </Grid>
+    
+</Window>
+

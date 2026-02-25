@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Handheld Launcher (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Handheld Launcher (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
