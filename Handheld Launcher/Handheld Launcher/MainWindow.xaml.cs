@@ -1,6 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -14,6 +15,8 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.Gaming.Input;
+using Microsoft.UI.Dispatching;
 
 namespace Handheld_Launcher
 {
@@ -46,12 +49,21 @@ namespace Handheld_Launcher
         private bool _suspendSave = false;
         private record PersistedGame(string Name, string Path, string IconPath);
 
+        // Gamepad support
+        private readonly List<Gamepad> _gamepads = new List<Gamepad>();
+        private DispatcherTimer _gamepadTimer;
+        private DateTime _lastGamepadAction = DateTime.MinValue;
+        private const int GamepadActionCooldownMs = 250;
+
         public MainWindow()
         {
             this.InitializeComponent();
 
             // En WinUI3, Window no tiene DataContext; asignamos al Grid raíz (named in XAML)
             RootGrid.DataContext = this;
+
+            // Asegurar foco para recibir KeyDown
+            RootGrid.Loaded += (s, e) => RootGrid.Focus(FocusState.Programmatic);
 
             // Conectamos lista y eventos
             Games.CollectionChanged += Games_CollectionChanged;
@@ -76,6 +88,65 @@ namespace Handheld_Launcher
                 TimeTextBlock.Text = DateTime.Now.ToString("HH:mm");
             };
             timer.Start();
+
+            // Inicializar detección y polling de gamepads
+            Gamepad.GamepadAdded += Gamepad_GamepadAdded;
+            Gamepad.GamepadRemoved += Gamepad_GamepadRemoved;
+            StartGamepadPolling();
+        }
+
+        private void StartGamepadPolling()
+        {
+            // Mantener lista inicial de gamepads
+            foreach (var gp in Gamepad.Gamepads) _gamepads.Add(gp);
+
+            _gamepadTimer = new DispatcherTimer();
+            _gamepadTimer.Interval = TimeSpan.FromMilliseconds(100);
+            _gamepadTimer.Tick += GamepadTimer_Tick;
+            _gamepadTimer.Start();
+        }
+
+        private void Gamepad_GamepadAdded(object sender, Gamepad e)
+        {
+            // Añadir al listado (asegurar no duplicados)
+            if (!_gamepads.Contains(e)) _gamepads.Add(e);
+        }
+
+        private void Gamepad_GamepadRemoved(object sender, Gamepad e)
+        {
+            if (_gamepads.Contains(e)) _gamepads.Remove(e);
+        }
+
+        private void GamepadTimer_Tick(object sender, object e)
+        {
+            if (_gamepads.Count == 0) return;
+
+            foreach (var gp in _gamepads)
+            {
+                try
+                {
+                    var reading = gp.GetCurrentReading();
+
+                    // DPad o stick horizontal para navegar
+                    bool left = (reading.Buttons & GamepadButtons.DPadLeft) == GamepadButtons.DPadLeft || reading.LeftThumbstickX < -0.6;
+                    bool right = (reading.Buttons & GamepadButtons.DPadRight) == GamepadButtons.DPadRight || reading.LeftThumbstickX > 0.6;
+
+                    if (left && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
+                    {
+                        ScrollLeft_Click(null, null);
+                        _lastGamepadAction = DateTime.Now;
+                    }
+                    else if (right && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
+                    {
+                        ScrollRight_Click(null, null);
+                        _lastGamepadAction = DateTime.Now;
+                    }
+                }
+                catch
+                {
+                    // Ignorar gamepads que fallen al leer
+                }
+            }
         }
 
         private void Games_SaveOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -138,14 +209,14 @@ namespace Handheld_Launcher
         private void ScrollLeft_Click(object sender, RoutedEventArgs e)
         {
             // Desplaza el ScrollViewer a la izquierda una cantidad (ajusta step según tus items)
-            double step = 300;
+            double step = 420;
             double target = Math.Max(0, CarouselScrollViewer.HorizontalOffset - step);
             CarouselScrollViewer.ChangeView(target, null, null, true);
         }
 
         private void ScrollRight_Click(object sender, RoutedEventArgs e)
         {
-            double step = 300;
+            double step = 420;
             double max = CarouselScrollViewer.ExtentWidth - CarouselScrollViewer.ViewportWidth;
             double target = Math.Min(max, CarouselScrollViewer.HorizontalOffset + step);
             CarouselScrollViewer.ChangeView(target, null, null, true);
@@ -299,6 +370,21 @@ namespace Handheld_Launcher
                 {
                     Debug.WriteLine($"Error al iniciar {selectedGame.Name}: {ex.Message}");
                 }
+            }
+        }
+
+        // KeyDown handler para flechas del teclado
+        private void RootGrid_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Left)
+            {
+                ScrollLeft_Click(null, null);
+                e.Handled = true;
+            }
+            else if (e.Key == Windows.System.VirtualKey.Right)
+            {
+                ScrollRight_Click(null, null);
+                e.Handled = true;
             }
         }
     }

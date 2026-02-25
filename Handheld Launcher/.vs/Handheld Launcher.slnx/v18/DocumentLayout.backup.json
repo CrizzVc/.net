@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|c:\\users\\user\\onedrive\\documents\\github\\.net\\handheld launcher\\handheld launcher\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|solutionrelative:handheld launcher\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|c:\\users\\user\\onedrive\\documents\\github\\.net\\handheld launcher\\handheld launcher\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|solutionrelative:handheld launcher\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|c:\\users\\user\\onedrive\\documents\\github\\.net\\handheld launcher\\handheld launcher\\gameitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|solutionrelative:handheld launcher\\gameitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|c:\\users\\user\\onedrive\\documents\\github\\.net\\handheld launcher\\handheld launcher\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|solutionrelative:handheld launcher\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|c:\\users\\user\\onedrive\\documents\\github\\.net\\handheld launcher\\handheld launcher\\booltowidthconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|solutionrelative:handheld launcher\\booltowidthconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|c:\\users\\user\\onedrive\\documents\\github\\.net\\handheld launcher\\handheld launcher\\gameitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CAFA76F0-1EF5-23FE-F175-679F17419916}|Handheld Launcher\\Handheld Launcher.csproj|solutionrelative:handheld launcher\\gameitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,20 +34,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "BoolToWidthConverter.cs",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\Handheld Launcher\\BoolToWidthConverter.cs",
               "RelativeDocumentMoniker": "Handheld Launcher\\BoolToWidthConverter.cs",
               "ToolTip": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\Handheld Launcher\\BoolToWidthConverter.cs",
               "RelativeToolTip": "Handheld Launcher\\BoolToWidthConverter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-25T22:16:18.944Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "GameItem.cs",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\Handheld Launcher\\GameItem.cs",
               "RelativeDocumentMoniker": "Handheld Launcher\\GameItem.cs",
@@ -55,31 +55,30 @@
               "RelativeToolTip": "Handheld Launcher\\GameItem.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAACkAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T19:02:37.381Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-25T19:02:37.381Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\Handheld Launcher\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Handheld Launcher\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\Handheld Launcher\\MainWindow.xaml.cs",
-              "RelativeToolTip": "Handheld Launcher\\MainWindow.xaml.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAAwDgAAAA/AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\Handheld Launcher\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "Handheld Launcher\\MainWindow.xaml.cs*",
+              "ViewState": "AgIAABIBAAAAAAAAAAAswCEBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-25T18:59:43.213Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\Handheld Launcher\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Handheld Launcher\\MainWindow.xaml",
               "ToolTip": "C:\\Users\\User\\OneDrive\\Documents\\GitHub\\.net\\Handheld Launcher\\Handheld Launcher\\MainWindow.xaml",
               "RelativeToolTip": "Handheld Launcher\\MainWindow.xaml",
-              "ViewState": "AgIAADcAAAAAAAAAAAAcwEMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAcwFgAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-02-25T18:58:17.071Z",
               "EditorCaption": ""
