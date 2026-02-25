@@ -9,70 +9,162 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using Windows.Storage.Pickers;
-using WinRT.Interop; // Necesario para asociar la ventana
-using System.Text.Json;
+using WinRT.Interop;
+using System.Linq;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Handheld_Launcher
 {
-    public sealed partial class MainWindow : Microsoft.UI.Xaml.Window
+    public sealed partial class MainWindow : Microsoft.UI.Xaml.Window, INotifyPropertyChanged
     {
-        // Esta es la lista que leerá el GridView
+        // Todas las entradas
         public ObservableCollection<GameItem> Games { get; set; } = new ObservableCollection<GameItem>();
+
+        // Colección para el carrusel (todos excepto el primero)
+        public ObservableCollection<GameItem> OtherGames { get; set; } = new ObservableCollection<GameItem>();
+
+        private GameItem _featuredGame;
+        public GameItem FeaturedGame
+        {
+            get => _featuredGame;
+            set
+            {
+                if (_featuredGame != value)
+                {
+                    _featuredGame = value;
+                    OnPropertyChanged(nameof(FeaturedGame));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        // Persistencia
+        private bool _suspendSave = false;
+        private record PersistedGame(string Name, string Path);
 
         public MainWindow()
         {
             this.InitializeComponent();
-            GamesGrid.ItemsSource = Games;
-            // Ejemplo: Escanea una carpeta (Cámbiala por una real en tu PC)
-            ScanGames(@"C:\Games");
+
+            // En WinUI3, Window no tiene DataContext; asignamos al Grid raíz (named in XAML)
+            RootGrid.DataContext = this;
+
+            // Conectamos lista y eventos
+            Games.CollectionChanged += Games_CollectionChanged;
+            Games.CollectionChanged += Games_SaveOnCollectionChanged;
+
+            // Cargamos juegos guardados (suspendemos guardado durante la carga)
+            _suspendSave = true;
+            CargarJuegosDesdeJson();
+            _suspendSave = false;
+
+            // Aseguramos que exista el placeholder en primer lugar (sin Path)
+            if (Games.Count == 0 || !string.IsNullOrEmpty(Games[0].Path))
+            {
+                Games.Insert(0, new GameItem("AGREGAR", null, new BitmapImage(new Uri("ms-appx:///Assets/StoreLogo.png"))));
+            }
+
+            // Inicializar timer de reloj
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += (s, e) => {
+            timer.Tick += (s, e) =>
+            {
                 TimeTextBlock.Text = DateTime.Now.ToString("HH:mm");
             };
             timer.Start();
-
         }
 
-        private void ScanGames(string folderPath)
+        private void Games_SaveOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (Directory.Exists(folderPath))
+            if (_suspendSave) return;
+            GuardarJuegoEnJson();
+        }
+
+        private void Games_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // Cuando cambie la colección principal recalculamos featured y othergames
+            UpdateFeaturedAndOthers();
+        }
+
+        private void UpdateFeaturedAndOthers()
+        {
+            if (Games.Count > 0)
             {
-                var files = Directory.GetFiles(folderPath, "*.exe");
-                foreach (var file in files)
-                {
-                    // Extraer el icono del archivo .exe
-                    Icon sysIcon = Icon.ExtractAssociatedIcon(file);
-                    SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
+                FeaturedGame = Games[0];
+                // Rellenar OtherGames
+                OtherGames.Clear();
+                foreach (var g in Games.Skip(1))
+                    OtherGames.Add(g);
+            }
+            else
+            {
+                FeaturedGame = null;
+                OtherGames.Clear();
+            }
+        }
 
-                    // Convertimos el icono de Windows a algo que WinUI entienda
-                    using (var stream = new MemoryStream())
-                    {
-                        sysIcon.ToBitmap().Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                        // Aquí podrías implementar una función async para cargar el bitmap
-                        // Pero para empezar, usaremos una imagen por defecto si no carga
-                    }
+        private void MoveToFeatured(GameItem item)
+        {
+            if (item == null) return;
 
-                    Games.Add(new GameItem(Path.GetFileNameWithoutExtension(file), file, null));
-                }
+            // Si ya es featured, no hacemos nada
+            if (Games.Count > 0 && Games[0] == item) return;
+
+            // Mover el item al índice 0
+            if (Games.Contains(item))
+            {
+                Games.Remove(item);
+                Games.Insert(0, item);
+            }
+            else
+            {
+                // Si no estaba en la lista por alguna razón, lo insertamos arriba
+                Games.Insert(0, item);
+            }
+
+            // UpdateFeaturedAndOthers se ejecutará por el evento CollectionChanged
+        }
+
+        private void ScrollLeft_Click(object sender, RoutedEventArgs e)
+        {
+            // Desplaza el ScrollViewer a la izquierda una cantidad (ajusta step según tus items)
+            double step = 300;
+            double target = Math.Max(0, CarouselScrollViewer.HorizontalOffset - step);
+            CarouselScrollViewer.ChangeView(target, null, null, true);
+        }
+
+        private void ScrollRight_Click(object sender, RoutedEventArgs e)
+        {
+            double step = 300;
+            double max = CarouselScrollViewer.ExtentWidth - CarouselScrollViewer.ViewportWidth;
+            double target = Math.Min(max, CarouselScrollViewer.HorizontalOffset + step);
+            CarouselScrollViewer.ChangeView(target, null, null, true);
+        }
+
+        private void CarouselGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var clicked = e.ClickedItem as GameItem;
+            if (clicked != null)
+            {
+                MoveToFeatured(clicked);
             }
         }
 
         private async void AddGame_Click(object sender, RoutedEventArgs e)
         {
-            // 1. Crear el selector de archivos
             var picker = new FileOpenPicker();
-
-            // IMPORTANTE: En WinUI 3 hay que asociar el picker con la ventana actual
             var hwnd = WindowNative.GetWindowHandle(this);
             InitializeWithWindow.Initialize(picker, hwnd);
 
             picker.ViewMode = PickerViewMode.Thumbnail;
             picker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
             picker.FileTypeFilter.Add(".exe");
-            picker.FileTypeFilter.Add(".lnk"); // También accesos directos
+            picker.FileTypeFilter.Add(".lnk");
 
-            // 2. Abrir el buscador
             var file = await picker.PickSingleFileAsync();
 
             if (file != null)
@@ -80,38 +172,75 @@ namespace Handheld_Launcher
                 string path = file.Path;
                 string name = file.DisplayName;
 
-                // 3. Crear el objeto y añadirlo a la lista visual
-                // Usaremos una imagen por defecto por ahora
                 var newGame = new GameItem(name, path, new BitmapImage(new Uri("ms-appx:///Assets/StoreLogo.png")));
-
                 Games.Add(newGame);
-                System.Diagnostics.Debug.WriteLine($"Juego añadido: {newGame.Name} - Total: {Games.Count}");
 
-                // Opcional: Guardar en una base de datos o archivo JSON para que no se borre al cerrar
-                GuardarJuegoEnJson(name, path);
+                // Guardado gestionado por Games_SaveOnCollectionChanged handler
             }
         }
 
-
-        private void GuardarJuegoEnJson(string nombre, string ruta)
+        private void GuardarJuegoEnJson()
         {
-            // Puedes crear una carpeta en AppData para guardar tu "base de datos"
-            string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HandheldLauncher");
-            Directory.CreateDirectory(folder);
-            string filePath = Path.Combine(folder, "games.json");
+            try
+            {
+                string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HandheldLauncher");
+                Directory.CreateDirectory(folder);
+                string filePath = Path.Combine(folder, "games.json");
 
-            // Cargamos lo que ya existe, añadimos el nuevo y guardamos
-            // (Esto es una versión simplificada)
-            var json = JsonSerializer.Serialize(Games);
-            File.WriteAllText(filePath, json);
+                var list = Games
+                    .Where(g => !string.IsNullOrEmpty(g.Path))
+                    .Select(g => new PersistedGame(g.Name, g.Path))
+                    .ToList();
+
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                var json = JsonSerializer.Serialize(list, options);
+                File.WriteAllText(filePath, json);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error guardando juegos: {ex.Message}");
+            }
         }
 
-    private void GamesGrid_ItemClick(object sender, ItemClickEventArgs e)
+        private void CargarJuegosDesdeJson()
+        {
+            try
+            {
+                string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "HandheldLauncher");
+                string filePath = Path.Combine(folder, "games.json");
+                if (!File.Exists(filePath)) return;
+
+                var json = File.ReadAllText(filePath);
+                var list = JsonSerializer.Deserialize<List<PersistedGame>>(json);
+                if (list != null)
+                {
+                    foreach (var pg in list)
+                    {
+                        // Por simplicidad usamos icono por defecto; puedes mejorar extrayendo el icono real.
+                        var icon = new BitmapImage(new Uri("ms-appx:///Assets/StoreLogo.png"));
+                        Games.Add(new GameItem(pg.Name, pg.Path, icon));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error cargando juegos: {ex.Message}");
+            }
+        }
+
+        private void GamesGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
             var selectedGame = e.ClickedItem as GameItem;
             if (selectedGame != null)
             {
-                Process.Start(new ProcessStartInfo(selectedGame.Path) { UseShellExecute = true });
+                try
+                {
+                    Process.Start(new ProcessStartInfo(selectedGame.Path) { UseShellExecute = true });
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error al iniciar {selectedGame.Name}: {ex.Message}");
+                }
             }
         }
     }
