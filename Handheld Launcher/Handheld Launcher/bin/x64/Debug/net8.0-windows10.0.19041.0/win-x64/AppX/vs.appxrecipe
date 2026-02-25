@@ -30,7 +30,7 @@
     <AppXManifest Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2026-02-25T21:52:12.001</Modified>
+      <Modified>2026-02-25T22:19:44.104</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -40,11 +40,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
       <PackagePath>Handheld Launcher.exe</PackagePath>
-      <Modified>2026-02-25T21:52:11.678</Modified>
+      <Modified>2026-02-25T22:19:43.738</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Handheld Launcher.dll">
       <PackagePath>Handheld Launcher.dll</PackagePath>
-      <Modified>2026-02-25T21:52:11.670</Modified>
+      <Modified>2026-02-25T22:19:43.730</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.23\runtimes\win-x64\lib\net8.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -980,7 +980,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2026-02-25T21:52:11.791</Modified>
+      <Modified>2026-02-25T22:19:43.848</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
