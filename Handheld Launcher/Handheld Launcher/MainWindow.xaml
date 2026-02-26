@@ -13,16 +13,12 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <!-- Añadido nombre al Grid raíz para asignar DataContext desde el code-behind -->
-    <Grid x:Name="RootGrid"
-          KeyDown="RootGrid_KeyDown" IsTabStop="True" >
-
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#232526" Offset="0"/>
-                <GradientStop Color="#0F2027" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid x:Name="RootGrid" KeyDown="RootGrid_KeyDown" IsTabStop="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
 
         <Grid.Resources>
             <local:BoolToWidthConverter x:Key="BoolToWidthConverter" />
@@ -34,7 +30,6 @@
                                 <Grid.RenderTransform>
                                     <ScaleTransform x:Name="RootScale" ScaleX="1" ScaleY="1" />
                                 </Grid.RenderTransform>
-
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CommonStates">
                                         <VisualState x:Name="Normal">
@@ -50,8 +45,6 @@
                                             </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>
-
-                                    <!-- Nuevo grupo para estados de selección/resalte -->
                                     <VisualStateGroup x:Name="SelectionStates">
                                         <VisualState x:Name="Unselected">
                                             <Storyboard>
@@ -65,8 +58,6 @@
                                                 <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.12" />
                                             </Storyboard>
                                         </VisualState>
-
-                                        <!-- Estado más pequeño para selección por teclado/gamepad (evita recorte) -->
                                         <VisualState x:Name="SelectedKeyboard">
                                             <Storyboard>
                                                 <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1.08" Duration="0:0:0.12" />
@@ -75,7 +66,6 @@
                                         </VisualState>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
-
                                 <ContentPresenter />
                             </Grid>
                         </ControlTemplate>
@@ -84,7 +74,39 @@
             </Style>
         </Grid.Resources>
 
+        <Image x:Name="BackgroundImage" Stretch="UniformToFill" Grid.RowSpan="3"/>
+
+        <!-- ASIDE -->
+        <Grid x:Name="SidePanel"
+          Width="250"
+          Background="#FF111111"
+          HorizontalAlignment="Left"
+          Translation="-250,0,0"
+          Canvas.ZIndex="10">
+
+            <StackPanel Margin="20,60,20,20" Spacing="15">
+
+                <Button Content="🏠 Home"
+                    Click="Home_Click"/>
+
+                <Button Content="🎮 Biblioteca"
+                    Click="Library_Click"/>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.RowSpan="3">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#00000000" Offset="0"/>
+                    <GradientStop Color="#00000000" Offset="0.6"/>
+                    <GradientStop Color="#CC000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+
         <TextBlock x:Name="TimeTextBlock" 
+                   Grid.Row="0"
                    HorizontalAlignment="Right" 
                    VerticalAlignment="Top" 
                    Margin="0,30,40,0" 
@@ -92,75 +114,107 @@
                    FontWeight="SemiBold" 
                    Foreground="White"/>
 
-        <!-- Quitado DataContext que apuntaba a Self para heredar el DataContext del RootGrid -->
-        <StackPanel Padding="40">
-            <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,0,20">
-                <TextBlock Text="MIS JUEGOS" FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <Button Content="+" Click="AddGame_Click" Style="{StaticResource AccentButtonStyle}" CornerRadius="5" Width="30" Height="30"/>
+        <!-- CONTENEDOR DE VISTAS -->
+        <Grid Grid.Row="1">
+
+            <!-- HOME VIEW -->
+            <StackPanel x:Name="HomeView" Padding="40,0">
+
+                <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,0,20">
+                    <TextBlock Text="MIS JUEGOS" 
+                       FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans"
+                       FontWeight="Bold"
+                       Style="{StaticResource HeaderTextBlockStyle}"/>
+                    <Button Content="+" Click="AddGame_Click"
+                    Style="{StaticResource AccentButtonStyle}"
+                    CornerRadius="5"
+                    Width="30"
+                    Height="30"
+                    Padding="1,0,0,2"
+                    FontWeight="Bold"
+                    Background="AntiqueWhite"/>
+                </StackPanel>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Content="◀" Click="ScrollLeft_Click"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="48"
+                    Height="120" />
+
+                    <ScrollViewer x:Name="CarouselScrollViewer"
+                          Grid.Column="1"
+                          HorizontalScrollMode="Enabled"
+                          HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollMode="Disabled"
+                          Margin="8,0">
+
+                        <GridView x:Name="CarouselGrid"
+                          ItemsSource="{x:Bind OtherGames, Mode=OneWay}"
+                          IsItemClickEnabled="True"
+                          ItemClick="CarouselGrid_ItemClick"
+                          SelectionMode="Single"
+                          HorizontalAlignment="Center"
+                          Padding="12,16">
+
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="local:GameItem">
+                                    <StackPanel Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14">
+                                        <Border Background="Gray"
+                                        Height="260"
+                                        CornerRadius="12"
+                                        Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}">
+                                            <Image Source="{x:Bind DisplayImage}" Stretch="UniformToFill" />
+                                        </Border>
+                                        <TextBlock Text="{x:Bind Name}"
+                                           Foreground="White"
+                                           Margin="20,10,0,0"
+                                           FontSize="16"
+                                           TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+
+                        </GridView>
+                    </ScrollViewer>
+
+                    <Button Grid.Column="2" Content="▶"
+                    Click="ScrollRight_Click"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="48"
+                    Height="120" />
+                </Grid>
+
             </StackPanel>
 
+            <!-- LIBRARY VIEW -->
+            <Grid x:Name="LibraryView"
+          Visibility="Collapsed"
+          Padding="40">
 
-            <!-- Carrusel con botones (ahora incluye también el juego featured) -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="60"/>
-                </Grid.ColumnDefinitions>
+                <TextBlock Text="BIBLIOTECA"
+                   FontSize="40"
+                   Foreground="White"/>
 
-                <Button Grid.Column="0" Content="◀" Click="ScrollLeft_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="120" />
-
-                <ScrollViewer x:Name="CarouselScrollViewer"
-                              Grid.Column="1"
-                              HorizontalScrollMode="Enabled"
-                              HorizontalScrollBarVisibility="Hidden"
-                              VerticalScrollMode="Disabled"
-                              VerticalScrollBarVisibility="Disabled"
-                              Margin="8,0">
-                    <GridView x:Name="CarouselGrid"
-                              ItemsSource="{x:Bind OtherGames, Mode=OneWay}"
-                              IsItemClickEnabled="True"
-                              ItemClick="CarouselGrid_ItemClick"
-                              SelectionMode="Single"
-                              HorizontalAlignment="Center"
-                              Padding="12,16">
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-
-                        <GridView.ItemTemplate>
-                            <DataTemplate x:DataType="local:GameItem">
-                                <!-- Anchura ahora depende de IsLarge; centrado y elemento más grande -->
-                                <StackPanel Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="Gray" Height="260" CornerRadius="12" Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}">
-                                        <Image Source="{x:Bind DisplayImage}" Stretch="UniformToFill" />
-                                    </Border>
-
-                                    <!-- Nombre justo debajo de la carátula (sin botones de edición en el home) -->
-                                    <TextBlock Text="{x:Bind Name}" 
-                                               HorizontalAlignment="Left" 
-                                               Foreground="White"
-                                               FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans"
-                                               Margin="0,10,0,0"
-                                               FontSize="16"
-                                               TextWrapping="Wrap"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
-                </ScrollViewer>
-
-                <Button Grid.Column="2" Content="▶" Click="ScrollRight_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="120" />
             </Grid>
-        </StackPanel>
 
-        <!-- Overlay detalle del juego (inspirado en la imagen proporcionada) -->
-        <Grid x:Name="DetailOverlay" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
-            <!-- Imagen de fondo (carátula) -->
+        </Grid>
+
+        <Grid x:Name="DetailOverlay" Grid.RowSpan="3" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
             <Image Source="{Binding SelectedGame.BackgroundOrIcon}" Stretch="UniformToFill" Opacity="0.35"/>
-            <!-- Gradiente oscuro para legibilidad -->
             <Rectangle>
                 <Rectangle.Fill>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -169,53 +223,40 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-
-            <!-- Contenido principal sobre el fondo -->
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
                 <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
                 <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
-                    <Button Content="▶ PLAY"
-                        Click="PlaySelectedGame_Click"
-                        Style="{StaticResource AccentButtonStyle}"
-                        Width="160"
-                        Height="48" />
-
-                    <Button Content="Cerrar"
-                        Click="HideDetail_Click"
-                        Width="120"
-                        Height="48" />
-
-                    <Button Content="⋯"
-                        Width="48"
-                        Height="48"
-                        FontSize="22"
-                        Click="OpenGameOptions_Click"/>
-                </StackPanel>
-
-                <!-- Filas de estadísticas / tarjetas minimalistas -->
-                <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,30,0,0">
-                    <Border Background="#20101010" CornerRadius="10" Padding="18" MinWidth="220">
-                        <StackPanel>
-                            <TextBlock Text="WEEKLY ACTIVITY" Foreground="#80FFFFFF" FontSize="12" />
-                            <TextBlock Text="— gráfico —" Foreground="White" Margin="0,8,0,0" />
-                        </StackPanel>
-                    </Border>
-
-                    <Border Background="#20101010" CornerRadius="10" Padding="18" MinWidth="220">
-                        <StackPanel>
-                            <TextBlock Text="YOUR STATS" Foreground="#80FFFFFF" FontSize="12" />
-                            <TextBlock Text="Win rate: 66%" Foreground="White" Margin="0,8,0,0" />
-                        </StackPanel>
-                    </Border>
-
-                    <Border Background="#20101010" CornerRadius="10" Padding="18" MinWidth="220">
-                        <StackPanel>
-                            <TextBlock Text="TOP PERFORMANCES" Foreground="#80FFFFFF" FontSize="12" />
-                            <TextBlock Text="— avatars —" Foreground="White" Margin="0,8,0,0" />
-                        </StackPanel>
-                    </Border>
+                    <Button Content="▶ PLAY" Click="PlaySelectedGame_Click" Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
+                    <Button Content="Cerrar" Click="HideDetail_Click" Width="120" Height="48" />
+                    <Button Content="⋯" Width="48" Height="48" FontSize="22" Click="OpenGameOptions_Click"/>
                 </StackPanel>
             </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" Height="50" VerticalAlignment="Bottom" Background="#AA111111" Padding="20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Click="ToggleSidePanel"
+                Background="Transparent"
+                BorderThickness="0"
+                Padding="0">
+
+                    <TextBlock Text="Mi Launcher"
+                        FontSize="16"
+                        Foreground="White"/>
+            </Button>
+            <Button Grid.Column="1" Content="⚙ Opciones" HorizontalAlignment="Right">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Color sólido" Click="Solid_Click"/>
+                        <MenuFlyoutItem Text="Degradado" Click="Gradient_Click"/>
+                        <MenuFlyoutItem Text="Imagen" Click="Image_Click"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
         </Grid>
 
     </Grid>

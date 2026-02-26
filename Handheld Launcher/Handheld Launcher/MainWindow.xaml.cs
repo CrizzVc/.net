@@ -1,25 +1,29 @@
+using Microsoft.UI;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Navigation;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
-using Windows.Storage.Pickers;
-using WinRT.Interop;
-using System.Linq;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Collections.Generic;
-using Windows.Storage;
-using Windows.Storage.Streams;
-using Windows.Gaming.Input;
-using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Windows.Foundation;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.Gaming.Input;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
+using Windows.UI;
+using WinRT.Interop;
 
 namespace Handheld_Launcher
 {
@@ -62,6 +66,71 @@ namespace Handheld_Launcher
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        // controlador de fondo
+        private void SetSolidColor()
+        {
+            RootGrid.Background = new SolidColorBrush(Colors.DarkSlateBlue);
+        }
+
+        private void SetGradient()
+        {
+            var brush = new LinearGradientBrush();
+            brush.StartPoint = new Windows.Foundation.Point(0, 0);
+            brush.EndPoint = new Windows.Foundation.Point(0, 1);
+
+            brush.GradientStops.Add(new GradientStop
+            {
+                Color = Color.FromArgb(255, 30, 30, 50),
+                Offset = 0
+            });
+
+            brush.GradientStops.Add(new GradientStop
+            {
+                Color = Color.FromArgb(255, 10, 10, 20),
+                Offset = 1
+            });
+
+            RootGrid.Background = brush;
+            ApplicationData.Current.LocalSettings.Values["BackgroundType"] = "Gradient";
+        }
+
+        private async void SetImageBackground()
+        {
+            var picker = new FileOpenPicker();
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".png");
+
+            StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                var bitmap = new BitmapImage(new Uri(file.Path));
+                RootGrid.Background = new ImageBrush
+                {
+                    ImageSource = bitmap,
+                    Stretch = Stretch.UniformToFill
+                };
+            }
+        }
+
+        private void Solid_Click(object sender, RoutedEventArgs e)
+        {
+            SetSolidColor();
+        }
+
+        private void Gradient_Click(object sender, RoutedEventArgs e)
+        {
+            SetGradient();
+        }
+
+        private void Image_Click(object sender, RoutedEventArgs e)
+        {
+            SetImageBackground();
+        }
+
 
         // Persistencia
         private bool _suspendSave = false;
@@ -247,6 +316,54 @@ namespace Handheld_Launcher
             DetailOverlay.IsHitTestVisible = false;
             // devolver foco al grid principal
             RootGrid.Focus(FocusState.Programmatic);
+        }
+
+
+        private bool _isMenuOpen = false;
+
+        private void ToggleMenu_Click(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            SidePanel.Translation = _isMenuOpen
+                ? new System.Numerics.Vector3(-250, 0, 0)
+                : new System.Numerics.Vector3(0, 0, 0);
+
+            _isMenuOpen = !_isMenuOpen;
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            HomeView.Visibility = Visibility.Visible;
+            LibraryView.Visibility = Visibility.Collapsed;
+            CloseMenu();
+        }
+
+        private void Library_Click(object sender, RoutedEventArgs e)
+        {
+            HomeView.Visibility = Visibility.Collapsed;
+            LibraryView.Visibility = Visibility.Visible;
+            CloseMenu();
+        }
+
+        private void CloseMenu()
+        {
+            SidePanel.Translation = new System.Numerics.Vector3(-250, 0, 0);
+            _isMenuOpen = false;
+        }
+
+        private bool _isPanelOpen = false;
+
+        private void ToggleSidePanel(object sender, RoutedEventArgs e)
+        {
+            if (_isPanelOpen)
+            {
+                SidePanel.Translation = new System.Numerics.Vector3(-250, 0, 0);
+                _isPanelOpen = false;
+            }
+            else
+            {
+                SidePanel.Translation = new System.Numerics.Vector3(0, 0, 0);
+                _isPanelOpen = true;
+            }
         }
 
         // Play desde la vista detalle
