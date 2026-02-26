@@ -128,7 +128,7 @@
                                 <!-- Anchura ahora depende de IsLarge; centrado y elemento más grande -->
                                 <StackPanel Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Border Background="Gray" Height="260" CornerRadius="12" Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}">
-                                        <Image Source="{x:Bind Icon}" Stretch="UniformToFill" />
+                                        <Image Source="{x:Bind DisplayImage}" Stretch="UniformToFill" />
                                     </Border>
 
                                     <!-- Nombre justo debajo de la carátula (sin botones de edición en el home) -->

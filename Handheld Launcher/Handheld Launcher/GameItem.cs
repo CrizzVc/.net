@@ -22,6 +22,7 @@ namespace Handheld_Launcher
                     _icon = value;
                     OnPropertyChanged(nameof(Icon));
                     OnPropertyChanged(nameof(BackgroundOrIcon));
+                    OnPropertyChanged(nameof(DisplayImage));
                 }
             }
         }
@@ -40,9 +41,14 @@ namespace Handheld_Launcher
                     _backgroundImage = value;
                     OnPropertyChanged(nameof(BackgroundImage));
                     OnPropertyChanged(nameof(BackgroundOrIcon));
+                    OnPropertyChanged(nameof(DisplayImage));
                 }
             }
         }
+
+        public ImageSource DisplayImage => IsLarge
+            ? (BackgroundImage ?? Icon)
+            : Icon;
 
         // Devuelve el fondo si existe, si no la carátula (útil para el overlay)
         public ImageSource BackgroundOrIcon => BackgroundImage ?? Icon;
@@ -57,6 +63,7 @@ namespace Handheld_Launcher
                 {
                     _isLarge = value;
                     OnPropertyChanged(nameof(IsLarge));
+                    OnPropertyChanged(nameof(DisplayImage));
                 }
             }
         }
