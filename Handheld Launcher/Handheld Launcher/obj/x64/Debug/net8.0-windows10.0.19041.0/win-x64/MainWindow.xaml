@@ -13,89 +13,70 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid x:ConnectionId='2' x:Name="RootGrid"                            IsTabStop="True">
+    <Grid x:ConnectionId='2' x:Name="RootGrid"
+                                    
+          IsTabStop="True">
+
+        <!-- COLUMNAS -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- FILAS -->
         <Grid.RowDefinitions>
             <RowDefinition Height="9*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <Grid.Resources>
-            <local:BoolToWidthConverter x:Key="BoolToWidthConverter" />
-            <Style TargetType="GridViewItem">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="GridViewItem">
-                            <Grid x:Name="ContentRoot" RenderTransformOrigin="0.5,0.5">
-                                <Grid.RenderTransform>
-                                    <ScaleTransform x:Name="RootScale" ScaleX="1" ScaleY="1" />
-                                </Grid.RenderTransform>
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Normal">
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2" />
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2" />
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="PointerOver">
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1.08" Duration="0:0:0.12" />
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1.08" Duration="0:0:0.12" />
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                    <VisualStateGroup x:Name="SelectionStates">
-                                        <VisualState x:Name="Unselected">
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.12" />
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.12" />
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="Selected">
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.12" />
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.12" />
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="SelectedKeyboard">
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1.08" Duration="0:0:0.12" />
-                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1.08" Duration="0:0:0.12" />
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                                <ContentPresenter />
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </Grid.Resources>
+        <!-- SIDEBAR -->
+        <Grid x:ConnectionId='3' x:Name="LeftSidebar"
+              Grid.Column="0"
+              Grid.RowSpan="3"
+              Background="#0F1A24">
 
-        <Image x:ConnectionId='13' x:Name="BackgroundImage" Stretch="UniformToFill" Grid.RowSpan="3"/>
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Spacing="25">
 
-        <!-- ASIDE -->
-        <Grid x:ConnectionId='14' x:Name="SidePanel"
-          Width="250"
-          Background="#FF111111"
-          HorizontalAlignment="Left"
-          Translation="-250,0,0"
-          Canvas.ZIndex="10">
+                <Button x:ConnectionId='23'                    Width="50" Height="50" CornerRadius="10">
+                    <TextBlock Text="🏠" FontSize="20"/>
+                </Button>
 
-            <StackPanel Margin="20,60,20,20" Spacing="15">
+                <Button x:ConnectionId='24'                       Width="50" Height="50" CornerRadius="10">
+                    <TextBlock Text="🎮" FontSize="20"/>
+                </Button>
 
-                <Button x:ConnectionId='35' Content="🏠 Home"
-                                      />
+                <Button x:ConnectionId='25'                       Width="50" Height="50" CornerRadius="10">
+                    <TextBlock Text="➕" FontSize="20"/>
+                </Button>
 
-                <Button x:ConnectionId='36' Content="🎮 Biblioteca"
-                                         />
+                <Button Width="50" Height="50" CornerRadius="10">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem x:ConnectionId='26' Text="Color sólido"                    />
+                            <MenuFlyoutItem x:ConnectionId='27' Text="Degradado"                       />
+                            <MenuFlyoutItem x:ConnectionId='28' Text="Imagen"                    />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                    <TextBlock Text="⚙" FontSize="20"/>
+                </Button>
 
             </StackPanel>
+
         </Grid>
 
-        <Grid Grid.RowSpan="3">
+        
+
+        <!-- BACKGROUND -->
+        <Image x:ConnectionId='4' x:Name="BackgroundImage"
+               Grid.Column="1"
+               Stretch="UniformToFill"
+               Grid.RowSpan="3"/>
+
+        <!-- GRADIENT OVERLAY -->
+        <Grid Grid.Column="1" Grid.RowSpan="3">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#00000000" Offset="0"/>
@@ -105,158 +86,144 @@
             </Grid.Background>
         </Grid>
 
-        <TextBlock x:ConnectionId='15' x:Name="TimeTextBlock" 
+        <!-- CLOCK -->
+        <TextBlock x:ConnectionId='5' x:Name="TimeTextBlock"
+                   Grid.Column="1"
                    Grid.Row="0"
-                   HorizontalAlignment="Right" 
-                   VerticalAlignment="Top" 
-                   Margin="0,30,40,0" 
-                   FontSize="26" 
-                   FontWeight="SemiBold" 
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Margin="0,30,40,0"
+                   FontSize="26"
+                   FontWeight="SemiBold"
                    Foreground="White"/>
 
         <!-- CONTENEDOR DE VISTAS -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Column="1" Grid.Row="1">
 
             <!-- HOME VIEW -->
-            <StackPanel x:ConnectionId='24' x:Name="HomeView" Padding="40,0">
+            <StackPanel x:ConnectionId='6' x:Name="HomeView" Padding="40,0">
 
                 <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,0,20">
-                    <TextBlock Text="MIS JUEGOS" 
-                       FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans"
-                       FontWeight="Bold"
-                       Style="{StaticResource HeaderTextBlockStyle}"/>
-                    <Button x:ConnectionId='34' Content="+"                      
-                    Style="{StaticResource AccentButtonStyle}"
-                    CornerRadius="5"
-                    Width="30"
-                    Height="30"
-                    Padding="1,0,0,2"
-                    FontWeight="Bold"
-                    Background="AntiqueWhite"/>
+                    <TextBlock Text="MIS JUEGOS"
+                               FontWeight="Bold"
+                               FontSize="28"
+                               Foreground="White"/>
+                   
                 </StackPanel>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="60"/>
-                    </Grid.ColumnDefinitions>
+                <ScrollViewer x:ConnectionId='17' x:Name="CarouselScrollViewer"
+                              HorizontalScrollMode="Enabled"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollMode="Disabled">
 
-                    <Button x:ConnectionId='26' Grid.Column="0" Content="◀"                         
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="48"
-                    Height="120" />
+                    <GridView x:ConnectionId='18' x:Name="CarouselGrid"
+                                                                            
+                              IsItemClickEnabled="True"
+                                                                
+                              SelectionMode="Single">
 
-                    <ScrollViewer x:ConnectionId='27' x:Name="CarouselScrollViewer"
-                          Grid.Column="1"
-                          HorizontalScrollMode="Enabled"
-                          HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollMode="Disabled"
-                          Margin="8,0">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
 
-                        <GridView x:ConnectionId='29' x:Name="CarouselGrid"
-                                                                        
-                          IsItemClickEnabled="True"
-                                                            
-                          SelectionMode="Single"
-                          HorizontalAlignment="Center"
-                          Padding="12,16">
+                        <GridView.ItemTemplate>
+                            <DataTemplate                            >
+                                <StackPanel x:ConnectionId='20' Width="200" Margin="14">
+                                    <Border Height="260"
+                                            CornerRadius="12"
+                                            Background="#222">
+                                        <Image x:ConnectionId='22'                               
+                                               Stretch="UniformToFill"/>
+                                    </Border>
+                                    <TextBlock x:ConnectionId='21'                     
+                                               Foreground="White"
+                                               Margin="0,10,0,0"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
 
-                            <GridView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </GridView.ItemsPanel>
-
-                            <GridView.ItemTemplate>
-                                <DataTemplate                            >
-                                    <StackPanel x:ConnectionId='31' Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14">
-                                        <Border Background="Gray"
-                                        Height="260"
-                                        CornerRadius="12"
-                                        Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}">
-                                            <Image x:ConnectionId='33'                                Stretch="UniformToFill" />
-                                        </Border>
-                                        <TextBlock x:ConnectionId='32'                     
-                                           Foreground="White"
-                                           Margin="20,10,0,0"
-                                           FontSize="16"
-                                           TextWrapping="Wrap"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-
-                        </GridView>
-                    </ScrollViewer>
-
-                    <Button x:ConnectionId='28' Grid.Column="2" Content="▶"
-                                             
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="48"
-                    Height="120" />
-                </Grid>
+                    </GridView>
+                </ScrollViewer>
 
             </StackPanel>
+
+            
 
             <!-- LIBRARY VIEW -->
-            <Grid x:ConnectionId='25' x:Name="LibraryView"
-          Visibility="Collapsed"
-          Padding="40">
+            <Grid x:ConnectionId='7' x:Name="LibraryView"
+                  Visibility="Collapsed"
+                  Padding="40">
 
-                <TextBlock Text="BIBLIOTECA"
-                   FontSize="40"
-                   Foreground="White"/>
+                <Grid.Background>
+                    <SolidColorBrush Color="#AA000000" />
+                    <!-- negro semi-transparente -->
+                </Grid.Background>
 
+                <StackPanel>
+
+                    <TextBlock Text="BIBLIOTECA"
+                               FontSize="40"
+                               Foreground="White"
+                               Margin="0,0,0,30"/>
+
+                    <GridView x:ConnectionId='12' x:Name="LibraryGrid"
+                                                                            
+                              IsItemClickEnabled="True"
+                                                               
+                              SelectionMode="Single">
+
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal"
+                                               MaximumRowsOrColumns="6"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+
+                        <GridView.ItemTemplate>
+                            <DataTemplate                            >
+                                <StackPanel x:ConnectionId='14' Width="200" Margin="12">
+                                    <Border Height="260"
+                                            CornerRadius="12"
+                                            Background="#222">
+                                        <Image x:ConnectionId='16'                               
+                                               Stretch="UniformToFill"/>
+                                    </Border>
+                                    <TextBlock x:ConnectionId='15'                     
+                                               Foreground="White"
+                                               Margin="0,10,0,0"
+                                               TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                    </GridView>
+
+                </StackPanel>
             </Grid>
 
-        </Grid>
-
-        <Grid x:ConnectionId='16' x:Name="DetailOverlay" Grid.RowSpan="3" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
-            <Image Source="{Binding SelectedGame.BackgroundOrIcon}" Stretch="UniformToFill" Opacity="0.35"/>
-            <Rectangle>
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#00000000" Offset="0.0"/>
-                        <GradientStop Color="#B3000000" Offset="0.6"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
-                <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
-                <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
-                    <Button x:ConnectionId='21' Content="▶ PLAY"                                Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
-                    <Button x:ConnectionId='22' Content="Cerrar"                          Width="120" Height="48" />
-                    <Button x:ConnectionId='23' Content="⋯" Width="48" Height="48" FontSize="22"                              />
+            <Grid x:ConnectionId='8' x:Name="DetailOverlay" Grid.RowSpan="3" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
+                <Image Source="{Binding SelectedGame.BackgroundOrIcon}" Stretch="UniformToFill" Opacity="0.35"/>
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#00000000" Offset="0.0"/>
+                            <GradientStop Color="#B3000000" Offset="0.6"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
+                    <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
+                        <Button x:ConnectionId='9' Content="▶ PLAY"                                Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
+                        <Button x:ConnectionId='10' Content="Cerrar"                          Width="120" Height="48" />
+                        <Button x:ConnectionId='11' Content="⋯" Width="48" Height="48" FontSize="22"                              />
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-        </Grid>
+            </Grid>
 
-        <Grid Grid.Row="2" Height="50" VerticalAlignment="Bottom" Background="#AA111111" Padding="20,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:ConnectionId='17'                        
-                Background="Transparent"
-                BorderThickness="0"
-                Padding="0">
-
-                    <TextBlock Text="Mi Launcher"
-                        FontSize="16"
-                        Foreground="White"/>
-            </Button>
-            <Button Grid.Column="1" Content="⚙ Opciones" HorizontalAlignment="Right">
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem x:ConnectionId='18' Text="Color sólido"                    />
-                        <MenuFlyoutItem x:ConnectionId='19' Text="Degradado"                       />
-                        <MenuFlyoutItem x:ConnectionId='20' Text="Imagen"                    />
-                    </MenuFlyout>
-                </Button.Flyout>
-            </Button>
         </Grid>
 
     </Grid>

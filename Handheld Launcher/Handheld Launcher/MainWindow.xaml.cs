@@ -3,6 +3,7 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
@@ -71,6 +72,7 @@ namespace Handheld_Launcher
         private void SetSolidColor()
         {
             RootGrid.Background = new SolidColorBrush(Colors.DarkSlateBlue);
+            ApplicationData.Current.LocalSettings.Values["BackgroundType"] = "Solid";
         }
 
         private void SetGradient()
@@ -92,6 +94,7 @@ namespace Handheld_Launcher
             });
 
             RootGrid.Background = brush;
+
             ApplicationData.Current.LocalSettings.Values["BackgroundType"] = "Gradient";
         }
 
@@ -113,6 +116,8 @@ namespace Handheld_Launcher
                     ImageSource = bitmap,
                     Stretch = Stretch.UniformToFill
                 };
+                ApplicationData.Current.LocalSettings.Values["BackgroundType"] = "Image";
+                ApplicationData.Current.LocalSettings.Values["ImagePath"] = file.Path;
             }
         }
 
@@ -131,6 +136,19 @@ namespace Handheld_Launcher
             SetImageBackground();
         }
 
+        // libreria de juegos
+        private void LibraryGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is GameItem game)
+            {
+                SelectedGame = game;
+                DetailOverlay.Visibility = Visibility.Visible;
+                DetailOverlay.IsHitTestVisible = true;
+            }
+        }
+
+
+        //public ObservableCollection<GameItem> OtherGames { get; set; } = new ObservableCollection<GameItem>();
 
         // Persistencia
         private bool _suspendSave = false;
@@ -297,11 +315,12 @@ namespace Handheld_Launcher
             // UpdateFeaturedAndOthers se ejecutará por el evento CollectionChanged
         }
 
+        
+
         // Mostrar detalle (overlay)
-        private void ShowDetail(GameItem game)
+        private void ShowDetail(GameItem selected)
         {
-            if (game == null) return;
-            SelectedGame = game;
+            SelectedGame = selected;
             DetailOverlay.Visibility = Visibility.Visible;
             DetailOverlay.IsHitTestVisible = true;
             DetailOverlay.UpdateLayout();
@@ -323,7 +342,7 @@ namespace Handheld_Launcher
 
         private void ToggleMenu_Click(object sender, Microsoft.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            SidePanel.Translation = _isMenuOpen
+            LeftSidebar.Translation = _isMenuOpen
                 ? new System.Numerics.Vector3(-250, 0, 0)
                 : new System.Numerics.Vector3(0, 0, 0);
 
@@ -334,19 +353,17 @@ namespace Handheld_Launcher
         {
             HomeView.Visibility = Visibility.Visible;
             LibraryView.Visibility = Visibility.Collapsed;
-            CloseMenu();
         }
 
         private void Library_Click(object sender, RoutedEventArgs e)
         {
             HomeView.Visibility = Visibility.Collapsed;
             LibraryView.Visibility = Visibility.Visible;
-            CloseMenu();
         }
 
         private void CloseMenu()
         {
-            SidePanel.Translation = new System.Numerics.Vector3(-250, 0, 0);
+            LeftSidebar.Translation = new System.Numerics.Vector3(-250, 0, 0);
             _isMenuOpen = false;
         }
 
@@ -356,12 +373,12 @@ namespace Handheld_Launcher
         {
             if (_isPanelOpen)
             {
-                SidePanel.Translation = new System.Numerics.Vector3(-250, 0, 0);
+                LeftSidebar.Translation = new System.Numerics.Vector3(-250, 0, 0);
                 _isPanelOpen = false;
             }
             else
             {
-                SidePanel.Translation = new System.Numerics.Vector3(0, 0, 0);
+                LeftSidebar.Translation = new System.Numerics.Vector3(0, 0, 0);
                 _isPanelOpen = true;
             }
         }
@@ -897,9 +914,10 @@ namespace Handheld_Launcher
             }
         }
 
-        private void HideDetail_Click(object sender, global::Microsoft.UI.Xaml.RoutedEventArgs e)
+        private void HideDetail_Click(object sender, RoutedEventArgs e)
         {
-            HideDetail();
+            DetailOverlay.Visibility = Visibility.Collapsed;
+            DetailOverlay.IsHitTestVisible = false;
         }
     }
 }

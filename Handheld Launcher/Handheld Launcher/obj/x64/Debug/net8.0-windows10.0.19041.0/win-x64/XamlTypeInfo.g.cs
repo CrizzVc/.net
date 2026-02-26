@@ -226,7 +226,7 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
         
         private void InitTypeTables()
         {
-            _typeNameTable = new string[22];
+            _typeNameTable = new string[20];
             _typeNameTable[0] = "Microsoft.UI.Xaml.Controls.XamlControlsResources";
             _typeNameTable[1] = "Microsoft.UI.Xaml.ResourceDictionary";
             _typeNameTable[2] = "Object";
@@ -236,21 +236,19 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
             _typeNameTable[6] = "Microsoft.UI.Composition.SystemBackdrops.MicaKind";
             _typeNameTable[7] = "System.Enum";
             _typeNameTable[8] = "System.ValueType";
-            _typeNameTable[9] = "Handheld_Launcher.BoolToWidthConverter";
-            _typeNameTable[10] = "Microsoft.UI.Xaml.Controls.GridViewItem";
-            _typeNameTable[11] = "Handheld_Launcher.MainWindow";
-            _typeNameTable[12] = "Microsoft.UI.Xaml.Window";
-            _typeNameTable[13] = "System.Collections.ObjectModel.ObservableCollection`1<Handheld_Launcher.GameItem>";
-            _typeNameTable[14] = "System.Collections.ObjectModel.Collection`1<Handheld_Launcher.GameItem>";
-            _typeNameTable[15] = "Handheld_Launcher.GameItem";
-            _typeNameTable[16] = "String";
-            _typeNameTable[17] = "Microsoft.UI.Xaml.Media.ImageSource";
-            _typeNameTable[18] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
-            _typeNameTable[19] = "Microsoft.UI.Xaml.DependencyObject";
-            _typeNameTable[20] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
-            _typeNameTable[21] = "Int32";
+            _typeNameTable[9] = "Handheld_Launcher.MainWindow";
+            _typeNameTable[10] = "Microsoft.UI.Xaml.Window";
+            _typeNameTable[11] = "System.Collections.ObjectModel.ObservableCollection`1<Handheld_Launcher.GameItem>";
+            _typeNameTable[12] = "System.Collections.ObjectModel.Collection`1<Handheld_Launcher.GameItem>";
+            _typeNameTable[13] = "Handheld_Launcher.GameItem";
+            _typeNameTable[14] = "String";
+            _typeNameTable[15] = "Microsoft.UI.Xaml.Media.ImageSource";
+            _typeNameTable[16] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
+            _typeNameTable[17] = "Microsoft.UI.Xaml.DependencyObject";
+            _typeNameTable[18] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
+            _typeNameTable[19] = "Int32";
 
-            _typeTable = new global::System.Type[22];
+            _typeTable = new global::System.Type[20];
             _typeTable[0] = typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources);
             _typeTable[1] = typeof(global::Microsoft.UI.Xaml.ResourceDictionary);
             _typeTable[2] = typeof(global::System.Object);
@@ -260,19 +258,17 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
             _typeTable[6] = typeof(global::Microsoft.UI.Composition.SystemBackdrops.MicaKind);
             _typeTable[7] = typeof(global::System.Enum);
             _typeTable[8] = typeof(global::System.ValueType);
-            _typeTable[9] = typeof(global::Handheld_Launcher.BoolToWidthConverter);
-            _typeTable[10] = typeof(global::Microsoft.UI.Xaml.Controls.GridViewItem);
-            _typeTable[11] = typeof(global::Handheld_Launcher.MainWindow);
-            _typeTable[12] = typeof(global::Microsoft.UI.Xaml.Window);
-            _typeTable[13] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::Handheld_Launcher.GameItem>);
-            _typeTable[14] = typeof(global::System.Collections.ObjectModel.Collection<global::Handheld_Launcher.GameItem>);
-            _typeTable[15] = typeof(global::Handheld_Launcher.GameItem);
-            _typeTable[16] = typeof(global::System.String);
-            _typeTable[17] = typeof(global::Microsoft.UI.Xaml.Media.ImageSource);
-            _typeTable[18] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
-            _typeTable[19] = typeof(global::Microsoft.UI.Xaml.DependencyObject);
-            _typeTable[20] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
-            _typeTable[21] = typeof(global::System.Int32);
+            _typeTable[9] = typeof(global::Handheld_Launcher.MainWindow);
+            _typeTable[10] = typeof(global::Microsoft.UI.Xaml.Window);
+            _typeTable[11] = typeof(global::System.Collections.ObjectModel.ObservableCollection<global::Handheld_Launcher.GameItem>);
+            _typeTable[12] = typeof(global::System.Collections.ObjectModel.Collection<global::Handheld_Launcher.GameItem>);
+            _typeTable[13] = typeof(global::Handheld_Launcher.GameItem);
+            _typeTable[14] = typeof(global::System.String);
+            _typeTable[15] = typeof(global::Microsoft.UI.Xaml.Media.ImageSource);
+            _typeTable[16] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
+            _typeTable[17] = typeof(global::Microsoft.UI.Xaml.DependencyObject);
+            _typeTable[18] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
+            _typeTable[19] = typeof(global::System.Int32);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -309,23 +305,21 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
 
         private object Activate_0_XamlControlsResources() { return new global::Microsoft.UI.Xaml.Controls.XamlControlsResources(); }
         private object Activate_4_MicaBackdrop() { return new global::Microsoft.UI.Xaml.Media.MicaBackdrop(); }
-        private object Activate_9_BoolToWidthConverter() { return new global::Handheld_Launcher.BoolToWidthConverter(); }
-        private object Activate_11_MainWindow() { return new global::Handheld_Launcher.MainWindow(); }
-        private object Activate_13_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::Handheld_Launcher.GameItem>(); }
-        private object Activate_14_Collection() { return new global::System.Collections.ObjectModel.Collection<global::Handheld_Launcher.GameItem>(); }
-        private object Activate_18_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
+        private object Activate_9_MainWindow() { return new global::Handheld_Launcher.MainWindow(); }
+        private object Activate_11_ObservableCollection() { return new global::System.Collections.ObjectModel.ObservableCollection<global::Handheld_Launcher.GameItem>(); }
+        private object Activate_12_Collection() { return new global::System.Collections.ObjectModel.Collection<global::Handheld_Launcher.GameItem>(); }
+        private object Activate_16_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
         private void StaticInitializer_0_XamlControlsResources() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources).TypeHandle);
         private void StaticInitializer_4_MicaBackdrop() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Media.MicaBackdrop).TypeHandle);
         private void StaticInitializer_6_MicaKind() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Composition.SystemBackdrops.MicaKind).TypeHandle);
         private void StaticInitializer_7_Enum() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Enum).TypeHandle);
         private void StaticInitializer_8_ValueType() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.ValueType).TypeHandle);
-        private void StaticInitializer_9_BoolToWidthConverter() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Handheld_Launcher.BoolToWidthConverter).TypeHandle);
-        private void StaticInitializer_11_MainWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Handheld_Launcher.MainWindow).TypeHandle);
-        private void StaticInitializer_13_ObservableCollection() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.ObjectModel.ObservableCollection<global::Handheld_Launcher.GameItem>).TypeHandle);
-        private void StaticInitializer_14_Collection() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.ObjectModel.Collection<global::Handheld_Launcher.GameItem>).TypeHandle);
-        private void StaticInitializer_15_GameItem() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Handheld_Launcher.GameItem).TypeHandle);
-        private void StaticInitializer_18_TreeViewNode() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode).TypeHandle);
-        private void StaticInitializer_20_IList() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>).TypeHandle);
+        private void StaticInitializer_9_MainWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Handheld_Launcher.MainWindow).TypeHandle);
+        private void StaticInitializer_11_ObservableCollection() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.ObjectModel.ObservableCollection<global::Handheld_Launcher.GameItem>).TypeHandle);
+        private void StaticInitializer_12_Collection() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.ObjectModel.Collection<global::Handheld_Launcher.GameItem>).TypeHandle);
+        private void StaticInitializer_13_GameItem() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Handheld_Launcher.GameItem).TypeHandle);
+        private void StaticInitializer_16_TreeViewNode() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode).TypeHandle);
+        private void StaticInitializer_18_IList() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>).TypeHandle);
         private void MapAdd_0_XamlControlsResources(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.Object, global::System.Object>)instance;
@@ -333,19 +327,19 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
             var newItem = (global::System.Object)item;
             collection.Add(newKey, newItem);
         }
-        private void VectorAdd_13_ObservableCollection(object instance, object item)
+        private void VectorAdd_11_ObservableCollection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Handheld_Launcher.GameItem>)instance;
             var newItem = (global::Handheld_Launcher.GameItem)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_14_Collection(object instance, object item)
+        private void VectorAdd_12_Collection(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Handheld_Launcher.GameItem>)instance;
             var newItem = (global::Handheld_Launcher.GameItem)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_20_IList(object instance, object item)
+        private void VectorAdd_18_IList(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Microsoft.UI.Xaml.Controls.TreeViewNode>)instance;
             var newItem = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)item;
@@ -415,22 +409,10 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 9:   //  Handheld_Launcher.BoolToWidthConverter
-                userType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_9_BoolToWidthConverter;
-                userType.StaticInitializer = StaticInitializer_9_BoolToWidthConverter;
-                userType.SetIsLocalType();
-                xamlType = userType;
-                break;
-
-            case 10:   //  Microsoft.UI.Xaml.Controls.GridViewItem
-                xamlType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 11:   //  Handheld_Launcher.MainWindow
+            case 9:   //  Handheld_Launcher.MainWindow
                 userType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.Window"));
-                userType.Activator = Activate_11_MainWindow;
-                userType.StaticInitializer = StaticInitializer_11_MainWindow;
+                userType.Activator = Activate_9_MainWindow;
+                userType.StaticInitializer = StaticInitializer_9_MainWindow;
                 userType.AddMemberName("Games");
                 userType.AddMemberName("OtherGames");
                 userType.AddMemberName("FeaturedGame");
@@ -439,29 +421,29 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 12:   //  Microsoft.UI.Xaml.Window
+            case 10:   //  Microsoft.UI.Xaml.Window
                 xamlType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 13:   //  System.Collections.ObjectModel.ObservableCollection`1<Handheld_Launcher.GameItem>
+            case 11:   //  System.Collections.ObjectModel.ObservableCollection`1<Handheld_Launcher.GameItem>
                 userType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Collections.ObjectModel.Collection`1<Handheld_Launcher.GameItem>"));
-                userType.StaticInitializer = StaticInitializer_13_ObservableCollection;
-                userType.CollectionAdd = VectorAdd_13_ObservableCollection;
+                userType.StaticInitializer = StaticInitializer_11_ObservableCollection;
+                userType.CollectionAdd = VectorAdd_11_ObservableCollection;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 14:   //  System.Collections.ObjectModel.Collection`1<Handheld_Launcher.GameItem>
+            case 12:   //  System.Collections.ObjectModel.Collection`1<Handheld_Launcher.GameItem>
                 userType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_14_Collection;
-                userType.StaticInitializer = StaticInitializer_14_Collection;
-                userType.CollectionAdd = VectorAdd_14_Collection;
+                userType.Activator = Activate_12_Collection;
+                userType.StaticInitializer = StaticInitializer_12_Collection;
+                userType.CollectionAdd = VectorAdd_12_Collection;
                 xamlType = userType;
                 break;
 
-            case 15:   //  Handheld_Launcher.GameItem
+            case 13:   //  Handheld_Launcher.GameItem
                 userType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.StaticInitializer = StaticInitializer_15_GameItem;
+                userType.StaticInitializer = StaticInitializer_13_GameItem;
                 userType.AddMemberName("Name");
                 userType.AddMemberName("Path");
                 userType.AddMemberName("IconPath");
@@ -475,18 +457,18 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 16:   //  String
+            case 14:   //  String
                 xamlType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 17:   //  Microsoft.UI.Xaml.Media.ImageSource
+            case 15:   //  Microsoft.UI.Xaml.Media.ImageSource
                 xamlType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 18:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
+            case 16:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
                 userType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_18_TreeViewNode;
-                userType.StaticInitializer = StaticInitializer_18_TreeViewNode;
+                userType.Activator = Activate_16_TreeViewNode;
+                userType.StaticInitializer = StaticInitializer_16_TreeViewNode;
                 userType.AddMemberName("Children");
                 userType.AddMemberName("Content");
                 userType.AddMemberName("Depth");
@@ -498,19 +480,19 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 19:   //  Microsoft.UI.Xaml.DependencyObject
+            case 17:   //  Microsoft.UI.Xaml.DependencyObject
                 xamlType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 20:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
+            case 18:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
                 userType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType(this, typeName, type, null);
-                userType.StaticInitializer = StaticInitializer_20_IList;
-                userType.CollectionAdd = VectorAdd_20_IList;
+                userType.StaticInitializer = StaticInitializer_18_IList;
+                userType.CollectionAdd = VectorAdd_18_IList;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 21:   //  Int32
+            case 19:   //  Int32
                 xamlType = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
             }
