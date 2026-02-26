@@ -131,16 +131,13 @@
                                         <Image Source="{x:Bind Icon}" Stretch="UniformToFill" />
                                     </Border>
 
-                                    <!-- Nombre justo debajo de la carátula -->
+                                    <!-- Nombre justo debajo de la carátula (sin botones de edición en el home) -->
                                     <TextBlock Text="{x:Bind Name}" 
                                                HorizontalAlignment="Center" 
                                                Foreground="White" 
                                                Margin="0,10,0,0"
                                                FontSize="16"
                                                TextWrapping="Wrap"/>
-
-                                    <!-- Botón para cambiar la carátula de este juego -->
-                                    <Button Content="Cambiar carátula" Margin="0,10,0,0" Click="ChangeCover_Click" />
                                 </StackPanel>
                             </DataTemplate>
                         </GridView.ItemTemplate>
@@ -154,7 +151,7 @@
         <!-- Overlay detalle del juego (inspirado en la imagen proporcionada) -->
         <Grid x:Name="DetailOverlay" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
             <!-- Imagen de fondo (carátula) -->
-            <Image Source="{Binding SelectedGame.Icon}" Stretch="UniformToFill" Opacity="0.35"/>
+            <Image Source="{Binding SelectedGame.BackgroundOrIcon}" Stretch="UniformToFill" Opacity="0.35"/>
             <!-- Gradiente oscuro para legibilidad -->
             <Rectangle>
                 <Rectangle.Fill>
@@ -169,8 +166,22 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
                 <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
                 <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
-                    <Button Content="▶ PLAY" Click="PlaySelectedGame_Click" Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
-                    <Button Content="Cerrar" Click="HideDetail_Click" Width="120" Height="48" />
+                    <Button Content="▶ PLAY"
+                        Click="PlaySelectedGame_Click"
+                        Style="{StaticResource AccentButtonStyle}"
+                        Width="160"
+                        Height="48" />
+
+                    <Button Content="Cerrar"
+                        Click="HideDetail_Click"
+                        Width="120"
+                        Height="48" />
+
+                    <Button Content="⋯"
+                        Width="48"
+                        Height="48"
+                        FontSize="22"
+                        Click="OpenGameOptions_Click"/>
                 </StackPanel>
 
                 <!-- Filas de estadísticas / tarjetas minimalistas -->

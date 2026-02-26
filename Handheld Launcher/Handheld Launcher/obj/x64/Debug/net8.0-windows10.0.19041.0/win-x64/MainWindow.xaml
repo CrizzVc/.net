@@ -101,16 +101,16 @@
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:ConnectionId='17' Grid.Column="0" Content="◀"                          HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="120" />
+                <Button x:ConnectionId='18' Grid.Column="0" Content="◀"                          HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="120" />
 
-                <ScrollViewer x:ConnectionId='18' x:Name="CarouselScrollViewer"
+                <ScrollViewer x:ConnectionId='19' x:Name="CarouselScrollViewer"
                               Grid.Column="1"
                               HorizontalScrollMode="Enabled"
                               HorizontalScrollBarVisibility="Hidden"
                               VerticalScrollMode="Disabled"
                               VerticalScrollBarVisibility="Disabled"
                               Margin="8,0">
-                    <GridView x:ConnectionId='20' x:Name="CarouselGrid"
+                    <GridView x:ConnectionId='21' x:Name="CarouselGrid"
                                                                             
                               IsItemClickEnabled="True"
                                                                 
@@ -126,35 +126,32 @@
                         <GridView.ItemTemplate>
                             <DataTemplate                            >
                                 <!-- Anchura ahora depende de IsLarge; centrado y elemento más grande -->
-                                <StackPanel x:ConnectionId='22' Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel x:ConnectionId='23' Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Border Background="Gray" Height="260" CornerRadius="12" Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}">
                                         <Image x:ConnectionId='25'                        Stretch="UniformToFill" />
                                     </Border>
 
-                                    <!-- Nombre justo debajo de la carátula -->
-                                    <TextBlock x:ConnectionId='23'                      
+                                    <!-- Nombre justo debajo de la carátula (sin botones de edición en el home) -->
+                                    <TextBlock x:ConnectionId='24'                      
                                                HorizontalAlignment="Center" 
                                                Foreground="White" 
                                                Margin="0,10,0,0"
                                                FontSize="16"
                                                TextWrapping="Wrap"/>
-
-                                    <!-- Botón para cambiar la carátula de este juego -->
-                                    <Button x:ConnectionId='24' Content="Cambiar carátula" Margin="0,10,0,0"                           />
                                 </StackPanel>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
                 </ScrollViewer>
 
-                <Button x:ConnectionId='19' Grid.Column="2" Content="▶"                           HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="120" />
+                <Button x:ConnectionId='20' Grid.Column="2" Content="▶"                           HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="120" />
             </Grid>
         </StackPanel>
 
         <!-- Overlay detalle del juego (inspirado en la imagen proporcionada) -->
         <Grid x:ConnectionId='14' x:Name="DetailOverlay" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
             <!-- Imagen de fondo (carátula) -->
-            <Image Source="{Binding SelectedGame.Icon}" Stretch="UniformToFill" Opacity="0.35"/>
+            <Image Source="{Binding SelectedGame.BackgroundOrIcon}" Stretch="UniformToFill" Opacity="0.35"/>
             <!-- Gradiente oscuro para legibilidad -->
             <Rectangle>
                 <Rectangle.Fill>
@@ -169,8 +166,22 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
                 <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
                 <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
-                    <Button x:ConnectionId='15' Content="▶ PLAY"                                Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
-                    <Button x:ConnectionId='16' Content="Cerrar"                          Width="120" Height="48" />
+                    <Button x:ConnectionId='15' Content="▶ PLAY"
+                                                      
+                        Style="{StaticResource AccentButtonStyle}"
+                        Width="160"
+                        Height="48" />
+
+                    <Button x:ConnectionId='16' Content="Cerrar"
+                                                
+                        Width="120"
+                        Height="48" />
+
+                    <Button x:ConnectionId='17' Content="⋯"
+                        Width="48"
+                        Height="48"
+                        FontSize="22"
+                                                     />
                 </StackPanel>
 
                 <!-- Filas de estadísticas / tarjetas minimalistas -->

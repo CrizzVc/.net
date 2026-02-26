@@ -224,7 +224,6 @@ C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\hostfxr.dll
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\hostpolicy.dll
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\mscordaccore.dll
-C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\mscordaccore_amd64_amd64_8.0.2325.60607.dll
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\mscordbi.dll
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\mscorrc.dll
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\msquic.dll
@@ -270,3 +269,4 @@ C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MultipleQualifiersPerDimensionFound.txt
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\ProjectArchitectures.txt
 C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\.winmd_cache\$Microsoft.Web.WebView2.Core.winmd_638789222360000000.json
+C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\mscordaccore_amd64_amd64_8.0.2426.7010.dll

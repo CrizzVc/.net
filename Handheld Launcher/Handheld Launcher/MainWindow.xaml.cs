@@ -19,6 +19,7 @@ using Windows.Gaming.Input;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Windows.Foundation;
+using System.Threading.Tasks;
 
 namespace Handheld_Launcher
 {
@@ -64,7 +65,7 @@ namespace Handheld_Launcher
 
         // Persistencia
         private bool _suspendSave = false;
-        private record PersistedGame(string Name, string Path, string IconPath);
+        private record PersistedGame(string Name, string Path, string IconPath, string BackgroundPath);
 
         // Gamepad support
         private readonly List<Gamepad> _gamepads = new List<Gamepad>();
@@ -261,6 +262,72 @@ namespace Handheld_Launcher
             {
                 Debug.WriteLine($"Error al iniciar {SelectedGame.Name}: {ex.Message}");
             }
+        }
+
+        private async void OpenGameOptions_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedGame == null) return;
+
+            var dialog = new ContentDialog
+            {
+                Title = SelectedGame.Name,
+                Content = "Selecciona una opción",
+                PrimaryButtonText = "Cambiar carátula",
+                SecondaryButtonText = "Cambiar fondo",
+                CloseButtonText = "Eliminar del launcher",
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = RootGrid.XamlRoot
+            };
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                await PickAndSetIconAsync(SelectedGame);
+            }
+            else if (result == ContentDialogResult.Secondary)
+            {
+                await PickAndSetBackgroundAsync(SelectedGame);
+            }
+            else if (result == ContentDialogResult.None)
+            {
+                await ConfirmDeleteAsync();
+            }
+        }
+
+        private async Task ConfirmDeleteAsync()
+        {
+            if (SelectedGame == null) return;
+
+            var confirmDialog = new ContentDialog
+            {
+                Title = "Eliminar juego",
+                Content = $"¿Seguro que deseas eliminar \"{SelectedGame.Name}\" del launcher?",
+                PrimaryButtonText = "Eliminar",
+                CloseButtonText = "Cancelar",
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = RootGrid.XamlRoot
+            };
+
+            var result = await confirmDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                DeleteSelectedGame();
+            }
+        }
+
+        private void DeleteSelectedGame()
+        {
+            if (SelectedGame == null) return;
+
+            var gameToDelete = SelectedGame;
+
+            HideDetail();
+
+            Games.Remove(gameToDelete);
+
+            GuardarJuegoEnJson();
         }
 
         // Navegación por selección enfocada y resaltada
@@ -486,20 +553,53 @@ namespace Handheld_Launcher
                 string name = file.DisplayName;
 
                 var icon = new BitmapImage(new Uri("ms-appx:///Assets/StoreLogo.png"));
-                var newGame = new GameItem(name, path, icon, null);
+                var newGame = new GameItem(name, path, icon, null, null);
                 Games.Add(newGame);
 
                 // Guardado gestionado por Games_SaveOnCollectionChanged handler
             }
         }
 
-        // Handler para cambiar la carátula de un juego desde la UI
+        // Handler para cambiar la carátula desde el botón específico (ha sido mantenido para compatibilidad)
         private async void ChangeCover_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             var game = btn?.DataContext as GameItem;
             if (game == null) return;
 
+            await PickAndSetIconAsync(game);
+        }
+
+        // Botón de tres puntos (ahora usado en el overlay). DataContext apunta al GameItem (o tomará SelectedGame)
+        private async void EditGame_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            var game = btn?.DataContext as GameItem ?? SelectedGame;
+            if (game == null) return;
+
+            var dialog = new ContentDialog
+            {
+                Title = "Editar imágenes",
+                PrimaryButtonText = "Cambiar carátula",
+                SecondaryButtonText = "Cambiar fondo",
+                CloseButtonText = "Cancelar",
+                XamlRoot = RootGrid.XamlRoot
+            };
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                await PickAndSetIconAsync(game);
+            }
+            else if (result == ContentDialogResult.Secondary)
+            {
+                await PickAndSetBackgroundAsync(game);
+            }
+        }
+
+        private async Task PickAndSetIconAsync(GameItem game)
+        {
             var picker = new FileOpenPicker();
             var hwnd = WindowNative.GetWindowHandle(this);
             InitializeWithWindow.Initialize(picker, hwnd);
@@ -532,6 +632,39 @@ namespace Handheld_Launcher
             }
         }
 
+        private async Task PickAndSetBackgroundAsync(GameItem game)
+        {
+            var picker = new FileOpenPicker();
+            var hwnd = WindowNative.GetWindowHandle(this);
+            InitializeWithWindow.Initialize(picker, hwnd);
+
+            picker.ViewMode = PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".png");
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".bmp");
+
+            var file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                try
+                {
+                    using IRandomAccessStream stream = await file.OpenReadAsync();
+                    var bitmap = new BitmapImage();
+                    await bitmap.SetSourceAsync(stream);
+                    game.BackgroundImage = bitmap;
+                    game.BackgroundPath = file.Path;
+
+                    GuardarJuegoEnJson();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error cargando imagen de fondo: {ex.Message}");
+                }
+            }
+        }
+
         private void GuardarJuegoEnJson()
         {
             try
@@ -542,7 +675,7 @@ namespace Handheld_Launcher
 
                 var list = Games
                     .Where(g => !string.IsNullOrEmpty(g.Path))
-                    .Select(g => new PersistedGame(g.Name, g.Path, g.IconPath))
+                    .Select(g => new PersistedGame(g.Name, g.Path, g.IconPath, g.BackgroundPath))
                     .ToList();
 
                 var options = new JsonSerializerOptions { WriteIndented = true };
@@ -583,7 +716,22 @@ namespace Handheld_Launcher
                             }
                         }
 
-                        Games.Add(new GameItem(pg.Name, pg.Path, icon, pg.IconPath));
+                        var game = new GameItem(pg.Name, pg.Path, icon, pg.IconPath, pg.BackgroundPath);
+
+                        if (!string.IsNullOrEmpty(pg.BackgroundPath) && File.Exists(pg.BackgroundPath))
+                        {
+                            try
+                            {
+                                game.BackgroundImage = new BitmapImage(new Uri(pg.BackgroundPath));
+                            }
+                            catch
+                            {
+                                // ignorar si falla
+                                game.BackgroundImage = null;
+                            }
+                        }
+
+                        Games.Add(game);
                     }
                 }
             }
