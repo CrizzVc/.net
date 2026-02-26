@@ -712,6 +712,9 @@
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Handheld Launcher.deps.json">
       <PackagePath>Handheld Launcher.deps.json</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\Assets\ic_launcher.png">
+      <PackagePath>Assets\ic_launcher.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
@@ -732,6 +735,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\ic_launcher.ico">
+      <PackagePath>ic_launcher.ico</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\.nuget\packages\microsoft.web.webview2\1.0.3179.45\build\..\lib\Microsoft.Web.WebView2.Core.winmd">
       <PackagePath>Microsoft.Web.WebView2.Core.winmd</PackagePath>

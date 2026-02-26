@@ -151,7 +151,7 @@ namespace Handheld_Launcher
         //public ObservableCollection<GameItem> OtherGames { get; set; } = new ObservableCollection<GameItem>();
 
         // Persistencia
-        private bool _suspendSave = false;
+        private bool _suspendSave = false; 
         private record PersistedGame(string Name, string Path, string IconPath, string BackgroundPath);
 
         // Gamepad support

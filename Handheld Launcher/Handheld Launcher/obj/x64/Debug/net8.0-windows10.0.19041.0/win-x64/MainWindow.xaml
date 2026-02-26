@@ -9,6 +9,7 @@
     mc:Ignorable="d"
     Title="Handheld Launcher">
 
+
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
@@ -16,6 +17,11 @@
     <Grid x:ConnectionId='2' x:Name="RootGrid"
                                     
           IsTabStop="True">
+
+        <Grid.Resources>
+            <local:BoolToWidthConverter x:Key="BoolToWidthConverter" />
+            
+        </Grid.Resources>
 
         <!-- COLUMNAS -->
         <Grid.ColumnDefinitions>
@@ -34,22 +40,23 @@
         <Grid x:ConnectionId='3' x:Name="LeftSidebar"
               Grid.Column="0"
               Grid.RowSpan="3"
-              Background="#0F1A24">
+              Background="#16171b">
 
             <StackPanel VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Spacing="25">
 
                 <Button x:ConnectionId='23'                    Width="50" Height="50" CornerRadius="10">
-                    <TextBlock Text="🏠" FontSize="20"/>
+                    <FontIcon Glyph="&#xE80F;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
                 <Button x:ConnectionId='24'                       Width="50" Height="50" CornerRadius="10">
-                    <TextBlock Text="🎮" FontSize="20"/>
+                    <FontIcon Glyph="&#xe74c;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
                 <Button x:ConnectionId='25'                       Width="50" Height="50" CornerRadius="10">
-                    <TextBlock Text="➕" FontSize="20"/>
+
+                    <FontIcon Glyph="&#xe948;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
                 <Button Width="50" Height="50" CornerRadius="10">
@@ -60,7 +67,7 @@
                             <MenuFlyoutItem x:ConnectionId='28' Text="Imagen"                    />
                         </MenuFlyout>
                     </Button.Flyout>
-                    <TextBlock Text="⚙" FontSize="20"/>
+                    <FontIcon Glyph="&#xe713;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
             </StackPanel>
@@ -86,6 +93,15 @@
             </Grid.Background>
         </Grid>
 
+        <Grid Grid.Column="1" Grid.Row="0">
+            <FontIcon Glyph="&#xE856;"
+              FontFamily="Segoe MDL2 Assets"
+              FontSize="35"
+              Foreground="White"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Margin="0,30,115,0"/>
+        </Grid>
         <!-- CLOCK -->
         <TextBlock x:ConnectionId='5' x:Name="TimeTextBlock"
                    Grid.Column="1"
@@ -130,17 +146,11 @@
 
                         <GridView.ItemTemplate>
                             <DataTemplate                            >
-                                <StackPanel x:ConnectionId='20' Width="200" Margin="14">
-                                    <Border Height="260"
-                                            CornerRadius="12"
-                                            Background="#222">
-                                        <Image x:ConnectionId='22'                               
-                                               Stretch="UniformToFill"/>
+                                <StackPanel x:ConnectionId='20' Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14">
+                                    <Border Height="260" CornerRadius="12" Background="#222" Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}">
+                                        <Image x:ConnectionId='22'                                Stretch="UniformToFill"/>
                                     </Border>
-                                    <TextBlock x:ConnectionId='21'                     
-                                               Foreground="White"
-                                               Margin="0,10,0,0"
-                                               TextWrapping="Wrap"/>
+                                    <TextBlock x:ConnectionId='21'                      Foreground="White" Margin="0,10,0,0" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridView.ItemTemplate>
@@ -155,7 +165,10 @@
             <!-- LIBRARY VIEW -->
             <Grid x:ConnectionId='7' x:Name="LibraryView"
                   Visibility="Collapsed"
+                  Height="1060"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                   Padding="40">
+                  
 
                 <Grid.Background>
                     <SolidColorBrush Color="#AA000000" />

@@ -30,7 +30,7 @@
     <AppXManifest Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2026-02-26T21:53:06.622</Modified>
+      <Modified>2026-02-26T23:31:53.657</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +40,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
       <PackagePath>Handheld Launcher.exe</PackagePath>
-      <Modified>2026-02-26T21:53:06.361</Modified>
+      <Modified>2026-02-26T23:31:53.347</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\Assets\GoogleSans-Variable.ttf">
       <PackagePath>Assets\GoogleSans-Variable.ttf</PackagePath>
@@ -48,7 +48,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Handheld Launcher.dll">
       <PackagePath>Handheld Launcher.dll</PackagePath>
-      <Modified>2026-02-26T21:53:06.357</Modified>
+      <Modified>2026-02-26T23:31:53.341</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.24\runtimes\win-x64\lib\net8.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -948,7 +948,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Handheld Launcher.deps.json">
       <PackagePath>Handheld Launcher.deps.json</PackagePath>
-      <Modified>2026-02-26T17:44:55.265</Modified>
+      <Modified>2026-02-26T23:31:53.446</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\Assets\ic_launcher.png">
+      <PackagePath>Assets\ic_launcher.png</PackagePath>
+      <Modified>2026-02-26T23:20:40.205</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -978,13 +982,17 @@
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <Modified>2026-02-04T18:02:46.026</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\ic_launcher.ico">
+      <PackagePath>ic_launcher.ico</PackagePath>
+      <Modified>2026-02-26T23:22:27.440</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\.nuget\packages\microsoft.web.webview2\1.0.3179.45\build\..\lib\Microsoft.Web.WebView2.Core.winmd">
       <PackagePath>Microsoft.Web.WebView2.Core.winmd</PackagePath>
       <Modified>2025-03-30T09:03:56.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2026-02-26T21:53:06.443</Modified>
+      <Modified>2026-02-26T23:31:53.488</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
