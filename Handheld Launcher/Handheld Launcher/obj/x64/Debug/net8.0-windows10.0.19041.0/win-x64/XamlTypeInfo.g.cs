@@ -434,6 +434,7 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
                 userType.AddMemberName("Games");
                 userType.AddMemberName("OtherGames");
                 userType.AddMemberName("FeaturedGame");
+                userType.AddMemberName("SelectedGame");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -667,52 +668,62 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
             var that = (global::Handheld_Launcher.MainWindow)instance;
             that.FeaturedGame = (global::Handheld_Launcher.GameItem)Value;
         }
-        private object get_10_TreeViewNode_Children(object instance)
+        private object get_10_MainWindow_SelectedGame(object instance)
+        {
+            var that = (global::Handheld_Launcher.MainWindow)instance;
+            return that.SelectedGame;
+        }
+        private void set_10_MainWindow_SelectedGame(object instance, object Value)
+        {
+            var that = (global::Handheld_Launcher.MainWindow)instance;
+            that.SelectedGame = (global::Handheld_Launcher.GameItem)Value;
+        }
+        private object get_11_TreeViewNode_Children(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Children;
         }
-        private object get_11_TreeViewNode_Content(object instance)
+        private object get_12_TreeViewNode_Content(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Content;
         }
-        private void set_11_TreeViewNode_Content(object instance, object Value)
+        private void set_12_TreeViewNode_Content(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.Content = (global::System.Object)Value;
         }
-        private object get_12_TreeViewNode_Depth(object instance)
+        private object get_13_TreeViewNode_Depth(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Depth;
         }
-        private object get_13_TreeViewNode_HasChildren(object instance)
+        private object get_14_TreeViewNode_HasChildren(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.HasChildren;
         }
-        private object get_14_TreeViewNode_HasUnrealizedChildren(object instance)
+        private object get_15_TreeViewNode_HasUnrealizedChildren(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.HasUnrealizedChildren;
         }
-        private void set_14_TreeViewNode_HasUnrealizedChildren(object instance, object Value)
+        private void set_15_TreeViewNode_HasUnrealizedChildren(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.HasUnrealizedChildren = (global::System.Boolean)Value;
         }
-        private object get_15_TreeViewNode_IsExpanded(object instance)
+        private object get_16_TreeViewNode_IsExpanded(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.IsExpanded;
         }
-        private void set_15_TreeViewNode_IsExpanded(object instance, object Value)
+        private void set_16_TreeViewNode_IsExpanded(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.IsExpanded = (global::System.Boolean)Value;
         }
-        private object get_16_TreeViewNode_Parent(object instance)
+        private object get_17_TreeViewNode_Parent(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Parent;
@@ -787,50 +798,56 @@ namespace Handheld_Launcher.Handheld_Launcher_XamlTypeInfo
                 xamlMember.Getter = get_9_MainWindow_FeaturedGame;
                 xamlMember.Setter = set_9_MainWindow_FeaturedGame;
                 break;
+            case "Handheld_Launcher.MainWindow.SelectedGame":
+                userType = (global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Handheld_Launcher.MainWindow");
+                xamlMember = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlMember(this, "SelectedGame", "Handheld_Launcher.GameItem");
+                xamlMember.Getter = get_10_MainWindow_SelectedGame;
+                xamlMember.Setter = set_10_MainWindow_SelectedGame;
+                break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Children":
                 userType = (global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlMember(this, "Children", "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>");
-                xamlMember.Getter = get_10_TreeViewNode_Children;
+                xamlMember.Getter = get_11_TreeViewNode_Children;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Content":
                 userType = (global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlMember(this, "Content", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_11_TreeViewNode_Content;
-                xamlMember.Setter = set_11_TreeViewNode_Content;
+                xamlMember.Getter = get_12_TreeViewNode_Content;
+                xamlMember.Setter = set_12_TreeViewNode_Content;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Depth":
                 userType = (global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlMember(this, "Depth", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_12_TreeViewNode_Depth;
+                xamlMember.Getter = get_13_TreeViewNode_Depth;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.HasChildren":
                 userType = (global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlMember(this, "HasChildren", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_13_TreeViewNode_HasChildren;
+                xamlMember.Getter = get_14_TreeViewNode_HasChildren;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.HasUnrealizedChildren":
                 userType = (global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlMember(this, "HasUnrealizedChildren", "Boolean");
-                xamlMember.Getter = get_14_TreeViewNode_HasUnrealizedChildren;
-                xamlMember.Setter = set_14_TreeViewNode_HasUnrealizedChildren;
+                xamlMember.Getter = get_15_TreeViewNode_HasUnrealizedChildren;
+                xamlMember.Setter = set_15_TreeViewNode_HasUnrealizedChildren;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.IsExpanded":
                 userType = (global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlMember(this, "IsExpanded", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_15_TreeViewNode_IsExpanded;
-                xamlMember.Setter = set_15_TreeViewNode_IsExpanded;
+                xamlMember.Getter = get_16_TreeViewNode_IsExpanded;
+                xamlMember.Setter = set_16_TreeViewNode_IsExpanded;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Parent":
                 userType = (global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::Handheld_Launcher.Handheld_Launcher_XamlTypeInfo.XamlMember(this, "Parent", "Microsoft.UI.Xaml.Controls.TreeViewNode");
-                xamlMember.Getter = get_16_TreeViewNode_Parent;
+                xamlMember.Getter = get_17_TreeViewNode_Parent;
                 xamlMember.SetIsReadOnly();
                 break;
             }

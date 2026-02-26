@@ -44,6 +44,21 @@ namespace Handheld_Launcher
             }
         }
 
+        // Propiedad para la vista detalle
+        private GameItem _selectedGame;
+        public GameItem SelectedGame
+        {
+            get => _selectedGame;
+            set
+            {
+                if (_selectedGame != value)
+                {
+                    _selectedGame = value;
+                    OnPropertyChanged(nameof(SelectedGame));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
@@ -83,12 +98,6 @@ namespace Handheld_Launcher
             _suspendSave = true;
             CargarJuegosDesdeJson();
             _suspendSave = false;
-
-            // Aseguramos que exista el placeholder en primer lugar (sin Path)
-            //if (Games.Count == 0 || !string.IsNullOrEmpty(Games[0].Path))
-            //{
-            //    Games.Insert(0, new GameItem("AGREGAR", null, new BitmapImage(new Uri("ms-appx:///Assets/StoreLogo.png")), null));
-            //}
 
             // Inicializar timer de reloj
             DispatcherTimer timer = new DispatcherTimer();
@@ -216,6 +225,42 @@ namespace Handheld_Launcher
             }
 
             // UpdateFeaturedAndOthers se ejecutará por el evento CollectionChanged
+        }
+
+        // Mostrar detalle (overlay)
+        private void ShowDetail(GameItem game)
+        {
+            if (game == null) return;
+            SelectedGame = game;
+            DetailOverlay.Visibility = Visibility.Visible;
+            DetailOverlay.IsHitTestVisible = true;
+            DetailOverlay.UpdateLayout();
+            DetailOverlay.Focus(FocusState.Programmatic);
+        }
+
+        // Ocultar detalle
+        private void HideDetail()
+        {
+            SelectedGame = null;
+            DetailOverlay.Visibility = Visibility.Collapsed;
+            DetailOverlay.IsHitTestVisible = false;
+            // devolver foco al grid principal
+            RootGrid.Focus(FocusState.Programmatic);
+        }
+
+        // Play desde la vista detalle
+        private void PlaySelectedGame_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedGame == null || string.IsNullOrEmpty(SelectedGame.Path)) return;
+            try
+            {
+                Process.Start(new ProcessStartInfo(SelectedGame.Path) { UseShellExecute = true });
+                HideDetail();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error al iniciar {SelectedGame.Name}: {ex.Message}");
+            }
         }
 
         // Navegación por selección enfocada y resaltada
@@ -416,7 +461,9 @@ namespace Handheld_Launcher
                 var container = CarouselGrid.ContainerFromItem(clicked) as GridViewItem;
                 container?.Focus(FocusState.Programmatic);
 
+                // Mover a featured (opcional) y mostrar detalle en overlay
                 MoveToFeatured(clicked);
+                ShowDetail(clicked);
             }
         }
 
@@ -562,7 +609,7 @@ namespace Handheld_Launcher
             }
         }
 
-        // KeyDown handler para flechas del teclado
+        // KeyDown handler para flechas del teclado (y Escape para cerrar detalle)
         private void RootGrid_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
@@ -575,6 +622,19 @@ namespace Handheld_Launcher
                 SelectNext(); // navegación por teclado: no activar hover
                 e.Handled = true;
             }
+            else if (e.Key == Windows.System.VirtualKey.Escape)
+            {
+                if (DetailOverlay != null && DetailOverlay.Visibility == Visibility.Visible)
+                {
+                    HideDetail();
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void HideDetail_Click(object sender, global::Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            HideDetail();
         }
     }
 }

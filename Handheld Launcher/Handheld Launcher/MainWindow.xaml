@@ -150,5 +150,54 @@
                 <Button Grid.Column="2" Content="▶" Click="ScrollRight_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="120" />
             </Grid>
         </StackPanel>
+
+        <!-- Overlay detalle del juego (inspirado en la imagen proporcionada) -->
+        <Grid x:Name="DetailOverlay" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
+            <!-- Imagen de fondo (carátula) -->
+            <Image Source="{Binding SelectedGame.Icon}" Stretch="UniformToFill" Opacity="0.35"/>
+            <!-- Gradiente oscuro para legibilidad -->
+            <Rectangle>
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#00000000" Offset="0.0"/>
+                        <GradientStop Color="#B3000000" Offset="0.6"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <!-- Contenido principal sobre el fondo -->
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
+                <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
+                <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
+                    <Button Content="▶ PLAY" Click="PlaySelectedGame_Click" Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
+                    <Button Content="Cerrar" Click="HideDetail_Click" Width="120" Height="48" />
+                </StackPanel>
+
+                <!-- Filas de estadísticas / tarjetas minimalistas -->
+                <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,30,0,0">
+                    <Border Background="#20101010" CornerRadius="10" Padding="18" MinWidth="220">
+                        <StackPanel>
+                            <TextBlock Text="WEEKLY ACTIVITY" Foreground="#80FFFFFF" FontSize="12" />
+                            <TextBlock Text="— gráfico —" Foreground="White" Margin="0,8,0,0" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#20101010" CornerRadius="10" Padding="18" MinWidth="220">
+                        <StackPanel>
+                            <TextBlock Text="YOUR STATS" Foreground="#80FFFFFF" FontSize="12" />
+                            <TextBlock Text="Win rate: 66%" Foreground="White" Margin="0,8,0,0" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#20101010" CornerRadius="10" Padding="18" MinWidth="220">
+                        <StackPanel>
+                            <TextBlock Text="TOP PERFORMANCES" Foreground="#80FFFFFF" FontSize="12" />
+                            <TextBlock Text="— avatars —" Foreground="White" Margin="0,8,0,0" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Window>
