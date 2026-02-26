@@ -43,6 +43,30 @@
                                             </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>
+
+                                    <!-- Nuevo grupo para estados de selección/resalte -->
+                                    <VisualStateGroup x:Name="SelectionStates">
+                                        <VisualState x:Name="Unselected">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.12" />
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.12" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1.15" Duration="0:0:0.12" />
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1.15" Duration="0:0:0.12" />
+                                            </Storyboard>
+                                        </VisualState>
+
+                                        <!-- Estado más pequeño para selección por teclado/gamepad (evita recorte) -->
+                                        <VisualState x:Name="SelectedKeyboard">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleX" To="1.08" Duration="0:0:0.12" />
+                                                <DoubleAnimation Storyboard.TargetName="RootScale" Storyboard.TargetProperty="ScaleY" To="1.08" Duration="0:0:0.12" />
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
 
                                 <ContentPresenter />
@@ -65,7 +89,7 @@
         <StackPanel Padding="40">
             <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,0,20">
                 <TextBlock Text="MIS JUEGOS" Style="{StaticResource HeaderTextBlockStyle}"/>
-                <Button Content="+" Click="AddGame_Click" Style="{StaticResource AccentButtonStyle}" CornerRadius="15" Width="30" Height="30"/>
+                <Button Content="+" Click="AddGame_Click" Style="{StaticResource AccentButtonStyle}" CornerRadius="5" Width="30" Height="30"/>
             </StackPanel>
 
 
@@ -90,7 +114,7 @@
                               ItemsSource="{x:Bind OtherGames, Mode=OneWay}"
                               IsItemClickEnabled="True"
                               ItemClick="CarouselGrid_ItemClick"
-                              SelectionMode="None"
+                              SelectionMode="Single"
                               HorizontalAlignment="Center"
                               Padding="12,16">
                         <GridView.ItemsPanel>

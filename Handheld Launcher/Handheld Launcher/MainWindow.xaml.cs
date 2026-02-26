@@ -17,6 +17,8 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.Gaming.Input;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Windows.Foundation;
 
 namespace Handheld_Launcher
 {
@@ -55,6 +57,9 @@ namespace Handheld_Launcher
         private DateTime _lastGamepadAction = DateTime.MinValue;
         private const int GamepadActionCooldownMs = 250;
 
+        // Guardamos el índice seleccionado anterior para restablecer estados visuales
+        private int _lastSelectedIndex = -1;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -63,22 +68,27 @@ namespace Handheld_Launcher
             RootGrid.DataContext = this;
 
             // Asegurar foco para recibir KeyDown
-            RootGrid.Loaded += (s, e) => RootGrid.Focus(FocusState.Programmatic);
+            RootGrid.Loaded += (s, e) =>
+            {
+                RootGrid.Focus(FocusState.Programmatic);
+                // asegurar selección inicial
+                EnsureSelection();
+            };
 
             // Conectamos lista y eventos
             Games.CollectionChanged += Games_CollectionChanged;
             Games.CollectionChanged += Games_SaveOnCollectionChanged;
 
-            // Cargamos juegos guardados (suspendemos guardado durante la carga)
+            // Cargamos juegos guardados (suspendimos guardado durante la carga)
             _suspendSave = true;
             CargarJuegosDesdeJson();
             _suspendSave = false;
 
             // Aseguramos que exista el placeholder en primer lugar (sin Path)
-            if (Games.Count == 0 || !string.IsNullOrEmpty(Games[0].Path))
-            {
-                Games.Insert(0, new GameItem("AGREGAR", null, new BitmapImage(new Uri("ms-appx:///Assets/StoreLogo.png")), null));
-            }
+            //if (Games.Count == 0 || !string.IsNullOrEmpty(Games[0].Path))
+            //{
+            //    Games.Insert(0, new GameItem("AGREGAR", null, new BitmapImage(new Uri("ms-appx:///Assets/StoreLogo.png")), null));
+            //}
 
             // Inicializar timer de reloj
             DispatcherTimer timer = new DispatcherTimer();
@@ -133,12 +143,12 @@ namespace Handheld_Launcher
 
                     if (left && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        ScrollLeft_Click(null, null);
+                        SelectPrevious(); // navegación por gamepad: no activamos efecto hover
                         _lastGamepadAction = DateTime.Now;
                     }
                     else if (right && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        ScrollRight_Click(null, null);
+                        SelectNext(); // navegación por gamepad: no activamos efecto hover
                         _lastGamepadAction = DateTime.Now;
                     }
                 }
@@ -159,6 +169,8 @@ namespace Handheld_Launcher
         {
             // Cuando cambie la colección principal recalculamos featured y othergames
             UpdateFeaturedAndOthers();
+            // asegurar que siempre haya selección válida
+            EnsureSelection();
         }
 
         private void UpdateFeaturedAndOthers()
@@ -206,20 +218,189 @@ namespace Handheld_Launcher
             // UpdateFeaturedAndOthers se ejecutará por el evento CollectionChanged
         }
 
+        // Navegación por selección enfocada y resaltada
+        private bool IsSelectable(GameItem item) => item != null && !string.IsNullOrEmpty(item.Path);
+
+        private int FindSelectableIndexFrom(int startIndex, int direction)
+        {
+            int i = startIndex;
+            while (i >= 0 && i < OtherGames.Count)
+            {
+                if (IsSelectable(OtherGames[i])) return i;
+                i += direction;
+            }
+            return -1;
+        }
+
+        // Helper: asegura que el contenedor esté visible dentro del ScrollViewer externo
+        private void EnsureContainerVisible(GridViewItem container)
+        {
+            if (container == null || CarouselScrollViewer == null) return;
+
+            // Forzar layout para asegurar medidas actualizadas
+            try
+            {
+                container.UpdateLayout();
+                CarouselScrollViewer.UpdateLayout();
+
+                // Transformar la posición del contenedor respecto al ScrollViewer
+                var transform = container.TransformToVisual(CarouselScrollViewer);
+                Point pos = transform.TransformPoint(new Point(0, 0));
+
+                double containerLeft = pos.X;
+                double containerRight = containerLeft + container.ActualWidth;
+                double viewportWidth = CarouselScrollViewer.ActualWidth;
+                double current = CarouselScrollViewer.HorizontalOffset;
+                double target = current;
+
+                if (containerLeft < 0)
+                {
+                    // desplazar a la izquierda lo necesario
+                    target = Math.Max(0, current + containerLeft);
+                }
+                else if (containerRight > viewportWidth)
+                {
+                    // desplazar a la derecha lo necesario
+                    target = current + (containerRight - viewportWidth);
+                }
+
+                // Si target cambia, aplicarlo
+                if (Math.Abs(target - current) > 0.5)
+                {
+                    CarouselScrollViewer.ChangeView(target, null, null, true);
+                }
+            }
+            catch
+            {
+                // si algo falla (transform devuelve null o similar), caer silenciosamente
+            }
+        }
+
+        // Ahora permitimos elegir si queremos dar foco (para evitar activar PointerOver cuando navegamos con teclado/gamepad)
+        private void SelectIndex(int index, bool setFocus = true)
+        {
+            if (OtherGames.Count == 0 || CarouselGrid == null) return;
+            index = Math.Max(0, Math.Min(OtherGames.Count - 1, index));
+            // si el índice no es seleccionable, buscar el siguiente seleccionable hacia adelante
+            if (!IsSelectable(OtherGames[index]))
+            {
+                int forward = FindSelectableIndexFrom(index + 1, 1);
+                int backward = FindSelectableIndexFrom(index - 1, -1);
+                index = forward >= 0 ? forward : backward;
+                if (index < 0) return; // no hay items seleccionables
+            }
+
+            var item = OtherGames[index];
+
+            // Guardamos el índice previo para restablecer su estado visual
+            int previousIndex = _lastSelectedIndex;
+
+            // Selección real en el Grid
+            CarouselGrid.SelectedItem = item;
+            CarouselGrid.UpdateLayout();
+
+            // Intentar obtener el contenedor; si no existe, forzamos UpdateLayout y lo obtenemos por índice
+            var container = CarouselGrid.ContainerFromItem(item) as GridViewItem;
+            if (container == null)
+            {
+                container = CarouselGrid.ContainerFromIndex(index) as GridViewItem;
+            }
+
+            // Asegurar visibilidad usando el ScrollViewer externo (si existe)
+            if (container != null)
+            {
+                EnsureContainerVisible(container);
+            }
+            else
+            {
+                // fallback: usar ScrollIntoView del GridView si no hay contenedor
+                try { CarouselGrid.ScrollIntoView(item, ScrollIntoViewAlignment.Leading); } catch { }
+            }
+
+            // Solo dar foco si explicitamente queremos (evita activar PointerOver/hover en navegación por teclado/gamepad)
+            if (setFocus)
+            {
+                container?.Focus(FocusState.Programmatic);
+            }
+
+            // Restablecer visual states del elemento previamente seleccionado (si está realizado)
+            if (previousIndex >= 0 && previousIndex < OtherGames.Count)
+            {
+                var prevItem = OtherGames[previousIndex];
+                if (!ReferenceEquals(prevItem, item))
+                {
+                    var prevContainer = CarouselGrid.ContainerFromItem(prevItem) as GridViewItem;
+                    if (prevContainer != null)
+                    {
+                        // Forzar estado 'Unselected' para que reduzca la escala
+                        VisualStateManager.GoToState(prevContainer, "Unselected", true);
+                        // También volver al estado normal del grupo CommonStates
+                        VisualStateManager.GoToState(prevContainer, "Normal", true);
+                    }
+                }
+            }
+
+            // Aplicar estado 'Selected' o 'SelectedKeyboard' al nuevo contenedor
+            if (container != null)
+            {
+                if (setFocus)
+                {
+                    VisualStateManager.GoToState(container, "Selected", true);
+                }
+                else
+                {
+                    // Navegación por teclado/gamepad: usar zoom menor para evitar recorte
+                    VisualStateManager.GoToState(container, "SelectedKeyboard", true);
+                }
+            }
+
+            // Actualizamos el índice seleccionado
+            _lastSelectedIndex = index;
+        }
+
+        private void SelectNext()
+        {
+            int start = CarouselGrid.SelectedIndex;
+            if (start < 0) start = 0; else start = start + 1;
+            int idx = FindSelectableIndexFrom(start, 1);
+            // No hacer wrap: si no hay más, no hacemos nada
+            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegación por flechas/gamepad: no activar hover
+        }
+
+        private void SelectPrevious()
+        {
+            int start = CarouselGrid.SelectedIndex;
+            if (start < 0) start = OtherGames.Count - 1; else start = start - 1;
+            int idx = FindSelectableIndexFrom(start, -1);
+            // No hacer wrap: si no hay más hacia atrás, no hacemos nada
+            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegación por flechas/gamepad: no activar hover
+        }
+
+        private void EnsureSelection()
+        {
+            // Si no hay selección, seleccionar el primer juego seleccionable
+            if (CarouselGrid == null) return;
+            if (CarouselGrid.SelectedItem != null)
+            {
+                // actualizamos _lastSelectedIndex para reflejar la selección actual
+                var cur = CarouselGrid.SelectedItem as GameItem;
+                _lastSelectedIndex = cur != null ? OtherGames.IndexOf(cur) : -1;
+                return;
+            }
+            int idx = FindSelectableIndexFrom(0, 1);
+            if (idx >= 0) SelectIndex(idx, setFocus: false);
+        }
+
         private void ScrollLeft_Click(object sender, RoutedEventArgs e)
         {
-            // Desplaza el ScrollViewer a la izquierda una cantidad (ajusta step según tus items)
-            double step = 420;
-            double target = Math.Max(0, CarouselScrollViewer.HorizontalOffset - step);
-            CarouselScrollViewer.ChangeView(target, null, null, true);
+            // ahora navegamos a la izquierda seleccionando el juego anterior
+            SelectPrevious();
         }
 
         private void ScrollRight_Click(object sender, RoutedEventArgs e)
         {
-            double step = 420;
-            double max = CarouselScrollViewer.ExtentWidth - CarouselScrollViewer.ViewportWidth;
-            double target = Math.Min(max, CarouselScrollViewer.HorizontalOffset + step);
-            CarouselScrollViewer.ChangeView(target, null, null, true);
+            // ahora navegamos a la derecha seleccionando el siguiente juego
+            SelectNext();
         }
 
         private void CarouselGrid_ItemClick(object sender, ItemClickEventArgs e)
@@ -227,6 +408,14 @@ namespace Handheld_Launcher
             var clicked = e.ClickedItem as GameItem;
             if (clicked != null)
             {
+                // seleccionar y enfocar el item clicado usando la versión que sí da foco
+                int clickedIndex = OtherGames.IndexOf(clicked);
+                if (clickedIndex >= 0) SelectIndex(clickedIndex, setFocus: true);
+
+                // Asegurar que el contenedor tenga foco para que el usuario pueda interactuar si ha hecho click
+                var container = CarouselGrid.ContainerFromItem(clicked) as GridViewItem;
+                container?.Focus(FocusState.Programmatic);
+
                 MoveToFeatured(clicked);
             }
         }
@@ -378,12 +567,12 @@ namespace Handheld_Launcher
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
-                ScrollLeft_Click(null, null);
+                SelectPrevious(); // navegación por teclado: no activar hover
                 e.Handled = true;
             }
             else if (e.Key == Windows.System.VirtualKey.Right)
             {
-                ScrollRight_Click(null, null);
+                SelectNext(); // navegación por teclado: no activar hover
                 e.Handled = true;
             }
         }
