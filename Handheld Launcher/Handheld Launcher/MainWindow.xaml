@@ -14,8 +14,15 @@
     </Window.SystemBackdrop>
 
     <!-- Añadido nombre al Grid raíz para asignar DataContext desde el code-behind -->
-    <Grid x:Name="RootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    <Grid x:Name="RootGrid"
           KeyDown="RootGrid_KeyDown" IsTabStop="True" >
+
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#232526" Offset="0"/>
+                <GradientStop Color="#0F2027" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
         <Grid.Resources>
             <local:BoolToWidthConverter x:Key="BoolToWidthConverter" />
@@ -88,7 +95,7 @@
         <!-- Quitado DataContext que apuntaba a Self para heredar el DataContext del RootGrid -->
         <StackPanel Padding="40">
             <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,0,20">
-                <TextBlock Text="MIS JUEGOS" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock Text="MIS JUEGOS" FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans" Style="{StaticResource HeaderTextBlockStyle}"/>
                 <Button Content="+" Click="AddGame_Click" Style="{StaticResource AccentButtonStyle}" CornerRadius="5" Width="30" Height="30"/>
             </StackPanel>
 
@@ -133,8 +140,9 @@
 
                                     <!-- Nombre justo debajo de la carátula (sin botones de edición en el home) -->
                                     <TextBlock Text="{x:Bind Name}" 
-                                               HorizontalAlignment="Center" 
-                                               Foreground="White" 
+                                               HorizontalAlignment="Left" 
+                                               Foreground="White"
+                                               FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans"
                                                Margin="0,10,0,0"
                                                FontSize="16"
                                                TextWrapping="Wrap"/>
@@ -164,7 +172,7 @@
 
             <!-- Contenido principal sobre el fondo -->
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
-                <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
+                <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
                 <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
                     <Button Content="▶ PLAY"
                         Click="PlaySelectedGame_Click"

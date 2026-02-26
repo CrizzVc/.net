@@ -31,6 +31,9 @@
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
       <PackagePath>Handheld Launcher.exe</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\Assets\GoogleSans-Variable.ttf">
+      <PackagePath>Assets\GoogleSans-Variable.ttf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Handheld Launcher.dll">
       <PackagePath>Handheld Launcher.dll</PackagePath>
     </AppxPackagedFile>

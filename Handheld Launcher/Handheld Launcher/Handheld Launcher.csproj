@@ -41,6 +41,11 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260209005" />
     <PackageReference Include="System.Drawing.Common" Version="10.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Assets\GoogleSans-Variable.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
