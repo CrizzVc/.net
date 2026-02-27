@@ -1389,42 +1389,5 @@ namespace Handheld_Launcher
                 Debug.WriteLine($"Error en CrossfadeToImagePath: {ex.Message}");
             }
         }
-
-        private async Task ConfirmDeleteAsync()
-        {
-            // If no selection, nothing to do
-            if (SelectedGame == null) return;
-
-            var dialog = new ContentDialog
-            {
-                Title = "Eliminar juego",
-                Content = $"¿Desea eliminar \"{SelectedGame.Name}\" del launcher?",
-                PrimaryButtonText = "Eliminar",
-                CloseButtonText = "Cancelar",
-                XamlRoot = RootGrid.XamlRoot
-            };
-
-            var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                try
-                {
-                    // Remove from collection (this triggers save via handler)
-                    Games.Remove(SelectedGame);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Error eliminando juego: {ex.Message}");
-                    // Aun si falla, intentamos persistir
-                }
-                finally
-                {
-                    // Asegurar que el overlay se cierre y que no quede la referencia
-                    HideDetail();
-                    // Guardar por si el handler no se ejecuta
-                    GuardarJuegoEnJson();
-                }
-            }
-        }
     }
 }

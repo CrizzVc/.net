@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Handheld Launcher")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6d067f9099a653a0384ec9e4400685a35e934ac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd4f4c1742180bcce1b07cacc0dbb0459d2ad937")]
 [assembly: System.Reflection.AssemblyProductAttribute("Handheld Launcher")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Handheld Launcher")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

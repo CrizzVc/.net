@@ -19,6 +19,9 @@
 
         <Grid.Resources>
             <local:BoolToWidthConverter x:Key="BoolToWidthConverter" />
+            <!-- Converter para visibilidad basada en null (añadido) -->
+            <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <local:NullToVisibilityConverter x:Key="NullToVisibilityInverted" Invert="True" />
         </Grid.Resources>
 
         <!-- COLUMNAS -->
@@ -299,7 +302,24 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
-                    <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
+                    <!-- Reemplazado el uso de Style.Triggers (no soportado) por binding a Visibility con convertidores -->
+                    <Image Source="{Binding SelectedGame.Logo}"
+           Stretch="Uniform"
+           MaxWidth="300"
+           HorizontalAlignment="Left"
+           Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityConverter}}"/>
+
+                    <!-- NOMBRE (solo si no hay logo) -->
+                    <TextBlock Text="{Binding SelectedGame.Name}"
+                       FontSize="72"
+                       FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans"
+                       FontWeight="SemiBold"
+                       Foreground="White"
+                       TextWrapping="Wrap"
+                       MaxWidth="600"
+                       Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityInverted}}">  
+                    </TextBlock>
+
                     <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
                         <Button x:ConnectionId='11' Content="▶ PLAY"                                Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
                         <Button x:ConnectionId='12' Content="Cerrar"                          Width="120" Height="48" />

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Window
     x:Class="Handheld_Launcher.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -19,9 +19,6 @@
 
         <Grid.Resources>
             <local:BoolToWidthConverter x:Key="BoolToWidthConverter" />
-            <!-- Converter para visibilidad basada en null (añadido) -->
-            <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
-            <local:NullToVisibilityConverter x:Key="NullToVisibilityInverted" Invert="True" />
         </Grid.Resources>
 
         <!-- COLUMNAS -->
@@ -302,12 +299,21 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
-                    <!-- Reemplazado el uso de Style.Triggers (no soportado) por binding a Visibility con convertidores -->
                     <Image Source="{Binding SelectedGame.Logo}"
            Stretch="Uniform"
            MaxWidth="300"
-           HorizontalAlignment="Left"
-           Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityConverter}}"/>
+           HorizontalAlignment="Left">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedGame.Logo}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
 
                     <!-- NOMBRE (solo si no hay logo) -->
                     <TextBlock Text="{Binding SelectedGame.Name}"
@@ -316,8 +322,17 @@
                        FontWeight="SemiBold"
                        Foreground="White"
                        TextWrapping="Wrap"
-                       MaxWidth="600"
-                       Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityInverted}}">  
+                       MaxWidth="600">  
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedGame.Logo}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
                     </TextBlock>
 
                     <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">

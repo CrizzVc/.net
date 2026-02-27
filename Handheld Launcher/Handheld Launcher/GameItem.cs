@@ -46,6 +46,38 @@ namespace Handheld_Launcher
             }
         }
 
+        // Nuevo: logotipo separado y su ruta (persistible)
+        public string LogoPath { get; set; }
+
+        private ImageSource _logo;
+        public ImageSource Logo
+        {
+            get => _logo;
+            set
+            {
+                if (_logo != value)
+                {
+                    _logo = value;
+                    OnPropertyChanged(nameof(Logo));
+                }
+            }
+        }
+
+        // Nueva descripción
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    OnPropertyChanged(nameof(Description));
+                }
+            }
+        }
+
         public ImageSource DisplayImage => IsLarge
             ? (BackgroundImage ?? Icon)
             : Icon;
@@ -68,7 +100,8 @@ namespace Handheld_Launcher
             }
         }
 
-        public GameItem(string name, string path, ImageSource icon, string iconPath = null, string backgroundPath = null)
+        // Constructor ampliado con parámetros opcionales para logo y descripción
+        public GameItem(string name, string path, ImageSource icon, string iconPath = null, string backgroundPath = null, string logoPath = null, ImageSource logo = null, string description = null)
         {
             Name = name;
             Path = path;
@@ -77,6 +110,10 @@ namespace Handheld_Launcher
             BackgroundPath = backgroundPath;
             BackgroundImage = null;
             IsLarge = false;
+
+            LogoPath = logoPath;
+            Logo = logo;
+            Description = description;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
