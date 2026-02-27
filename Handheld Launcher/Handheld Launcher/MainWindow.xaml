@@ -9,7 +9,6 @@
     mc:Ignorable="d"
     Title="Handheld Launcher">
 
-
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
@@ -20,7 +19,6 @@
 
         <Grid.Resources>
             <local:BoolToWidthConverter x:Key="BoolToWidthConverter" />
-            
         </Grid.Resources>
 
         <!-- COLUMNAS -->
@@ -55,7 +53,6 @@
                 </Button>
 
                 <Button Click="AddGame_Click" Width="50" Height="50" CornerRadius="10">
-
                     <FontIcon Glyph="&#xe948;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
@@ -74,23 +71,51 @@
 
         </Grid>
 
-        
-
-        <!-- BACKGROUND -->
-        <Image x:Name="BackgroundImage"
+        <!-- BACKGROUND: dos imágenes para crossfade -->
+        <Image x:Name="BackgroundImageA"
                Grid.Column="1"
                Stretch="UniformToFill"
-               Grid.RowSpan="3"/>
+               Grid.RowSpan="3"
+               Opacity="1"/>
 
-        <!-- GRADIENT OVERLAY -->
+        <Image x:Name="BackgroundImageB"
+               Grid.Column="1"
+               Stretch="UniformToFill"
+               Grid.RowSpan="3"
+               Opacity="0"/>
+
+        <!-- GRADIENT OVERLAY (más intenso para mayor presencia visual) -->
         <Grid Grid.Column="1" Grid.RowSpan="3">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <!-- Stops más oscuros y con mayor opacidad para mayor intensidad -->
                     <GradientStop Color="#00000000" Offset="0"/>
-                    <GradientStop Color="#00000000" Offset="0.6"/>
+                    <GradientStop Color="#22000000" Offset="0.35"/>
+                    <GradientStop Color="#66000000" Offset="0.65"/>
                     <GradientStop Color="#CC000000" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
+        </Grid>
+
+        <!-- SPLASH / STARTUP — estilo minimal, centrado tipo PS5 -->
+        <Grid x:Name="SplashOverlay"
+              Grid.Column="1"
+              Grid.RowSpan="3"
+              Background="Transparent"
+              Visibility="Visible"
+              IsHitTestVisible="False">
+            <!-- se muestra el mismo fondo (las imágenes A/B están debajo) -->
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14" Opacity="1">
+                    <!-- Minimal logo / marca -->
+                    <TextBlock Text="HANDHELD"
+                               FontSize="42"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Launcher" FontSize="20" Foreground="#DDFFFFFF" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="0">
@@ -102,6 +127,7 @@
               VerticalAlignment="Top"
               Margin="0,30,115,0"/>
         </Grid>
+
         <!-- CLOCK -->
         <TextBlock x:Name="TimeTextBlock"
                    Grid.Column="1"
@@ -124,7 +150,6 @@
                                FontWeight="Bold"
                                FontSize="28"
                                Foreground="White"/>
-                   
                 </StackPanel>
 
                 <ScrollViewer x:Name="CarouselScrollViewer"
@@ -160,15 +185,12 @@
 
             </StackPanel>
 
-            
-
             <!-- LIBRARY VIEW -->
             <Grid x:Name="LibraryView"
                   Visibility="Collapsed"
                   Height="1060"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   Padding="40">
-                  
 
                 <Grid.Background>
                     <SolidColorBrush Color="#AA000000" />

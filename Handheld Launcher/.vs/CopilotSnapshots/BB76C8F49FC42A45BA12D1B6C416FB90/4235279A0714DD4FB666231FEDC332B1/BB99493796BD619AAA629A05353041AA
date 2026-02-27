@@ -1,4 +1,4 @@
-using Microsoft.UI;
+Ôªøusing Microsoft.UI;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -34,7 +34,7 @@ namespace Handheld_Launcher
         // Todas las entradas
         public ObservableCollection<GameItem> Games { get; set; } = new ObservableCollection<GameItem>();
 
-        // ColecciÛn para el carrusel (ahora incluye todos, tambiÈn el primero)
+        // Colecci√≥n para el carrusel (ahora incluye todos, tambi√©n el primero)
         public ObservableCollection<GameItem> OtherGames { get; set; } = new ObservableCollection<GameItem>();
 
         private GameItem _featuredGame;
@@ -79,7 +79,7 @@ namespace Handheld_Launcher
         private DateTime _lastGamepadAction = DateTime.MinValue;
         private const int GamepadActionCooldownMs = 250;
 
-        // Guardamos el Ìndice seleccionado anterior para restablecer estados visuales
+        // Guardamos el √≠ndice seleccionado anterior para restablecer estados visuales
         private int _lastSelectedIndex = -1;
 
         // Background manager helpers
@@ -91,14 +91,14 @@ namespace Handheld_Launcher
         {
             this.InitializeComponent();
 
-            // En WinUI3, Window no tiene DataContext; asignamos al Grid raÌz (named in XAML)
+            // En WinUI3, Window no tiene DataContext; asignamos al Grid ra√≠z (named in XAML)
             RootGrid.DataContext = this;
 
             // Asegurar foco para recibir KeyDown
             RootGrid.Loaded += (s, e) =>
             {
                 RootGrid.Focus(FocusState.Programmatic);
-                // asegurar selecciÛn inicial
+                // asegurar selecci√≥n inicial
                 EnsureSelection();
             };
 
@@ -114,7 +114,7 @@ namespace Handheld_Launcher
             // Aplicar fondo guardado por el usuario (carga inicial)
             ApplyUserBackground(initial: true);
 
-            // Iniciar splash overlay y esconderlo tras breve delay/selecciÛn
+            // Iniciar splash overlay y esconderlo tras breve delay/selecci√≥n
             ShowSplashAndHideOnReady();
 
             // Inicializar timer de reloj
@@ -126,7 +126,7 @@ namespace Handheld_Launcher
             };
             timer.Start();
 
-            // Inicializar detecciÛn y polling de gamepads
+            // Inicializar detecci√≥n y polling de gamepads
             Gamepad.GamepadAdded += Gamepad_GamepadAdded;
             Gamepad.GamepadRemoved += Gamepad_GamepadRemoved;
             StartGamepadPolling();
@@ -134,10 +134,10 @@ namespace Handheld_Launcher
 
         private async void ShowSplashAndHideOnReady()
         {
-            // Splash visible por defecto (definido en XAML). Esperamos a que se carguen juegos y selecciÛn.
+            // Splash visible por defecto (definido en XAML). Esperamos a que se carguen juegos y selecci√≥n.
             // Si no hay juegos, ocultamos splash tras un par de segundos igualmente.
             int waited = 0;
-            while (waited < 3000) // m·ximo 3s
+            while (waited < 3000) // m√°ximo 3s
             {
                 if (OtherGames.Count > 0 && CarouselGrid != null && CarouselGrid.SelectedItem != null)
                 {
@@ -147,7 +147,7 @@ namespace Handheld_Launcher
                 waited += 150;
             }
 
-            // PequeÒa pausa para que el usuario vea la pantalla de inicio estilo PS5
+            // Peque√±a pausa para que el usuario vea la pantalla de inicio estilo PS5
             await Task.Delay(650);
 
             // Fade out splash
@@ -182,7 +182,7 @@ namespace Handheld_Launcher
 
         private void Gamepad_GamepadAdded(object sender, Gamepad e)
         {
-            // AÒadir al listado (asegurar no duplicados)
+            // A√±adir al listado (asegurar no duplicados)
             if (!_gamepads.Contains(e)) _gamepads.Add(e);
         }
 
@@ -207,12 +207,12 @@ namespace Handheld_Launcher
 
                     if (left && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        SelectPrevious(); // navegaciÛn por gamepad: no activamos efecto hover
+                        SelectPrevious(); // navegaci√≥n por gamepad: no activamos efecto hover
                         _lastGamepadAction = DateTime.Now;
                     }
                     else if (right && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        SelectNext(); // navegaciÛn por gamepad: no activamos efecto hover
+                        SelectNext(); // navegaci√≥n por gamepad: no activamos efecto hover
                         _lastGamepadAction = DateTime.Now;
                     }
                 }
@@ -231,9 +231,9 @@ namespace Handheld_Launcher
 
         private void Games_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // Cuando cambie la colecciÛn principal recalculamos featured y othergames
+            // Cuando cambie la colecci√≥n principal recalculamos featured y othergames
             UpdateFeaturedAndOthers();
-            // asegurar que siempre haya selecciÛn v·lida
+            // asegurar que siempre haya selecci√≥n v√°lida
             EnsureSelection();
         }
 
@@ -267,7 +267,7 @@ namespace Handheld_Launcher
             // Si ya es featured, no hacemos nada
             if (Games.Count > 0 && Games[0] == item) return;
 
-            // Mover el item al Ìndice 0
+            // Mover el item al √≠ndice 0
             if (Games.Contains(item))
             {
                 Games.Remove(item);
@@ -275,11 +275,11 @@ namespace Handheld_Launcher
             }
             else
             {
-                // Si no estaba en la lista por alguna razÛn, lo insertamos arriba
+                // Si no estaba en la lista por alguna raz√≥n, lo insertamos arriba
                 Games.Insert(0, item);
             }
 
-            // UpdateFeaturedAndOthers se ejecutar· por el evento CollectionChanged
+            // UpdateFeaturedAndOthers se ejecutar√° por el evento CollectionChanged
         }
 
         // Mostrar detalle (overlay)
@@ -327,7 +327,7 @@ namespace Handheld_Launcher
             }
             else
             {
-                // si no hay selecciÛn, aplicar fondo del usuario
+                // si no hay selecci√≥n, aplicar fondo del usuario
                 ApplyUserBackground();
             }
         }
@@ -364,7 +364,7 @@ namespace Handheld_Launcher
             }
         }
 
-        // Handlers para el men˙ de fondo (corregir referencias XAML)
+        // Handlers para el men√∫ de fondo (corregir referencias XAML)
         private void Solid_Click(object sender, RoutedEventArgs e)
         {
             SetSolidColor();
@@ -403,8 +403,8 @@ namespace Handheld_Launcher
             var dialog = new ContentDialog
             {
                 Title = SelectedGame.Name,
-                Content = "Selecciona una opciÛn",
-                PrimaryButtonText = "Cambiar car·tula",
+                Content = "Selecciona una opci√≥n",
+                PrimaryButtonText = "Cambiar car√°tula",
                 SecondaryButtonText = "Cambiar fondo",
                 CloseButtonText = "Eliminar del launcher",
                 DefaultButton = ContentDialogButton.Primary,
@@ -434,7 +434,7 @@ namespace Handheld_Launcher
             var confirmDialog = new ContentDialog
             {
                 Title = "Eliminar juego",
-                Content = $"øSeguro que deseas eliminar \"{SelectedGame.Name}\" del launcher?",
+                Content = $"¬øSeguro que deseas eliminar \"{SelectedGame.Name}\" del launcher?",
                 PrimaryButtonText = "Eliminar",
                 CloseButtonText = "Cancelar",
                 DefaultButton = ContentDialogButton.Close,
@@ -462,7 +462,7 @@ namespace Handheld_Launcher
             GuardarJuegoEnJson();
         }
 
-        // NavegaciÛn por selecciÛn enfocada y resaltada
+        // Navegaci√≥n por selecci√≥n enfocada y resaltada
         private bool IsSelectable(GameItem item) => item != null && !string.IsNullOrEmpty(item.Path);
 
         private int FindSelectableIndexFrom(int startIndex, int direction)
@@ -476,7 +476,7 @@ namespace Handheld_Launcher
             return -1;
         }
 
-        // Helper: asegura que el contenedor estÈ visible dentro del ScrollViewer externo
+        // Helper: asegura que el contenedor est√© visible dentro del ScrollViewer externo
         private void EnsureContainerVisible(GridViewItem container)
         {
             if (container == null || CarouselScrollViewer == null) return;
@@ -487,7 +487,7 @@ namespace Handheld_Launcher
                 container.UpdateLayout();
                 CarouselScrollViewer.UpdateLayout();
 
-                // Transformar la posiciÛn del contenedor respecto al ScrollViewer
+                // Transformar la posici√≥n del contenedor respecto al ScrollViewer
                 var transform = container.TransformToVisual(CarouselScrollViewer);
                 Point pos = transform.TransformPoint(new Point(0, 0));
 
@@ -525,7 +525,7 @@ namespace Handheld_Launcher
         {
             if (OtherGames.Count == 0 || CarouselGrid == null) return;
             index = Math.Max(0, Math.Min(OtherGames.Count - 1, index));
-            // si el Ìndice no es seleccionable, buscar el siguiente seleccionable hacia adelante
+            // si el √≠ndice no es seleccionable, buscar el siguiente seleccionable hacia adelante
             if (!IsSelectable(OtherGames[index]))
             {
                 int forward = FindSelectableIndexFrom(index + 1, 1);
@@ -536,14 +536,14 @@ namespace Handheld_Launcher
 
             var item = OtherGames[index];
 
-            // Guardamos el Ìndice previo para restablecer su estado visual
+            // Guardamos el √≠ndice previo para restablecer su estado visual
             int previousIndex = _lastSelectedIndex;
 
-            // SelecciÛn real en el Grid
+            // Selecci√≥n real en el Grid
             CarouselGrid.SelectedItem = item;
             CarouselGrid.UpdateLayout();
 
-            // Intentar obtener el contenedor; si no existe, forzamos UpdateLayout y lo obtenemos por Ìndice
+            // Intentar obtener el contenedor; si no existe, forzamos UpdateLayout y lo obtenemos por √≠ndice
             var container = CarouselGrid.ContainerFromItem(item) as GridViewItem;
             if (container == null)
             {
@@ -561,13 +561,13 @@ namespace Handheld_Launcher
                 try { CarouselGrid.ScrollIntoView(item, ScrollIntoViewAlignment.Leading); } catch { }
             }
 
-            // Solo dar foco si explicitamente queremos (evita activar PointerOver/hover en navegaciÛn por teclado/gamepad)
+            // Solo dar foco si explicitamente queremos (evita activar PointerOver/hover en navegaci√≥n por teclado/gamepad)
             if (setFocus)
             {
                 container?.Focus(FocusState.Programmatic);
             }
 
-            // Restablecer visual states del elemento previamente seleccionado (si est· realizado)
+            // Restablecer visual states del elemento previamente seleccionado (si est√° realizado)
             if (previousIndex >= 0 && previousIndex < OtherGames.Count)
             {
                 var prevItem = OtherGames[previousIndex];
@@ -578,7 +578,7 @@ namespace Handheld_Launcher
                     {
                         // Forzar estado 'Unselected' para que reduzca la escala
                         VisualStateManager.GoToState(prevContainer, "Unselected", true);
-                        // TambiÈn volver al estado normal del grupo CommonStates
+                        // Tambi√©n volver al estado normal del grupo CommonStates
                         VisualStateManager.GoToState(prevContainer, "Normal", true);
                     }
                 }
@@ -593,15 +593,15 @@ namespace Handheld_Launcher
                 }
                 else
                 {
-                    // NavegaciÛn por teclado/gamepad: usar zoom menor para evitar recorte
+                    // Navegaci√≥n por teclado/gamepad: usar zoom menor para evitar recorte
                     VisualStateManager.GoToState(container, "SelectedKeyboard", true);
                 }
             }
 
-            // Actualizamos el Ìndice seleccionado
+            // Actualizamos el √≠ndice seleccionado
             _lastSelectedIndex = index;
 
-            // Actualizar background din·mico si estamos en Home (no en Library)
+            // Actualizar background din√°mico si estamos en Home (no en Library)
             if (!_libraryMode)
             {
                 UpdateBackgroundForIndex(index, immediate: false);
@@ -639,8 +639,8 @@ namespace Handheld_Launcher
             int start = CarouselGrid.SelectedIndex;
             if (start < 0) start = 0; else start = start + 1;
             int idx = FindSelectableIndexFrom(start, 1);
-            // No hacer wrap: si no hay m·s, no hacemos nada
-            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegaciÛn por flechas/gamepad: no activar hover
+            // No hacer wrap: si no hay m√°s, no hacemos nada
+            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegaci√≥n por flechas/gamepad: no activar hover
         }
 
         private void SelectPrevious()
@@ -648,17 +648,17 @@ namespace Handheld_Launcher
             int start = CarouselGrid.SelectedIndex;
             if (start < 0) start = OtherGames.Count - 1; else start = start - 1;
             int idx = FindSelectableIndexFrom(start, -1);
-            // No hacer wrap: si no hay m·s hacia atr·s, no hacemos nada
-            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegaciÛn por flechas/gamepad: no activar hover
+            // No hacer wrap: si no hay m√°s hacia atr√°s, no hacemos nada
+            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegaci√≥n por flechas/gamepad: no activar hover
         }
 
         private void EnsureSelection()
         {
-            // Si no hay selecciÛn, seleccionar el primer juego seleccionable
+            // Si no hay selecci√≥n, seleccionar el primer juego seleccionable
             if (CarouselGrid == null) return;
             if (CarouselGrid.SelectedItem != null)
             {
-                // actualizamos _lastSelectedIndex para reflejar la selecciÛn actual
+                // actualizamos _lastSelectedIndex para reflejar la selecci√≥n actual
                 var cur = CarouselGrid.SelectedItem as GameItem;
                 _lastSelectedIndex = cur != null ? OtherGames.IndexOf(cur) : -1;
                 return;
@@ -684,7 +684,7 @@ namespace Handheld_Launcher
             var clicked = e.ClickedItem as GameItem;
             if (clicked != null)
             {
-                // seleccionar y enfocar el item clicado usando la versiÛn que sÌ da foco
+                // seleccionar y enfocar el item clicado usando la versi√≥n que s√≠ da foco
                 int clickedIndex = OtherGames.IndexOf(clicked);
                 if (clickedIndex >= 0) SelectIndex(clickedIndex, setFocus: true);
 
@@ -730,7 +730,7 @@ namespace Handheld_Launcher
             }
         }
 
-        // Handler para cambiar la car·tula desde el botÛn especÌfico (ha sido mantenido para compatibilidad)
+        // Handler para cambiar la car√°tula desde el bot√≥n espec√≠fico (ha sido mantenido para compatibilidad)
         private async void ChangeCover_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
@@ -740,7 +740,7 @@ namespace Handheld_Launcher
             await PickAndSetIconAsync(game);
         }
 
-        // BotÛn de tres puntos (ahora usado en el overlay). DataContext apunta al GameItem (o tomar· SelectedGame)
+        // Bot√≥n de tres puntos (ahora usado en el overlay). DataContext apunta al GameItem (o tomar√° SelectedGame)
         private async void EditGame_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
@@ -749,8 +749,8 @@ namespace Handheld_Launcher
 
             var dialog = new ContentDialog
             {
-                Title = "Editar im·genes",
-                PrimaryButtonText = "Cambiar car·tula",
+                Title = "Editar im√°genes",
+                PrimaryButtonText = "Cambiar car√°tula",
                 SecondaryButtonText = "Cambiar fondo",
                 CloseButtonText = "Cancelar",
                 XamlRoot = RootGrid.XamlRoot
@@ -953,12 +953,12 @@ namespace Handheld_Launcher
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
-                SelectPrevious(); // navegaciÛn por teclado: no activar hover
+                SelectPrevious(); // navegaci√≥n por teclado: no activar hover
                 e.Handled = true;
             }
             else if (e.Key == Windows.System.VirtualKey.Right)
             {
-                SelectNext(); // navegaciÛn por teclado: no activar hover
+                SelectNext(); // navegaci√≥n por teclado: no activar hover
                 e.Handled = true;
             }
             else if (e.Key == Windows.System.VirtualKey.Escape)
@@ -977,7 +977,7 @@ namespace Handheld_Launcher
             DetailOverlay.IsHitTestVisible = false;
         }
 
-        // --- Background management: crossfades y aplicaciÛn de fondo del usuario ---
+        // --- Background management: crossfades y aplicaci√≥n de fondo del usuario ---
 
         private void ApplyUserBackground(bool initial = false)
         {
@@ -1015,7 +1015,7 @@ namespace Handheld_Launcher
                         new GradientStop { Color = Color.FromArgb(255, 8, 8, 18), Offset = 1 }
                     }
                 };
-                // ocultar im·genes
+                // ocultar im√°genes
                 BackgroundImageA.Source = null;
                 BackgroundImageA.Opacity = 0;
                 BackgroundImageB.Source = null;
@@ -1034,7 +1034,7 @@ namespace Handheld_Launcher
 
         private void SetSolidColor()
         {
-            // Oculta im·genes y aplica color sÛlido
+            // Oculta im√°genes y aplica color s√≥lido
             BackgroundImageA.Source = null;
             BackgroundImageA.Opacity = 0;
             BackgroundImageB.Source = null;
@@ -1046,7 +1046,7 @@ namespace Handheld_Launcher
 
         private void SetGradient()
         {
-            // Gradiente m·s intenso para mayor presencia
+            // Gradiente m√°s intenso para mayor presencia
             var brush = new LinearGradientBrush();
             brush.StartPoint = new Windows.Foundation.Point(0, 0);
             brush.EndPoint = new Windows.Foundation.Point(0, 1);
@@ -1063,7 +1063,7 @@ namespace Handheld_Launcher
                 Offset = 1
             });
 
-            // Ocultar im·genes y usar RootGrid background
+            // Ocultar im√°genes y usar RootGrid background
             BackgroundImageA.Source = null;
             BackgroundImageA.Opacity = 0;
             BackgroundImageB.Source = null;
@@ -1109,7 +1109,7 @@ namespace Handheld_Launcher
 
                 if (immediate)
                 {
-                    // Sin animaciÛn: set next fully visible
+                    // Sin animaci√≥n: set next fully visible
                     nextImage.Opacity = 1;
                     currImage.Opacity = 0;
                     _bgAIsActive = !_bgAIsActive;

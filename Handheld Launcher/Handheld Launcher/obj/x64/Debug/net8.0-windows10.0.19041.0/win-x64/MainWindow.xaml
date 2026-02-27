@@ -9,7 +9,6 @@
     mc:Ignorable="d"
     Title="Handheld Launcher">
 
-
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
@@ -20,7 +19,6 @@
 
         <Grid.Resources>
             <local:BoolToWidthConverter x:Key="BoolToWidthConverter" />
-            
         </Grid.Resources>
 
         <!-- COLUMNAS -->
@@ -46,25 +44,24 @@
                         HorizontalAlignment="Center"
                         Spacing="25">
 
-                <Button x:ConnectionId='23'                    Width="50" Height="50" CornerRadius="10">
+                <Button x:ConnectionId='25'                    Width="50" Height="50" CornerRadius="10">
                     <FontIcon Glyph="&#xE80F;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
-                <Button x:ConnectionId='24'                       Width="50" Height="50" CornerRadius="10">
+                <Button x:ConnectionId='26'                       Width="50" Height="50" CornerRadius="10">
                     <FontIcon Glyph="&#xe74c;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
-                <Button x:ConnectionId='25'                       Width="50" Height="50" CornerRadius="10">
-
+                <Button x:ConnectionId='27'                       Width="50" Height="50" CornerRadius="10">
                     <FontIcon Glyph="&#xe948;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
                 <Button Width="50" Height="50" CornerRadius="10">
                     <Button.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem x:ConnectionId='26' Text="Color sólido"                    />
-                            <MenuFlyoutItem x:ConnectionId='27' Text="Degradado"                       />
-                            <MenuFlyoutItem x:ConnectionId='28' Text="Imagen"                    />
+                            <MenuFlyoutItem x:ConnectionId='28' Text="Color sólido"                    />
+                            <MenuFlyoutItem x:ConnectionId='29' Text="Degradado"                       />
+                            <MenuFlyoutItem x:ConnectionId='30' Text="Imagen"                    />
                         </MenuFlyout>
                     </Button.Flyout>
                     <FontIcon Glyph="&#xe713;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
@@ -74,23 +71,51 @@
 
         </Grid>
 
-        
-
-        <!-- BACKGROUND -->
-        <Image x:ConnectionId='4' x:Name="BackgroundImage"
+        <!-- BACKGROUND: dos imágenes para crossfade -->
+        <Image x:ConnectionId='4' x:Name="BackgroundImageA"
                Grid.Column="1"
                Stretch="UniformToFill"
-               Grid.RowSpan="3"/>
+               Grid.RowSpan="3"
+               Opacity="1"/>
 
-        <!-- GRADIENT OVERLAY -->
+        <Image x:ConnectionId='5' x:Name="BackgroundImageB"
+               Grid.Column="1"
+               Stretch="UniformToFill"
+               Grid.RowSpan="3"
+               Opacity="0"/>
+
+        <!-- GRADIENT OVERLAY (más intenso para mayor presencia visual) -->
         <Grid Grid.Column="1" Grid.RowSpan="3">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <!-- Stops más oscuros y con mayor opacidad para mayor intensidad -->
                     <GradientStop Color="#00000000" Offset="0"/>
-                    <GradientStop Color="#00000000" Offset="0.6"/>
+                    <GradientStop Color="#22000000" Offset="0.35"/>
+                    <GradientStop Color="#66000000" Offset="0.65"/>
                     <GradientStop Color="#CC000000" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
+        </Grid>
+
+        <!-- SPLASH / STARTUP — estilo minimal, centrado tipo PS5 -->
+        <Grid x:ConnectionId='6' x:Name="SplashOverlay"
+              Grid.Column="1"
+              Grid.RowSpan="3"
+              Background="Transparent"
+              Visibility="Visible"
+              IsHitTestVisible="False">
+            <!-- se muestra el mismo fondo (las imágenes A/B están debajo) -->
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="14" Opacity="1">
+                    <!-- Minimal logo / marca -->
+                    <TextBlock Text="HANDHELD"
+                               FontSize="42"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Launcher" FontSize="20" Foreground="#DDFFFFFF" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="0">
@@ -102,8 +127,9 @@
               VerticalAlignment="Top"
               Margin="0,30,115,0"/>
         </Grid>
+
         <!-- CLOCK -->
-        <TextBlock x:ConnectionId='5' x:Name="TimeTextBlock"
+        <TextBlock x:ConnectionId='7' x:Name="TimeTextBlock"
                    Grid.Column="1"
                    Grid.Row="0"
                    HorizontalAlignment="Right"
@@ -117,22 +143,21 @@
         <Grid Grid.Column="1" Grid.Row="1">
 
             <!-- HOME VIEW -->
-            <StackPanel x:ConnectionId='6' x:Name="HomeView" Padding="40,0">
+            <StackPanel x:ConnectionId='8' x:Name="HomeView" Padding="40,0">
 
                 <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,0,0,20">
                     <TextBlock Text="MIS JUEGOS"
                                FontWeight="Bold"
                                FontSize="28"
                                Foreground="White"/>
-                   
                 </StackPanel>
 
-                <ScrollViewer x:ConnectionId='17' x:Name="CarouselScrollViewer"
+                <ScrollViewer x:ConnectionId='19' x:Name="CarouselScrollViewer"
                               HorizontalScrollMode="Enabled"
                               HorizontalScrollBarVisibility="Hidden"
                               VerticalScrollMode="Disabled">
 
-                    <GridView x:ConnectionId='18' x:Name="CarouselGrid"
+                    <GridView x:ConnectionId='20' x:Name="CarouselGrid"
                                                                             
                               IsItemClickEnabled="True"
                                                                 
@@ -146,11 +171,11 @@
 
                         <GridView.ItemTemplate>
                             <DataTemplate                            >
-                                <StackPanel x:ConnectionId='20' Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14">
+                                <StackPanel x:ConnectionId='22' Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}" Margin="14">
                                     <Border Height="260" CornerRadius="12" Background="#222" Width="{Binding IsLarge, Converter={StaticResource BoolToWidthConverter}}">
-                                        <Image x:ConnectionId='22'                                Stretch="UniformToFill"/>
+                                        <Image x:ConnectionId='24'                                Stretch="UniformToFill"/>
                                     </Border>
-                                    <TextBlock x:ConnectionId='21'                      Foreground="White" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock x:ConnectionId='23'                      Foreground="White" Margin="0,10,0,0" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridView.ItemTemplate>
@@ -160,15 +185,12 @@
 
             </StackPanel>
 
-            
-
             <!-- LIBRARY VIEW -->
-            <Grid x:ConnectionId='7' x:Name="LibraryView"
+            <Grid x:ConnectionId='9' x:Name="LibraryView"
                   Visibility="Collapsed"
                   Height="1060"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   Padding="40">
-                  
 
                 <Grid.Background>
                     <SolidColorBrush Color="#AA000000" />
@@ -182,7 +204,7 @@
                                Foreground="White"
                                Margin="0,0,0,30"/>
 
-                    <GridView x:ConnectionId='12' x:Name="LibraryGrid"
+                    <GridView x:ConnectionId='14' x:Name="LibraryGrid"
                                                                             
                               IsItemClickEnabled="True"
                                                                
@@ -197,14 +219,14 @@
 
                         <GridView.ItemTemplate>
                             <DataTemplate                            >
-                                <StackPanel x:ConnectionId='14' Width="200" Margin="12">
+                                <StackPanel x:ConnectionId='16' Width="200" Margin="12">
                                     <Border Height="260"
                                             CornerRadius="12"
                                             Background="#222">
-                                        <Image x:ConnectionId='16'                               
+                                        <Image x:ConnectionId='18'                               
                                                Stretch="UniformToFill"/>
                                     </Border>
-                                    <TextBlock x:ConnectionId='15'                     
+                                    <TextBlock x:ConnectionId='17'                     
                                                Foreground="White"
                                                Margin="0,10,0,0"
                                                TextWrapping="Wrap"/>
@@ -217,7 +239,7 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:ConnectionId='8' x:Name="DetailOverlay" Grid.RowSpan="3" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
+            <Grid x:ConnectionId='10' x:Name="DetailOverlay" Grid.RowSpan="3" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
                 <Image Source="{Binding SelectedGame.BackgroundOrIcon}" Stretch="UniformToFill" Opacity="0.35"/>
                 <Rectangle>
                     <Rectangle.Fill>
@@ -230,9 +252,9 @@
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
                     <TextBlock Text="{Binding SelectedGame.Name}" FontSize="72" FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans" FontWeight="SemiBold" Foreground="White" TextWrapping="Wrap" />
                     <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
-                        <Button x:ConnectionId='9' Content="▶ PLAY"                                Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
-                        <Button x:ConnectionId='10' Content="Cerrar"                          Width="120" Height="48" />
-                        <Button x:ConnectionId='11' Content="⋯" Width="48" Height="48" FontSize="22"                              />
+                        <Button x:ConnectionId='11' Content="▶ PLAY"                                Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
+                        <Button x:ConnectionId='12' Content="Cerrar"                          Width="120" Height="48" />
+                        <Button x:ConnectionId='13' Content="⋯" Width="48" Height="48" FontSize="22"                              />
                     </StackPanel>
                 </StackPanel>
             </Grid>
