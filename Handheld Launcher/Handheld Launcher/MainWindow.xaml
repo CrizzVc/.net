@@ -163,6 +163,18 @@
                               ItemClick="CarouselGrid_ItemClick"
                               SelectionMode="Single">
 
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <!-- Desactivar el foco visual del sistema (quita el borde azul) -->
+                                <Setter Property="UIElement.UseSystemFocusVisuals" Value="False"/>
+                                <!-- Asegurar que no se pinte ningún trazado de foco -->
+                                <Setter Property="FrameworkElement.FocusVisualPrimaryBrush" Value="Transparent"/>
+                                <Setter Property="FrameworkElement.FocusVisualSecondaryBrush" Value="Transparent"/>
+                                <Setter Property="FrameworkElement.FocusVisualPrimaryThickness" Value="0"/>
+                                <Setter Property="FrameworkElement.FocusVisualSecondaryThickness" Value="0"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
@@ -209,6 +221,16 @@
                               IsItemClickEnabled="True"
                               ItemClick="LibraryGrid_ItemClick"
                               SelectionMode="Single">
+
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="UIElement.UseSystemFocusVisuals" Value="False"/>
+                                <Setter Property="FrameworkElement.FocusVisualPrimaryBrush" Value="Transparent"/>
+                                <Setter Property="FrameworkElement.FocusVisualSecondaryBrush" Value="Transparent"/>
+                                <Setter Property="FrameworkElement.FocusVisualPrimaryThickness" Value="0"/>
+                                <Setter Property="FrameworkElement.FocusVisualSecondaryThickness" Value="0"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
 
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>

@@ -204,15 +204,27 @@ namespace Handheld_Launcher
                     // DPad o stick horizontal para navegar
                     bool left = (reading.Buttons & GamepadButtons.DPadLeft) == GamepadButtons.DPadLeft || reading.LeftThumbstickX < -0.6;
                     bool right = (reading.Buttons & GamepadButtons.DPadRight) == GamepadButtons.DPadRight || reading.LeftThumbstickX > 0.6;
+                    bool aButton = (reading.Buttons & GamepadButtons.A) == GamepadButtons.A;
 
                     if (left && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        SelectPrevious(); // navegación por gamepad: no activamos efecto hover
+                        SelectPrevious(); // navegación por gamepad: no activamos efecto hover (usa SelectedKeyboard)
                         _lastGamepadAction = DateTime.Now;
                     }
                     else if (right && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        SelectNext(); // navegación por gamepad: no activamos efecto hover
+                        SelectNext(); // navegación por gamepad: no activamos efecto hover (usa SelectedKeyboard)
+                        _lastGamepadAction = DateTime.Now;
+                    }
+                    else if (aButton && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
+                    {
+                        // botón A -> abrir vista detalle del elemento seleccionado
+                        var selected = CarouselGrid?.SelectedItem as GameItem;
+                        if (selected != null)
+                        {
+                            MoveToFeatured(selected);
+                            ShowDetail(selected);
+                        }
                         _lastGamepadAction = DateTime.Now;
                     }
                 }
@@ -567,7 +579,7 @@ namespace Handheld_Launcher
                 container?.Focus(FocusState.Programmatic);
             }
 
-            // Restablecer visual states del elemento previamente seleccionado (si está realizado)
+            // Restablecer visual states y transform del elemento previamente seleccionado (si está realizado)
             if (previousIndex >= 0 && previousIndex < OtherGames.Count)
             {
                 var prevItem = OtherGames[previousIndex];
@@ -580,22 +592,38 @@ namespace Handheld_Launcher
                         VisualStateManager.GoToState(prevContainer, "Unselected", true);
                         // También volver al estado normal del grupo CommonStates
                         VisualStateManager.GoToState(prevContainer, "Normal", true);
+
+                        // Restaurar escala a 1.0 si se había aplicado por navegación con teclado/gamepad
+                        try
+                        {
+                            prevContainer.RenderTransformOrigin = new Windows.Foundation.Point(0.5, 0.5);
+                            prevContainer.RenderTransform = new ScaleTransform { ScaleX = 1.0, ScaleY = 1.0 };
+                        }
+                        catch { }
                     }
                 }
             }
 
-            // Aplicar estado 'Selected' o 'SelectedKeyboard' al nuevo contenedor
+            // Aplicar estado/escala al nuevo contenedor
             if (container != null)
             {
-                if (setFocus)
+                try
                 {
-                    VisualStateManager.GoToState(container, "Selected", true);
+                    container.RenderTransformOrigin = new Windows.Foundation.Point(0.5, 0.5);
+                    if (setFocus)
+                    {
+                        // navegación por pointer/click: no escalado extra
+                        container.RenderTransform = new ScaleTransform { ScaleX = 1.0, ScaleY = 1.0 };
+                        VisualStateManager.GoToState(container, "Selected", true);
+                    }
+                    else
+                    {
+                        // Navegación por teclado/gamepad: aplicar scale 1.05
+                        container.RenderTransform = new ScaleTransform { ScaleX = 1.05, ScaleY = 1.05 };
+                        VisualStateManager.GoToState(container, "SelectedKeyboard", true);
+                    }
                 }
-                else
-                {
-                    // Navegación por teclado/gamepad: usar zoom menor para evitar recorte
-                    VisualStateManager.GoToState(container, "SelectedKeyboard", true);
-                }
+                catch { /* proteger contra contenedores no listos */ }
             }
 
             // Actualizamos el índice seleccionado
@@ -966,6 +994,18 @@ namespace Handheld_Launcher
                 if (DetailOverlay != null && DetailOverlay.Visibility == Visibility.Visible)
                 {
                     HideDetail();
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                // Al pulsar Enter, abrir la vista de detalle del juego seleccionado
+                var selected = CarouselGrid?.SelectedItem as GameItem;
+                if (selected != null)
+                {
+                    // Alineamos comportamiento con click: mover a featured y mostrar detalle
+                    MoveToFeatured(selected);
+                    ShowDetail(selected);
                     e.Handled = true;
                 }
             }
