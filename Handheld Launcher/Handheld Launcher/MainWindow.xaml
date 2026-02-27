@@ -118,26 +118,53 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="0">
-            <FontIcon Glyph="&#xE856;"
-              FontFamily="Segoe MDL2 Assets"
-              FontSize="35"
-              Foreground="White"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Top"
-              Margin="0,30,115,0"/>
-        </Grid>
+        <!-- STATUS (red + bateria + reloj) -->
+        <StackPanel Grid.Column="1" Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,30,40,0"
+                    Spacing="12"
+                    x:Name="StatusPanel">
 
-        <!-- CLOCK -->
-        <TextBlock x:Name="TimeTextBlock"
-                   Grid.Column="1"
-                   Grid.Row="0"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Top"
-                   Margin="0,30,40,0"
-                   FontSize="26"
-                   FontWeight="SemiBold"
-                   Foreground="White"/>
+            <!-- Network: icon + (opcional) texto -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+                <FontIcon x:Name="NetworkIcon"
+                          FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE701;"
+                          FontSize="20"
+                          Foreground="LightGray"
+                          VerticalAlignment="Center"/>
+                <!-- opcional etiqueta corta -->
+                <TextBlock x:Name="NetworkText"
+                           Text=""
+                           Foreground="White"
+                           FontSize="14"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Battery: icon + porcentaje -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+                <FontIcon x:Name="BatteryIcon"
+                          FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xEB10;"
+                          FontSize="20"
+                          Foreground="LightGray"
+                          VerticalAlignment="Center"/>
+                <TextBlock x:Name="BatteryPercent"
+                           Text=""
+                           Foreground="White"
+                           FontSize="14"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Reloj -->
+            <TextBlock x:Name="TimeTextBlock"
+                       FontSize="26"
+                       FontWeight="SemiBold"
+                       Foreground="White"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
 
         <!-- CONTENEDOR DE VISTAS -->
         <Grid Grid.Column="1" Grid.Row="1">

@@ -44,24 +44,24 @@
                         HorizontalAlignment="Center"
                         Spacing="25">
 
-                <Button x:ConnectionId='25'                    Width="50" Height="50" CornerRadius="10">
+                <Button x:ConnectionId='30'                    Width="50" Height="50" CornerRadius="10">
                     <FontIcon Glyph="&#xE80F;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
-                <Button x:ConnectionId='26'                       Width="50" Height="50" CornerRadius="10">
+                <Button x:ConnectionId='31'                       Width="50" Height="50" CornerRadius="10">
                     <FontIcon Glyph="&#xe74c;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
-                <Button x:ConnectionId='27'                       Width="50" Height="50" CornerRadius="10">
+                <Button x:ConnectionId='32'                       Width="50" Height="50" CornerRadius="10">
                     <FontIcon Glyph="&#xe948;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
                 </Button>
 
                 <Button Width="50" Height="50" CornerRadius="10">
                     <Button.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem x:ConnectionId='28' Text="Color sólido"                    />
-                            <MenuFlyoutItem x:ConnectionId='29' Text="Degradado"                       />
-                            <MenuFlyoutItem x:ConnectionId='30' Text="Imagen"                    />
+                            <MenuFlyoutItem x:ConnectionId='33' Text="Color sólido"                    />
+                            <MenuFlyoutItem x:ConnectionId='34' Text="Degradado"                       />
+                            <MenuFlyoutItem x:ConnectionId='35' Text="Imagen"                    />
                         </MenuFlyout>
                     </Button.Flyout>
                     <FontIcon Glyph="&#xe713;" FontFamily="Segoe MDL2 Assets" FontSize="24"/>
@@ -118,26 +118,53 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="0">
-            <FontIcon Glyph="&#xE856;"
-              FontFamily="Segoe MDL2 Assets"
-              FontSize="35"
-              Foreground="White"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Top"
-              Margin="0,30,115,0"/>
-        </Grid>
+        <!-- STATUS (red + bateria + reloj) -->
+        <StackPanel x:ConnectionId='7' Grid.Column="1" Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,30,40,0"
+                    Spacing="12"
+                    x:Name="StatusPanel">
 
-        <!-- CLOCK -->
-        <TextBlock x:ConnectionId='7' x:Name="TimeTextBlock"
-                   Grid.Column="1"
-                   Grid.Row="0"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Top"
-                   Margin="0,30,40,0"
-                   FontSize="26"
-                   FontWeight="SemiBold"
-                   Foreground="White"/>
+            <!-- Network: icon + (opcional) texto -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+                <FontIcon x:ConnectionId='28' x:Name="NetworkIcon"
+                          FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE701;"
+                          FontSize="20"
+                          Foreground="LightGray"
+                          VerticalAlignment="Center"/>
+                <!-- opcional etiqueta corta -->
+                <TextBlock x:ConnectionId='29' x:Name="NetworkText"
+                           Text=""
+                           Foreground="White"
+                           FontSize="14"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Battery: icon + porcentaje -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+                <FontIcon x:ConnectionId='26' x:Name="BatteryIcon"
+                          FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xEB10;"
+                          FontSize="20"
+                          Foreground="LightGray"
+                          VerticalAlignment="Center"/>
+                <TextBlock x:ConnectionId='27' x:Name="BatteryPercent"
+                           Text=""
+                           Foreground="White"
+                           FontSize="14"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Reloj -->
+            <TextBlock x:ConnectionId='25' x:Name="TimeTextBlock"
+                       FontSize="26"
+                       FontWeight="SemiBold"
+                       Foreground="White"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
 
         <!-- CONTENEDOR DE VISTAS -->
         <Grid Grid.Column="1" Grid.Row="1">

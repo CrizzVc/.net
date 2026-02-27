@@ -1,4 +1,4 @@
-using Microsoft.UI;
+ï»¿using Microsoft.UI;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -27,6 +27,11 @@ using Windows.Storage.Streams;
 using Windows.UI;
 using WinRT.Interop;
 
+// Nuevos using para baterÃ­a y red
+using Windows.System.Power;
+using Windows.Networking.Connectivity;
+using Windows.Devices.Power;
+
 namespace Handheld_Launcher
 {
     public sealed partial class MainWindow : Microsoft.UI.Xaml.Window, INotifyPropertyChanged
@@ -34,7 +39,7 @@ namespace Handheld_Launcher
         // Todas las entradas
         public ObservableCollection<GameItem> Games { get; set; } = new ObservableCollection<GameItem>();
 
-        // Colección para el carrusel (ahora incluye todos, también el primero)
+        // Colecciï¿½n para el carrusel (ahora incluye todos, tambiï¿½n el primero)
         public ObservableCollection<GameItem> OtherGames { get; set; } = new ObservableCollection<GameItem>();
 
         private GameItem _featuredGame;
@@ -79,7 +84,7 @@ namespace Handheld_Launcher
         private DateTime _lastGamepadAction = DateTime.MinValue;
         private const int GamepadActionCooldownMs = 250;
 
-        // Guardamos el índice seleccionado anterior para restablecer estados visuales
+        // Guardamos el ï¿½ndice seleccionado anterior para restablecer estados visuales
         private int _lastSelectedIndex = -1;
 
         // Background manager helpers
@@ -87,18 +92,21 @@ namespace Handheld_Launcher
         private bool _libraryMode = false; // when true, background stays fixed to user choice
         private const int CrossfadeMs = 600;
 
+        // NUEVO: timer para estado baterÃ­a/red
+        private DispatcherTimer _statusTimer;
+
         public MainWindow()
         {
             this.InitializeComponent();
 
-            // En WinUI3, Window no tiene DataContext; asignamos al Grid raíz (named in XAML)
+            // En WinUI3, Window no tiene DataContext; asignamos al Grid raï¿½z (named in XAML)
             RootGrid.DataContext = this;
 
             // Asegurar foco para recibir KeyDown
             RootGrid.Loaded += (s, e) =>
             {
                 RootGrid.Focus(FocusState.Programmatic);
-                // asegurar selección inicial
+                // asegurar selecciï¿½n inicial
                 EnsureSelection();
             };
 
@@ -114,7 +122,7 @@ namespace Handheld_Launcher
             // Aplicar fondo guardado por el usuario (carga inicial)
             ApplyUserBackground(initial: true);
 
-            // Iniciar splash overlay y esconderlo tras breve delay/selección
+            // Iniciar splash overlay y esconderlo tras breve delay/selecciï¿½n
             ShowSplashAndHideOnReady();
 
             // Inicializar timer de reloj
@@ -126,18 +134,174 @@ namespace Handheld_Launcher
             };
             timer.Start();
 
-            // Inicializar detección y polling de gamepads
+            // Inicializar detecciÃ³n y polling de gamepads
             Gamepad.GamepadAdded += Gamepad_GamepadAdded;
             Gamepad.GamepadRemoved += Gamepad_GamepadRemoved;
             StartGamepadPolling();
+
+            // Inicializar timer de estado (baterÃ­a / red)
+            _statusTimer = new DispatcherTimer();
+            _statusTimer.Interval = TimeSpan.FromSeconds(5);
+            _statusTimer.Tick += (s, e) => UpdatePowerAndNetworkStatus();
+            _statusTimer.Start();
+
+            // Llamada inicial rÃ¡pida
+            UpdatePowerAndNetworkStatus();
+
+            // Suscribir cambio de estado de red (opcional)
+            try
+            {
+                NetworkInformation.NetworkStatusChanged += (obj) =>
+                {
+                    // se ejecuta en hilo de sistema; postear al dispatcher UI
+                    _ = DispatcherQueue.TryEnqueue(() => UpdatePowerAndNetworkStatus());
+                };
+            }
+            catch
+            {
+                // ignorar si no disponible
+            }
+        }
+
+        // Nuevo mÃ©todo que actualiza baterÃ­a y red
+        private void UpdatePowerAndNetworkStatus()
+        {
+            // BATERÃA: intentamos obtener porcentaje y si estÃ¡ cargando
+            try
+            {
+                // Intento directo con PowerManager (suele ser el mÃ¡s sencillo)
+                int percent = -1;
+                bool hasPercent = false;
+                bool isCharging = false;
+
+                try
+                {
+                    // RemainingChargePercent puede devolver -1 si no hay baterÃ­a
+                    percent = PowerManager.RemainingChargePercent;
+                    if (percent >= 0) hasPercent = true;
+                }
+                catch { /* no disponible */ }
+
+                try
+                {
+                    var ps = PowerManager.PowerSupplyStatus;
+                    // PowerSupplyStatus.Adequate indica que la alimentaciÃ³n externa estÃ¡ disponible
+                    isCharging = (ps == PowerSupplyStatus.Adequate);
+                }
+                catch { /* fallback */ }
+
+                // Fallback con Battery API si falta info
+                if (!hasPercent)
+                {
+                    try
+                    {
+                        var report = Battery.AggregateBattery.GetReport();
+                        var rem = report.RemainingCapacityInMilliwattHours;
+                        var full = report.FullChargeCapacityInMilliwattHours;
+                        var chargeRate = report.ChargeRateInMilliwatts;
+                        if (rem.HasValue && full.HasValue && full.Value > 0)
+                        {
+                            percent = (int)Math.Round((rem.Value * 100.0) / full.Value);
+                            hasPercent = true;
+                        }
+                        // chargeRate > 0 normalmente indica que estÃ¡ cargando
+                        if (chargeRate.HasValue)
+                        {
+                            isCharging = chargeRate.Value > 0;
+                        }
+                    }
+                    catch { /* ignorar */ }
+                }
+
+                // Actualizar UI (dispatcher)
+                _ = DispatcherQueue.TryEnqueue(() =>
+                {
+                    try
+                    {
+                        if (hasPercent)
+                        {
+                            BatteryPercent.Text = $"{percent}%";
+                        }
+                        else
+                        {
+                            BatteryPercent.Text = ""; // ocultar si no hay info
+                        }
+
+                        // Cambiar icon/colores segÃºn estado de carga / nivel
+                        if (isCharging)
+                        {
+                            // glyph de "charging" (puede ajustarse)
+                            BatteryIcon.Glyph = "\uEBA3"; // glyph aproximado para carga
+                            BatteryIcon.Foreground = new SolidColorBrush(Colors.LightGreen);
+                        }
+                        else
+                        {
+                            BatteryIcon.Glyph = "\uEB10"; // glyph aproximado para baterÃ­a
+                            // color segÃºn umbral
+                            if (hasPercent && percent <= 20)
+                                BatteryIcon.Foreground = new SolidColorBrush(Colors.OrangeRed);
+                            else
+                                BatteryIcon.Foreground = new SolidColorBrush(Colors.LightGray);
+                        }
+                    }
+                    catch { /* proteger UI */ }
+                });
+            }
+            catch
+            {
+                // ignorar errores de lectura de baterÃ­a
+            }
+
+            // RED: comprobamos si hay acceso a internet
+            try
+            {
+                bool haveInternet = false;
+                string profileName = string.Empty;
+
+                try
+                {
+                    var profile = NetworkInformation.GetInternetConnectionProfile();
+                    if (profile != null)
+                    {
+                        var level = profile.GetNetworkConnectivityLevel();
+                        haveInternet = level == NetworkConnectivityLevel.InternetAccess || level == NetworkConnectivityLevel.ConstrainedInternetAccess;
+                        profileName = profile.ProfileName ?? string.Empty;
+                    }
+                }
+                catch { /* ignore */ }
+
+                _ = DispatcherQueue.TryEnqueue(() =>
+                {
+                    try
+                    {
+                        if (haveInternet)
+                        {
+                            NetworkIcon.Glyph = "\uE701"; // glyph Wi-Fi (aprox.)
+                            NetworkIcon.Foreground = new SolidColorBrush(Colors.LightGreen);
+                            NetworkText.Text = ""; // opcional: mostrar nombre o dejar vacÃ­o
+                        }
+                        else
+                        {
+                            NetworkIcon.Glyph = "\uE8A7"; // glyph desconectado / error (aprox.)
+                            NetworkIcon.Foreground = new SolidColorBrush(Colors.OrangeRed);
+                            NetworkText.Text = ""; // opcional: "offline"
+                        }
+                    }
+                    catch { }
+                });
+            }
+            catch
+            {
+                // ignorar errores de red
+            }
         }
 
         private async void ShowSplashAndHideOnReady()
         {
-            // Splash visible por defecto (definido en XAML). Esperamos a que se carguen juegos y selección.
+            // Splash visible por defecto (definido en XAML). Esperamos a que se carguen juegos y selecciï¿½n.
             // Si no hay juegos, ocultamos splash tras un par de segundos igualmente.
             int waited = 0;
-            while (waited < 3000) // máximo 3s
+            while (waited < 3000) // mï¿½ximo 3s
             {
                 if (OtherGames.Count > 0 && CarouselGrid != null && CarouselGrid.SelectedItem != null)
                 {
@@ -147,7 +311,7 @@ namespace Handheld_Launcher
                 waited += 150;
             }
 
-            // Pequeña pausa para que el usuario vea la pantalla de inicio estilo PS5
+            // Pequeï¿½a pausa para que el usuario vea la pantalla de inicio estilo PS5
             await Task.Delay(650);
 
             // Fade out splash
@@ -182,7 +346,7 @@ namespace Handheld_Launcher
 
         private void Gamepad_GamepadAdded(object sender, Gamepad e)
         {
-            // Añadir al listado (asegurar no duplicados)
+            // Aï¿½adir al listado (asegurar no duplicados)
             if (!_gamepads.Contains(e)) _gamepads.Add(e);
         }
 
@@ -208,17 +372,17 @@ namespace Handheld_Launcher
 
                     if (left && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        SelectPrevious(); // navegación por gamepad: no activamos efecto hover (usa SelectedKeyboard)
+                        SelectPrevious(); // navegaciï¿½n por gamepad: no activamos efecto hover (usa SelectedKeyboard)
                         _lastGamepadAction = DateTime.Now;
                     }
                     else if (right && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        SelectNext(); // navegación por gamepad: no activamos efecto hover (usa SelectedKeyboard)
+                        SelectNext(); // navegaciï¿½n por gamepad: no activamos efecto hover (usa SelectedKeyboard)
                         _lastGamepadAction = DateTime.Now;
                     }
                     else if (aButton && (DateTime.Now - _lastGamepadAction).TotalMilliseconds > GamepadActionCooldownMs)
                     {
-                        // botón A -> abrir vista detalle del elemento seleccionado
+                        // botï¿½n A -> abrir vista detalle del elemento seleccionado
                         var selected = CarouselGrid?.SelectedItem as GameItem;
                         if (selected != null)
                         {
@@ -243,9 +407,9 @@ namespace Handheld_Launcher
 
         private void Games_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // Cuando cambie la colección principal recalculamos featured y othergames
+            // Cuando cambie la colecciï¿½n principal recalculamos featured y othergames
             UpdateFeaturedAndOthers();
-            // asegurar que siempre haya selección válida
+            // asegurar que siempre haya selecciï¿½n vï¿½lida
             EnsureSelection();
         }
 
@@ -279,7 +443,7 @@ namespace Handheld_Launcher
             // Si ya es featured, no hacemos nada
             if (Games.Count > 0 && Games[0] == item) return;
 
-            // Mover el item al índice 0
+            // Mover el item al ï¿½ndice 0
             if (Games.Contains(item))
             {
                 Games.Remove(item);
@@ -287,11 +451,11 @@ namespace Handheld_Launcher
             }
             else
             {
-                // Si no estaba en la lista por alguna razón, lo insertamos arriba
+                // Si no estaba en la lista por alguna razï¿½n, lo insertamos arriba
                 Games.Insert(0, item);
             }
 
-            // UpdateFeaturedAndOthers se ejecutará por el evento CollectionChanged
+            // UpdateFeaturedAndOthers se ejecutarï¿½ por el evento CollectionChanged
         }
 
         // Mostrar detalle (overlay)
@@ -339,7 +503,7 @@ namespace Handheld_Launcher
             }
             else
             {
-                // si no hay selección, aplicar fondo del usuario
+                // si no hay selecciï¿½n, aplicar fondo del usuario
                 ApplyUserBackground();
             }
         }
@@ -376,7 +540,7 @@ namespace Handheld_Launcher
             }
         }
 
-        // Handlers para el menú de fondo (corregir referencias XAML)
+        // Handlers para el menï¿½ de fondo (corregir referencias XAML)
         private void Solid_Click(object sender, RoutedEventArgs e)
         {
             SetSolidColor();
@@ -415,8 +579,8 @@ namespace Handheld_Launcher
             var dialog = new ContentDialog
             {
                 Title = SelectedGame.Name,
-                Content = "Selecciona una opción",
-                PrimaryButtonText = "Cambiar carátula",
+                Content = "Selecciona una opciï¿½n",
+                PrimaryButtonText = "Cambiar carï¿½tula",
                 SecondaryButtonText = "Cambiar fondo",
                 CloseButtonText = "Eliminar del launcher",
                 DefaultButton = ContentDialogButton.Primary,
@@ -446,7 +610,7 @@ namespace Handheld_Launcher
             var confirmDialog = new ContentDialog
             {
                 Title = "Eliminar juego",
-                Content = $"¿Seguro que deseas eliminar \"{SelectedGame.Name}\" del launcher?",
+                Content = $"ï¿½Seguro que deseas eliminar \"{SelectedGame.Name}\" del launcher?",
                 PrimaryButtonText = "Eliminar",
                 CloseButtonText = "Cancelar",
                 DefaultButton = ContentDialogButton.Close,
@@ -474,7 +638,7 @@ namespace Handheld_Launcher
             GuardarJuegoEnJson();
         }
 
-        // Navegación por selección enfocada y resaltada
+        // Navegaciï¿½n por selecciï¿½n enfocada y resaltada
         private bool IsSelectable(GameItem item) => item != null && !string.IsNullOrEmpty(item.Path);
 
         private int FindSelectableIndexFrom(int startIndex, int direction)
@@ -488,7 +652,7 @@ namespace Handheld_Launcher
             return -1;
         }
 
-        // Helper: asegura que el contenedor esté visible dentro del ScrollViewer externo
+        // Helper: asegura que el contenedor estï¿½ visible dentro del ScrollViewer externo
         private void EnsureContainerVisible(GridViewItem container)
         {
             if (container == null || CarouselScrollViewer == null) return;
@@ -499,7 +663,7 @@ namespace Handheld_Launcher
                 container.UpdateLayout();
                 CarouselScrollViewer.UpdateLayout();
 
-                // Transformar la posición del contenedor respecto al ScrollViewer
+                // Transformar la posiciï¿½n del contenedor respecto al ScrollViewer
                 var transform = container.TransformToVisual(CarouselScrollViewer);
                 Point pos = transform.TransformPoint(new Point(0, 0));
 
@@ -537,7 +701,7 @@ namespace Handheld_Launcher
         {
             if (OtherGames.Count == 0 || CarouselGrid == null) return;
             index = Math.Max(0, Math.Min(OtherGames.Count - 1, index));
-            // si el índice no es seleccionable, buscar el siguiente seleccionable hacia adelante
+            // si el ï¿½ndice no es seleccionable, buscar el siguiente seleccionable hacia adelante
             if (!IsSelectable(OtherGames[index]))
             {
                 int forward = FindSelectableIndexFrom(index + 1, 1);
@@ -548,14 +712,14 @@ namespace Handheld_Launcher
 
             var item = OtherGames[index];
 
-            // Guardamos el índice previo para restablecer su estado visual
+            // Guardamos el ï¿½ndice previo para restablecer su estado visual
             int previousIndex = _lastSelectedIndex;
 
-            // Selección real en el Grid
+            // Selecciï¿½n real en el Grid
             CarouselGrid.SelectedItem = item;
             CarouselGrid.UpdateLayout();
 
-            // Intentar obtener el contenedor; si no existe, forzamos UpdateLayout y lo obtenemos por índice
+            // Intentar obtener el contenedor; si no existe, forzamos UpdateLayout y lo obtenemos por ï¿½ndice
             var container = CarouselGrid.ContainerFromItem(item) as GridViewItem;
             if (container == null)
             {
@@ -573,13 +737,13 @@ namespace Handheld_Launcher
                 try { CarouselGrid.ScrollIntoView(item, ScrollIntoViewAlignment.Leading); } catch { }
             }
 
-            // Solo dar foco si explicitamente queremos (evita activar PointerOver/hover en navegación por teclado/gamepad)
+            // Solo dar foco si explicitamente queremos (evita activar PointerOver/hover en navegaciï¿½n por teclado/gamepad)
             if (setFocus)
             {
                 container?.Focus(FocusState.Programmatic);
             }
 
-            // Restablecer visual states y transform del elemento previamente seleccionado (si está realizado)
+            // Restablecer visual states y transform del elemento previamente seleccionado (si estï¿½ realizado)
             if (previousIndex >= 0 && previousIndex < OtherGames.Count)
             {
                 var prevItem = OtherGames[previousIndex];
@@ -590,10 +754,10 @@ namespace Handheld_Launcher
                     {
                         // Forzar estado 'Unselected' para que reduzca la escala
                         VisualStateManager.GoToState(prevContainer, "Unselected", true);
-                        // También volver al estado normal del grupo CommonStates
+                        // Tambiï¿½n volver al estado normal del grupo CommonStates
                         VisualStateManager.GoToState(prevContainer, "Normal", true);
 
-                        // Restaurar escala a 1.0 si se había aplicado por navegación con teclado/gamepad
+                        // Restaurar escala a 1.0 si se habï¿½a aplicado por navegciï¿½n con teclado/gamepad
                         try
                         {
                             prevContainer.RenderTransformOrigin = new Windows.Foundation.Point(0.5, 0.5);
@@ -612,13 +776,13 @@ namespace Handheld_Launcher
                     container.RenderTransformOrigin = new Windows.Foundation.Point(0.5, 0.5);
                     if (setFocus)
                     {
-                        // navegación por pointer/click: no escalado extra
+                        // navegaciï¿½n por pointer/click: no escalado extra
                         container.RenderTransform = new ScaleTransform { ScaleX = 1.0, ScaleY = 1.0 };
                         VisualStateManager.GoToState(container, "Selected", true);
                     }
                     else
                     {
-                        // Navegación por teclado/gamepad: aplicar scale 1.05
+                        // Navegaciï¿½n por teclado/gamepad: aplicar scale 1.05
                         container.RenderTransform = new ScaleTransform { ScaleX = 1.05, ScaleY = 1.05 };
                         VisualStateManager.GoToState(container, "SelectedKeyboard", true);
                     }
@@ -626,10 +790,10 @@ namespace Handheld_Launcher
                 catch { /* proteger contra contenedores no listos */ }
             }
 
-            // Actualizamos el índice seleccionado
+            // Actualizamos el ï¿½ndice seleccionado
             _lastSelectedIndex = index;
 
-            // Actualizar background dinámico si estamos en Home (no en Library)
+            // Actualizar background dinï¿½mico si estamos en Home (no en Library)
             if (!_libraryMode)
             {
                 UpdateBackgroundForIndex(index, immediate: false);
@@ -667,8 +831,8 @@ namespace Handheld_Launcher
             int start = CarouselGrid.SelectedIndex;
             if (start < 0) start = 0; else start = start + 1;
             int idx = FindSelectableIndexFrom(start, 1);
-            // No hacer wrap: si no hay más, no hacemos nada
-            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegación por flechas/gamepad: no activar hover
+            // No hacer wrap: si no hay mï¿½s, no hacemos nada
+            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegaciï¿½n por flechas/gamepad: no activar hover
         }
 
         private void SelectPrevious()
@@ -676,17 +840,17 @@ namespace Handheld_Launcher
             int start = CarouselGrid.SelectedIndex;
             if (start < 0) start = OtherGames.Count - 1; else start = start - 1;
             int idx = FindSelectableIndexFrom(start, -1);
-            // No hacer wrap: si no hay más hacia atrás, no hacemos nada
-            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegación por flechas/gamepad: no activar hover
+            // No hacer wrap: si no hay mï¿½s hacia atrï¿½s, no hacemos nada
+            if (idx >= 0) SelectIndex(idx, setFocus: false); // navegaciï¿½n por flechas/gamepad: no activar hover
         }
 
         private void EnsureSelection()
         {
-            // Si no hay selección, seleccionar el primer juego seleccionable
+            // Si no hay selecciï¿½n, seleccionar el primer juego seleccionable
             if (CarouselGrid == null) return;
             if (CarouselGrid.SelectedItem != null)
             {
-                // actualizamos _lastSelectedIndex para reflejar la selección actual
+                // actualizamos _lastSelectedIndex para reflejar la selecciï¿½n actual
                 var cur = CarouselGrid.SelectedItem as GameItem;
                 _lastSelectedIndex = cur != null ? OtherGames.IndexOf(cur) : -1;
                 return;
@@ -712,7 +876,7 @@ namespace Handheld_Launcher
             var clicked = e.ClickedItem as GameItem;
             if (clicked != null)
             {
-                // seleccionar y enfocar el item clicado usando la versión que sí da foco
+                // seleccionar y enfocar el item clicado usando la versiï¿½n que sï¿½ da foco
                 int clickedIndex = OtherGames.IndexOf(clicked);
                 if (clickedIndex >= 0) SelectIndex(clickedIndex, setFocus: true);
 
@@ -758,7 +922,7 @@ namespace Handheld_Launcher
             }
         }
 
-        // Handler para cambiar la carátula desde el botón específico (ha sido mantenido para compatibilidad)
+        // Handler para cambiar la carï¿½tula desde el botï¿½n especï¿½fico (ha sido mantenido para compatibilidad)
         private async void ChangeCover_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
@@ -768,7 +932,7 @@ namespace Handheld_Launcher
             await PickAndSetIconAsync(game);
         }
 
-        // Botón de tres puntos (ahora usado en el overlay). DataContext apunta al GameItem (o tomará SelectedGame)
+        // Botï¿½n de tres puntos (ahora usado en el overlay). DataContext apunta al GameItem (o tomarï¿½ SelectedGame)
         private async void EditGame_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
@@ -777,8 +941,8 @@ namespace Handheld_Launcher
 
             var dialog = new ContentDialog
             {
-                Title = "Editar imágenes",
-                PrimaryButtonText = "Cambiar carátula",
+                Title = "Editar imï¿½genes",
+                PrimaryButtonText = "Cambiar carï¿½tula",
                 SecondaryButtonText = "Cambiar fondo",
                 CloseButtonText = "Cancelar",
                 XamlRoot = RootGrid.XamlRoot
@@ -981,12 +1145,12 @@ namespace Handheld_Launcher
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
-                SelectPrevious(); // navegación por teclado: no activar hover
+                SelectPrevious(); // navegaciï¿½n por teclado: no activar hover
                 e.Handled = true;
             }
             else if (e.Key == Windows.System.VirtualKey.Right)
             {
-                SelectNext(); // navegación por teclado: no activar hover
+                SelectNext(); // navegaciï¿½n por teclado: no activar hover
                 e.Handled = true;
             }
             else if (e.Key == Windows.System.VirtualKey.Escape)
@@ -1017,7 +1181,7 @@ namespace Handheld_Launcher
             DetailOverlay.IsHitTestVisible = false;
         }
 
-        // --- Background management: crossfades y aplicación de fondo del usuario ---
+        // --- Background management: crossfades y aplicaciï¿½n de fondo del usuario ---
 
         private void ApplyUserBackground(bool initial = false)
         {
@@ -1055,7 +1219,7 @@ namespace Handheld_Launcher
                         new GradientStop { Color = Color.FromArgb(255, 8, 8, 18), Offset = 1 }
                     }
                 };
-                // ocultar imágenes
+                // ocultar imï¿½genes
                 BackgroundImageA.Source = null;
                 BackgroundImageA.Opacity = 0;
                 BackgroundImageB.Source = null;
@@ -1074,7 +1238,7 @@ namespace Handheld_Launcher
 
         private void SetSolidColor()
         {
-            // Oculta imágenes y aplica color sólido
+            // Oculta imï¿½genes y aplica color sï¿½lido
             BackgroundImageA.Source = null;
             BackgroundImageA.Opacity = 0;
             BackgroundImageB.Source = null;
@@ -1086,7 +1250,7 @@ namespace Handheld_Launcher
 
         private void SetGradient()
         {
-            // Gradiente más intenso para mayor presencia
+            // Gradiente mï¿½s intenso para mayor presencia
             var brush = new LinearGradientBrush();
             brush.StartPoint = new Windows.Foundation.Point(0, 0);
             brush.EndPoint = new Windows.Foundation.Point(0, 1);
@@ -1103,7 +1267,7 @@ namespace Handheld_Launcher
                 Offset = 1
             });
 
-            // Ocultar imágenes y usar RootGrid background
+            // Ocultar imï¿½genes y usar RootGrid background
             BackgroundImageA.Source = null;
             BackgroundImageA.Opacity = 0;
             BackgroundImageB.Source = null;
@@ -1149,7 +1313,7 @@ namespace Handheld_Launcher
 
                 if (immediate)
                 {
-                    // Sin animación: set next fully visible
+                    // Sin animaciï¿½n: set next fully visible
                     nextImage.Opacity = 1;
                     currImage.Opacity = 0;
                     _bgAIsActive = !_bgAIsActive;
