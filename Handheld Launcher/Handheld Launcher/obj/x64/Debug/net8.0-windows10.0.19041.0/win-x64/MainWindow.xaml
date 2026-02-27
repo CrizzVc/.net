@@ -317,8 +317,10 @@
                   HorizontalScrollBarVisibility="Disabled"
                   IsHitTestVisible="True">
 
+                    <!-- Alineamos el contenido a la izquierda para que no se centre en pantallas grandes -->
                     <Grid Margin="80"
-              MaxWidth="1300">
+                          MaxWidth="1300"
+                          HorizontalAlignment="Left">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -346,6 +348,26 @@
                            MaxWidth="700"
                            Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityInverted}}"/>
 
+                            <!-- BOTONES -->
+                            <StackPanel Orientation="Horizontal"
+                                Spacing="20"
+                                Margin="0,30,0,0">
+                                <Button x:ConnectionId='12' Content="▶ PLAY"
+                                                                  
+                                    Style="{StaticResource AccentButtonStyle}"
+                                    Width="160"
+                                    Height="48" />
+                                <Button x:ConnectionId='13' Content="Cerrar"
+                                                            
+                                    Width="120"
+                                    Height="48" />
+                                <Button x:ConnectionId='14' Content="⋯"
+                                    Width="48"
+                                    Height="48"
+                                    FontSize="22"
+                                                                 />
+                            </StackPanel>
+
                             <!-- DESCRIPCIÓN -->
                             <TextBlock Text="{Binding SelectedGame.Description}"
                            FontSize="18"
@@ -354,25 +376,7 @@
                            MaxWidth="700"
                            LineHeight="28"/>
 
-                            <!-- BOTONES -->
-                            <StackPanel Orientation="Horizontal"
-                            Spacing="20"
-                            Margin="0,30,0,0">
-                                <Button x:ConnectionId='12' Content="▶ PLAY"
-                                                          
-                            Style="{StaticResource AccentButtonStyle}"
-                            Width="160"
-                            Height="48" />
-                                <Button x:ConnectionId='13' Content="Cerrar"
-                                                    
-                            Width="120"
-                            Height="48" />
-                                <Button x:ConnectionId='14' Content="⋯"
-                            Width="48"
-                            Height="48"
-                            FontSize="22"
-                                                         />
-                            </StackPanel>
+                            
 
                         </StackPanel>
 
@@ -382,10 +386,12 @@
                     CornerRadius="20"
                     Background="#22000000"
                     Padding="12"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Center"
+                    Width="480">
 
                             <WebView2 x:ConnectionId='11' x:Name="GameTrailerView"
-                          Height="320"/>
+                          Height="320"
+                          HorizontalAlignment="Stretch"/>
 
                         </Border>
 

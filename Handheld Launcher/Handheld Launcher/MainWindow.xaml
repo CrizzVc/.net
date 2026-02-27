@@ -317,8 +317,10 @@
                   HorizontalScrollBarVisibility="Disabled"
                   IsHitTestVisible="True">
 
+                    <!-- Alineamos el contenido a la izquierda para que no se centre en pantallas grandes -->
                     <Grid Margin="80"
-              MaxWidth="1300">
+                          MaxWidth="1300"
+                          HorizontalAlignment="Left">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -384,10 +386,12 @@
                     CornerRadius="20"
                     Background="#22000000"
                     Padding="12"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Center"
+                    Width="430">
 
                             <WebView2 x:Name="GameTrailerView"
-                          Height="320"/>
+                          Height="320"
+                          HorizontalAlignment="Stretch"/>
 
                         </Border>
 
