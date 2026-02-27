@@ -291,41 +291,110 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="DetailOverlay" Grid.RowSpan="3" Visibility="Collapsed" Background="#FF000000" IsHitTestVisible="False">
-                <Image Source="{Binding SelectedGame.BackgroundOrIcon}" Stretch="UniformToFill" Opacity="0.35"/>
+            <Grid x:Name="DetailOverlay"
+              Grid.RowSpan="3"
+              Visibility="Collapsed"
+              Background="#FF000000"
+              IsHitTestVisible="False">
+
+                <!-- Fondo -->
+                <Image Source="{Binding SelectedGame.BackgroundOrIcon}"
+                   Stretch="UniformToFill"
+                   Opacity="0.35"/>
+
+                <!-- Degradado -->
                 <Rectangle>
                     <Rectangle.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                             <GradientStop Color="#00000000" Offset="0.0"/>
-                            <GradientStop Color="#B3000000" Offset="0.6"/>
+                            <GradientStop Color="#CC000000" Offset="0.6"/>
                         </LinearGradientBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80" MaxWidth="900" IsHitTestVisible="True">
-                    <!-- Reemplazado el uso de Style.Triggers (no soportado) por binding a Visibility con convertidores -->
-                    <Image Source="{Binding SelectedGame.Logo}"
-           Stretch="Uniform"
-           MaxWidth="300"
-           HorizontalAlignment="Left"
-           Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityConverter}}"/>
 
-                    <!-- NOMBRE (solo si no hay logo) -->
-                    <TextBlock Text="{Binding SelectedGame.Name}"
-                       FontSize="72"
-                       FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans"
-                       FontWeight="SemiBold"
-                       Foreground="White"
-                       TextWrapping="Wrap"
-                       MaxWidth="600"
-                       Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityInverted}}">  
-                    </TextBlock>
+                <!-- CONTENIDO SCROLLEABLE -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  IsHitTestVisible="True">
 
-                    <StackPanel Orientation="Horizontal" Spacing="20" Margin="0,24,0,0">
-                        <Button Content="▶ PLAY" Click="PlaySelectedGame_Click" Style="{StaticResource AccentButtonStyle}" Width="160" Height="48" />
-                        <Button Content="Cerrar" Click="HideDetail_Click" Width="120" Height="48" />
-                        <Button Content="⋯" Width="48" Height="48" FontSize="22" Click="OpenGameOptions_Click"/>
-                    </StackPanel>
-                </StackPanel>
+                    <Grid Margin="80"
+              MaxWidth="1300">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- COLUMNA IZQUIERDA -->
+                        <StackPanel Grid.Column="0"
+                        Spacing="20">
+
+                            <!-- Logo -->
+                            <Image Source="{Binding SelectedGame.Logo}"
+                       Stretch="Uniform"
+                       MaxWidth="350"
+                       HorizontalAlignment="Left"
+                       Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityConverter}}"/>
+
+                            <!-- Nombre si no hay logo -->
+                            <TextBlock Text="{Binding SelectedGame.Name}"
+                           FontSize="72"
+                           FontFamily="ms-appx:///Assets/GoogleSans-Variable.ttf#Google Sans"
+                           FontWeight="SemiBold"
+                           Foreground="White"
+                           TextWrapping="Wrap"
+                           MaxWidth="700"
+                           Visibility="{Binding SelectedGame.Logo, Converter={StaticResource NullToVisibilityInverted}}"/>
+
+                            <!-- BOTONES -->
+                            <StackPanel Orientation="Horizontal"
+                                Spacing="20"
+                                Margin="0,30,0,0">
+                                <Button Content="▶ PLAY"
+                                    Click="PlaySelectedGame_Click"
+                                    Style="{StaticResource AccentButtonStyle}"
+                                    Width="160"
+                                    Height="48" />
+                                <Button Content="Cerrar"
+                                    Click="HideDetail_Click"
+                                    Width="120"
+                                    Height="48" />
+                                <Button Content="⋯"
+                                    Width="48"
+                                    Height="48"
+                                    FontSize="22"
+                                    Click="OpenGameOptions_Click"/>
+                            </StackPanel>
+
+                            <!-- DESCRIPCIÓN -->
+                            <TextBlock Text="{Binding SelectedGame.Description}"
+                           FontSize="18"
+                           Foreground="#E6FFFFFF"
+                           TextWrapping="Wrap"
+                           MaxWidth="700"
+                           LineHeight="28"/>
+
+                            
+
+                        </StackPanel>
+
+                        <!-- COLUMNA DERECHA - TRAILER -->
+                        <Border Grid.Column="1"
+                    Margin="40,0,0,0"
+                    CornerRadius="20"
+                    Background="#22000000"
+                    Padding="12"
+                    VerticalAlignment="Top">
+
+                            <WebView2 x:Name="GameTrailerView"
+                          Height="320"/>
+
+                        </Border>
+
+                    </Grid>
+
+                </ScrollViewer>
+
             </Grid>
 
         </Grid>

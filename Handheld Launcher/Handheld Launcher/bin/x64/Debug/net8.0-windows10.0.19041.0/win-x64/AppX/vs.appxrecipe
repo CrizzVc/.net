@@ -30,7 +30,7 @@
     <AppXManifest Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2026-02-27T19:08:07.779</Modified>
+      <Modified>2026-02-27T19:36:45.035</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +40,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
       <PackagePath>Handheld Launcher.exe</PackagePath>
-      <Modified>2026-02-27T19:08:07.524</Modified>
+      <Modified>2026-02-27T19:36:44.825</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\Assets\GoogleSans-Variable.ttf">
       <PackagePath>Assets\GoogleSans-Variable.ttf</PackagePath>
@@ -48,7 +48,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Handheld Launcher.dll">
       <PackagePath>Handheld Launcher.dll</PackagePath>
-      <Modified>2026-02-27T19:08:07.517</Modified>
+      <Modified>2026-02-27T19:36:44.819</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.24\runtimes\win-x64\lib\net8.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -992,7 +992,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\OneDrive\Documents\GitHub\.net\Handheld Launcher\Handheld Launcher\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2026-02-27T19:08:07.606</Modified>
+      <Modified>2026-02-27T19:32:01.255</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

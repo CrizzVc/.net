@@ -11,6 +11,7 @@ namespace Handheld_Launcher
         // Ruta al archivo de la carátula (persistible)
         public string IconPath { get; set; }
 
+        public string Description { get; set; }
         public string TrailerUrl { get; set; }
 
         private ImageSource _icon;

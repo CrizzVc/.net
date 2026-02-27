@@ -463,8 +463,20 @@ namespace Handheld_Launcher
         private void ShowDetail(GameItem selected)
         {
             SelectedGame = selected;
+
             DetailOverlay.Visibility = Visibility.Visible;
             DetailOverlay.IsHitTestVisible = true;
+
+            // Cargar trailer si existe
+            if (!string.IsNullOrEmpty(selected.TrailerUrl))
+            {
+                GameTrailerView.Source = new Uri(selected.TrailerUrl);
+            }
+            else
+            {
+                GameTrailerView.Source = null;
+            }
+
             DetailOverlay.UpdateLayout();
             DetailOverlay.Focus(FocusState.Programmatic);
         }
@@ -594,6 +606,10 @@ namespace Handheld_Launcher
             var changeBg = new MenuFlyoutItem { Text = "Cambiar fondo" };
             changeBg.Click += async (s, ev) => await PickAndSetBackgroundAsync(game);
 
+            // Nueva opción: añadir/editar URL del trailer
+            var editTrailer = new MenuFlyoutItem { Text = "Añadir URL de trailer" };
+            editTrailer.Click += async (s, ev) => await EditTrailerUrlAsync(game);
+
             var separator = new MenuFlyoutSeparator();
 
             var delete = new MenuFlyoutItem { Text = "Eliminar del launcher" };
@@ -607,6 +623,7 @@ namespace Handheld_Launcher
             menu.Items.Add(changeLogo);
             menu.Items.Add(changeIcon);
             menu.Items.Add(changeBg);
+            menu.Items.Add(editTrailer);
             menu.Items.Add(separator);
             menu.Items.Add(delete);
 
@@ -1423,6 +1440,78 @@ namespace Handheld_Launcher
                     HideDetail();
                     // Guardar por si el handler no se ejecuta
                     GuardarJuegoEnJson();
+                }
+            }
+        }
+
+        // Nuevo método para añadir/editar la URL del trailer
+        private async Task EditTrailerUrlAsync(GameItem game)
+        {
+            var tb = new TextBox
+            {
+                Text = game.TrailerUrl ?? string.Empty,
+                AcceptsReturn = false,
+                PlaceholderText = "https://ejemplo.com/trailer",
+                TextWrapping = TextWrapping.NoWrap,
+                Height = 32
+            };
+
+            var dialog = new ContentDialog
+            {
+                Title = "Añadir/Editar URL del trailer",
+                Content = tb,
+                PrimaryButtonText = "Guardar",
+                CloseButtonText = "Cancelar",
+                XamlRoot = RootGrid.XamlRoot
+            };
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                var url = tb.Text?.Trim();
+                if (string.IsNullOrEmpty(url))
+                {
+                    game.TrailerUrl = null;
+                }
+                else
+                {
+                    // Intento básico de normalización: si falta esquema, probar con https://
+                    try
+                    {
+                        // Validar/normalizar URI
+                        if (!url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) &&
+                            !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                        {
+                            url = "https://" + url;
+                        }
+                        var uri = new Uri(url);
+                        game.TrailerUrl = uri.AbsoluteUri;
+                    }
+                    catch
+                    {
+                        // Si no es una URI válida, conservar el texto tal cual (opcional)
+                        game.TrailerUrl = url;
+                    }
+                }
+
+                // Persistir cambio
+                GuardarJuegoEnJson();
+
+                // Si el overlay está mostrando este juego, actualizar la vista del trailer
+                if (SelectedGame == game)
+                {
+                    if (!string.IsNullOrEmpty(game.TrailerUrl))
+                    {
+                        try
+                        {
+                            GameTrailerView.Source = new Uri(game.TrailerUrl);
+                        }
+                        catch { GameTrailerView.Source = null; }
+                    }
+                    else
+                    {
+                        GameTrailerView.Source = null;
+                    }
                 }
             }
         }
